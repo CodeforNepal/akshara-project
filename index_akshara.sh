@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# akshara_index.sh
+# index_akshara.sh
 #
 # Simple script to index json documents to elasticsearch
 
