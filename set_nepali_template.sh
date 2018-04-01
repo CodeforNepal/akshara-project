@@ -31,8 +31,13 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                     "format": "epoch_millis"
                 },
                 "author": {
-                    "type": "keyword",
-                    "norms": false
+                    "type":"text",
+                    "fields":{
+                        "keyword":{
+                            "type":"keyword",
+                            "norms": false
+                        }
+                    }
                 },
                 "title": {
                     "type": "text"
