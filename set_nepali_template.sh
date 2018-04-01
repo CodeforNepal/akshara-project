@@ -2,7 +2,7 @@
 #
 # set_nepali_template.sh
 #
-# set the template mapping for nepali indices
+# set the template mapping for akshara nepali indices
 
 # useful if we make this a cron job (should actually run only from one of the nodes only. here we pick the current master)
 if ! { curl --silent "$HOSTNAME:9200/_cat/nodes" | grep '\*' | grep --quiet --ignore-case "$HOSTNAME"; }
@@ -26,9 +26,9 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                 }
             }],
             "properties": {
-                "post_date": {
+                "ingest_time": {
                     "type": "date",
-                    "format": "epoch_second"
+                    "format": "epoch_millis"
                 },
                 "author": {
                     "type": "keyword",
