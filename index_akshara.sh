@@ -43,4 +43,6 @@ for file in "$@"; do
   curl -XPOST "${ELASTICSEARCH_URL}/${INDEX}/_doc/?pipeline=${PIPELINE}&pretty" \
     --header "Content-Type: application/json" \
     --data "$content"
+
+  echo ""
 done
