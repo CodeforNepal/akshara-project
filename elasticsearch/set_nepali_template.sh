@@ -13,6 +13,26 @@ fi
 curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content-Type: application/json" --data '{
     "template": "nepali*",
     "order": 1,
+    "settings": {
+      "index": {
+        "analysis": {
+          "analyzer": {
+            "latin": {
+              "tokenizer": "keyword",
+              "filter": [
+                "aksharaLatinTransform"
+              ]
+            }
+          },
+          "filter": {
+            "aksharaLatinTransform": {
+              "type": "icu_transform",
+              "id": "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
+            }
+          }
+        }
+      }
+    },
     "mappings": {
         "_doc": {
             "dynamic_templates": [{
