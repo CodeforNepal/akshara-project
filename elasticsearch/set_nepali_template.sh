@@ -52,15 +52,21 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                 },
                 "author": {
                     "type":"text",
-                    "fields":{
-                        "keyword":{
-                            "type":"keyword",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
                             "norms": false
                         }
                     }
                 },
                 "title": {
-                    "type": "text"
+                    "type": "text",
+                    "fields": {
+                        "latin": {
+                            "type": "text",
+                            "analyzer": "latin"
+                        }
+                    }
                 },
                 "text": {
                     "type": "text"
