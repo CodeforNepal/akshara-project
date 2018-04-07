@@ -19,7 +19,7 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
           "analyzer": {
             "akshara_nepali": {
               "type": "standard",
-              "stopwords": ["छ", "यही"]
+              "stopwords_path": "nepali_stopwords.txt"
             },
             "latin": {
               "tokenizer": "standard",
