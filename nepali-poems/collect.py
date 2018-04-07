@@ -6,7 +6,12 @@ import os
 import signal
 import sys
 
+from time import sleep
+
+global ctrlc
+ctrlc = False
 def signal_handler(signal, frame):
+    global ctrlc
     ctrlc = True
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -19,7 +24,7 @@ links = tree.xpath('//div[@class="multi-col-list div-with-shadow"]/ul/li')
 
 for linkElem in links:
     if ctrlc:
-        return
+        quit()
     else:
         author, link = linkElem.xpath('./a/@title')[0], linkElem.xpath('./a/@href')[0]
         author_page = requests.get(website + link)
@@ -29,12 +34,15 @@ for linkElem in links:
             os.makedirs(dir)
         # print(author)
         for poem_link in poem_links:
+            sleep(1)
             if ctrlc:
-                return
+                quit()
             else:
                 link2, title = poem_link.xpath('./@href')[0], poem_link.xpath('./@title')[0]
                 poem_page = requests.get(website + link2)
                 poem = html.fromstring(poem_page.content).xpath('//div[@class="poem"]/p/text()')
-                print("".join(poem))
-                with open(os.path.join(dir, title.split('/')[0]) + '.txt', "w") as f:
-                    f.write("".join(poem).strip())
+                # print("".join(poem))
+                poem_str = "".join(poem).strip()
+                if poem_str:
+                    with open(os.path.join(dir, title.split('/')[0]) + '.txt', "w") as f:
+                        f.write(poem_str)
