@@ -18,7 +18,7 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
         "analysis": {
           "analyzer": {
             "latin": {
-              "tokenizer": "keyword",
+              "tokenizer": "standard",
               "filter": [
                 "aksharaLatinTransform"
               ]
