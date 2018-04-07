@@ -65,6 +65,7 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                 },
                 "title": {
                     "type": "text",
+                    "analyzer": "akshara_nepali",
                     "fields": {
                         "latin": {
                             "type": "text",
