@@ -69,7 +69,13 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                     }
                 },
                 "text": {
-                    "type": "text"
+                    "type": "text",
+                    "fields": {
+                        "latin": {
+                            "type": "text",
+                            "analyzer": "latin"
+                        }
+                    }
                 }
             }
         }
