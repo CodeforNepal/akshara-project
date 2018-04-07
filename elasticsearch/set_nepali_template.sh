@@ -17,6 +17,10 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
       "index": {
         "analysis": {
           "analyzer": {
+            "akshara_nepali": {
+              "type": "standard",
+              "stopwords": ["छ", "यही"]
+            },
             "latin": {
               "tokenizer": "standard",
               "filter": [
@@ -70,6 +74,7 @@ curl --silent -XPUT "$HOSTNAME:9200/_template/nepali_template" --header "Content
                 },
                 "text": {
                     "type": "text",
+                    "analyzer": "akshara_nepali",
                     "fields": {
                         "latin": {
                             "type": "text",
