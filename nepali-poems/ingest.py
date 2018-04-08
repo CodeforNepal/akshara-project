@@ -5,7 +5,7 @@ from datetime import datetime
 
 es = elasticsearch.Elasticsearch(['172.18.0.2'], port=9200)
 
-for (dirpath, dirnames, filenames) in walk("data", ):
+for (dirpath, dirnames, filenames) in walk("data"):
     for filename in filenames:
         author = path.basename(dirpath)
         # print(":".join([author, filename]))
