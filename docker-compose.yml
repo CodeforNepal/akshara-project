@@ -20,9 +20,12 @@ services:
     networks:
       - esnet
   kibana:
-    image: kibana
+    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    container_name: akshara_kibana
     ports:
       - 5601:5601
+    networks:
+      - esnet
 volumes:
   esdata:
     driver: local
