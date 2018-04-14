@@ -22,7 +22,7 @@ const FiltersList = () => (
 	<List>
 		<RefinementListFilter
 			id="author"
-			title="Authors"
+			title="Author"
 			field="author.keyword"
 			operator="OR"
 			itemComponent={RefinementOption}

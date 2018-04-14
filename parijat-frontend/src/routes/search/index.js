@@ -27,6 +27,7 @@ import SearchItem from '../../components/searchitem';
 import SelectedFilter from '../../components/selectedfilter';
 import Filters from '../../components/filters';
 import ResetFiltersComponent from '../../components/resetfilters';
+import SearchActions from '../../components/searchactions';
 import style from './style';
 
 const searchkit = new SearchkitManager('http://localhost:9200/nepali');
@@ -43,15 +44,14 @@ export default class Search extends Component {
 							queryFields={['title', 'author', 'content']}
 						/>
 					</Header>
-					<Filters />
+					<SearchActions />
 					<ActionBar>
-						<ActionBarRow>
-							<HitsStats />
-						</ActionBarRow>
-
 						<ActionBarRow>
 							<SelectedFilters itemComponent={SelectedFilter} />
 							<ResetFilters component={ResetFiltersComponent} />
+						</ActionBarRow>
+						<ActionBarRow>
+							<HitsStats />
 						</ActionBarRow>
 					</ActionBar>
 					<Hits

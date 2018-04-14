@@ -1,6 +1,7 @@
 .SearchItem__Container {
   padding: 1rem;
   margin-bottom: 1em; 
+  width: 100%;
 }
 
 .SearchItem__Container em {

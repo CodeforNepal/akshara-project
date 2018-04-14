@@ -11,7 +11,7 @@ export class Chip extends Chips.Chip {
 }
 
 export default props => (
-	<Chip>
+	<Chip className={style.SelectedFilter__Container}>
 		<Chips.Text>
 			<strong>{props.labelKey}:</strong> {props.labelValue}
 		</Chips.Text>
