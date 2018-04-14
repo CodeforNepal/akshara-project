@@ -1,0 +1,21 @@
+.SearchItem__Container {
+  padding: 1rem;
+  margin-bottom: 1em; 
+}
+
+.SearchItem__Container em {
+  background: yellow;
+}
+
+.SearchItem__Title {
+  font-size: large;
+  margin-bottom: 0.5rem;
+}
+
+.SearchItem__Author {
+
+}
+
+.SearchItem__Description {
+  font-size: small;
+}

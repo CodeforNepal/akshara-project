@@ -1,16 +1,69 @@
 import { h, Component } from 'preact';
+import {
+	SearchkitManager,
+	SearchkitProvider,
+	SearchBox,
+	Hits,
+	HitsStats,
+	Pagination,
+	InputFilter,
+	HierarchicalMenuFilter,
+	RefinementListFilter,
+	Layout,
+	LayoutResults,
+	LayoutBody,
+	SelectedFilters,
+	ResetFilters,
+	ActionBar,
+	ActionBarRow,
+	SideBar,
+	TopBar,
+	NoHits
+} from 'searchkit';
+import Chips from 'preact-material-components/Chips';
+import 'preact-material-components/Chips/style.css';
 import Header from '../../components/header';
-// import Button from 'preact-material-components/Button';
-// import 'preact-material-components/Button/style.css';
+import SearchItem from '../../components/searchitem';
+import SelectedFilter from '../../components/selectedfilter';
+import Filters from '../../components/filters';
+import ResetFiltersComponent from '../../components/resetfilters';
 import style from './style';
 
+const searchkit = new SearchkitManager('http://localhost:9200/nepali');
+
 export default class Search extends Component {
-	render({ query }) {
+	render() {
 		return (
-			<div class={style.profile}>
-				<Header />
-				<h1>Search: {query}</h1>
-			</div>
+			<SearchkitProvider searchkit={searchkit}>
+				<Layout>
+					<Header>
+						<SearchBox
+							autofocus
+							searchOnChange
+							queryFields={['title', 'author', 'content']}
+						/>
+					</Header>
+					<Filters />
+					<ActionBar>
+						<ActionBarRow>
+							<HitsStats />
+						</ActionBarRow>
+
+						<ActionBarRow>
+							<SelectedFilters itemComponent={SelectedFilter} />
+							<ResetFilters component={ResetFiltersComponent} />
+						</ActionBarRow>
+					</ActionBar>
+					<Hits
+						mod="sk-hits-grid"
+						hitsPerPage={10}
+						highlightFields={['title', 'author', 'content']}
+						itemComponent={SearchItem}
+					/>
+					<Pagination />
+					<NoHits />
+				</Layout>
+			</SearchkitProvider>
 		);
 	}
 }
