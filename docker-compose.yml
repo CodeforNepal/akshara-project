@@ -3,9 +3,16 @@ version: '3.1'
 services:
 
   elasticsearch:
-    image: elasticsearch
+    image: elasticsearch 
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     volumes:
-        - ./esdata:/usr/share/elasticsearch/data
+      - ./esdata:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - 9200:9200
+      - 9300:9300
 
   kibana:
     image: kibana
