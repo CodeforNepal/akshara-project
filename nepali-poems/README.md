@@ -7,6 +7,18 @@
 Pipenv must be installed to activate virtual env.
 Python version 3.x
 
+Install pipenv
+
+```
+pip install pipenv
+```
+
+Install Requirements
+
+```
+pipenv install
+```
+
 ## Usage
 Run pipenv --python 3.6 to use python 3
 
