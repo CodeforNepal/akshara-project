@@ -3,6 +3,8 @@
 # index_akshara.sh
 #
 # Simple script to index json documents to elasticsearch
+#
+# Usage: ./index_akshara.sh sample_docs/*.json
 
 # exit the script when a command fails
 set -o errexit
@@ -20,7 +22,7 @@ fi
 INDEX="nepali"
 
 ELASTICSEARCH_URL="${HOSTNAME}:9200"
-PIPELINE="default_pipeline"
+PIPELINE="akshara_pipeline"
 
 # as unix time
 #CURRENT_TIME=$(date +'%s')
