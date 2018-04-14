@@ -6,6 +6,8 @@ services:
     image: elasticsearch
     volumes:
         - ./esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
 
   kibana:
     image: kibana

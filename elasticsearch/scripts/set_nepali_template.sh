@@ -8,10 +8,10 @@
 STOPWORDS_FILE="stopwords/nepali_test.txt"
 
 # useful if we make this a cron job (should actually run only from one of the nodes only. here we pick the current master)
-if ! { curl --silent "${HOSTNAME}:9200/_cat/nodes" | grep '\*' | grep --quiet --ignore-case "$HOSTNAME"; }
-then
-  exit 0
-fi
+#if ! { curl --silent "${HOSTNAME}:9200/_cat/nodes" | grep '\*' | grep --quiet --ignore-case "$HOSTNAME"; }
+#then
+#  exit 0
+#fi
 
 curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: application/json" --data '{
   "template": "nepali*",
@@ -32,7 +32,8 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
           },
           "akshara_nepali_standard": {
             "type": "standard",
-            "stopwords_path": "'"$STOPWORDS_FILE"'"
+            "stopwords": ["छ","यही", "होइन"]
+            /* "stopwords_path": "'"$STOPWORDS_FILE"'" */
           },
           "akshara_latin_transliterate": {
             "tokenizer": "standard",
@@ -44,7 +45,8 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
         "filter": {
           "nepali_stop": {
             "type": "stop",
-            "stopwords_path": "'"$STOPWORDS_FILE"'"
+            "stopwords": ["छ","यही", "होइन"]
+            /* "stopwords_path": "'"$STOPWORDS_FILE"'" */
           },
           "nepali_keywords": {
             "type": "keyword_marker",
@@ -64,7 +66,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
     }
   },
   "mappings": {
-    "_doc": {
+    "doc": {
       "dynamic_templates": [{
         "string_template": {
           "path_match": "*",
