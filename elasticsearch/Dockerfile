@@ -9,7 +9,15 @@
 # pass the es version as an arg during docker build
 ARG es_version
 
+# based on official image from elastic
 FROM docker.elastic.co/elasticsearch/elasticsearch:${es_version}
+
+# Add metadata.
+LABEL \
+  name="Akshara Elasticsearch Image" \
+  # TODO add our email
+  maintainer="Akshara Team <anupdhml@gmail.com>" \
+  vendor="Akshara"
 
 # required for the akshara_latin_transliterate analyzer (for searches in latin transliteration)
 RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install analysis-icu
