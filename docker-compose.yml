@@ -11,8 +11,9 @@ services:
     environment:
       - cluster.name=akshara-cluster
       - node.name=parijat
-      - discovery.type=single-node
       - action.destructive_requires_name=true
+      # we have only one es node right now
+      - discovery.type=single-node
       # disabling swapping for performance and node stability
       - bootstrap.memory_lock=true
       # disable the disk allocation decider
@@ -21,6 +22,13 @@ services:
       - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
       # also set the vm.max_map_count kernel setting for production use. See:
       # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+      #
+      # elasticsearch xpack features
+      - xpack.monitoring.enabled=true
+      # paid features
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
     ulimits:
       # disabling swapping for performance and node stability
       memlock:
@@ -40,6 +48,14 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:${ES_VERSION}
     container_name: akshara_kibana
+    environment:
+      # kibana xpack features
+      - xpack.monitoring.enabled=true
+      - xpack.reporting.enabled=true
+      # paid features
+      - xpack.graph.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
     ports:
       - 5601:5601
     networks:
