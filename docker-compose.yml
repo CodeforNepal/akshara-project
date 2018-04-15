@@ -2,13 +2,19 @@ version: '3.6'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+    build:
+      context: ./elasticsearch
+      args:
+        # version is picked up from the .env file
+        - es_version=${ES_VERSION}
+    image: akshara/elasticsearch:${ES_VERSION}
     container_name: akshara_elasticsearch
     environment:
       - cluster.name=akshara-cluster
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
+      # based on how much memory a node has
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
