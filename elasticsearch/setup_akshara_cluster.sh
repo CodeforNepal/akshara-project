@@ -13,8 +13,15 @@ BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 SCRIPTS_DIR="${BASE_DIR}/scripts"
 
+##############################################################################
+
 if [ ! -d "$SCRIPTS_DIR" ]; then
   echo "Could not find the scripts directory: ${SCRIPTS_DIR}"
+  exit 1
+fi
+
+if ! curl --silent "${HOSTNAME}:9200" 2>&1 > /dev/null; then
+  echo "No response from the elasticsearch cluster. Is it up?"
   exit 1
 fi
 
