@@ -1,5 +1,4 @@
 version: '3.6'
-
 services:
   elasticsearch:
     build:
@@ -11,14 +10,28 @@ services:
     container_name: akshara_elasticsearch
     environment:
       - cluster.name=akshara-cluster
-      - bootstrap.memory_lock=true
+      - node.name=parijat
       - discovery.type=single-node
+      - action.destructive_requires_name=true
+      # disabling swapping for performance and node stability
+      - bootstrap.memory_lock=true
+      # disable the disk allocation decider
+      - cluster.routing.allocation.disk.threshold_enabled=false
+      # jvm flags as environment var
       - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
+      # also set the vm.max_map_count kernel setting for production use. See:
+      # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
     ulimits:
+      # disabling swapping for performance and node stability
       memlock:
         soft: -1
         hard: -1
     volumes:
+      # share the repo stopwords config with the container
+      - ./elasticsearch/config/stopwords:/usr/share/elasticsearch/config/stopwords
+      # using local docker volume for es data
+      # gets stored in /var/lib/docker/volumes by default, and can specify a
+      # custom path here, but need to configure the dir perms for container use
       - esdata:/usr/share/elasticsearch/data
     ports:
       - 9200:9200

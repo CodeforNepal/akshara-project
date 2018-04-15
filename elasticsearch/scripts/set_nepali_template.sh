@@ -32,8 +32,8 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
           },
           "akshara_nepali_standard": {
             "type": "standard",
-            "stopwords": ["छ","यही", "होइन"]
-            /* "stopwords_path": "'"$STOPWORDS_FILE"'" */
+            "stopwords_path": "'"$STOPWORDS_FILE"'"
+            /* "stopwords": ["छ","यही", "होइन"] */
           },
           "akshara_latin_transliterate": {
             "tokenizer": "standard",
@@ -45,8 +45,8 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
         "filter": {
           "nepali_stop": {
             "type": "stop",
-            "stopwords": ["छ","यही", "होइन"]
-            /* "stopwords_path": "'"$STOPWORDS_FILE"'" */
+            "stopwords_path": "'"$STOPWORDS_FILE"'"
+            /* "stopwords": ["छ","यही", "होइन"] */
           },
           "nepali_keywords": {
             "type": "keyword_marker",

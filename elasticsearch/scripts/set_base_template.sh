@@ -18,7 +18,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/base_template" --header "Content-Type: ap
     /* enable in prod for some performance gains */
     /* "refresh_interval": "10s", */
     "index.number_of_shards": 4,
-    /* for testng */
+    /* increase replicas when we have more than one node */
     "index.number_of_replicas": 0,
     "index.search.slowlog.threshold.query.warn": "10s",
     "index.search.slowlog.threshold.query.info": "7s",
