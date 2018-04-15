@@ -1,0 +1,40 @@
+# Config file for the akshara elasticsearch cluster
+#
+# We use containers so if you are upgrading elasticsearch, make sure that we
+# carry over the configs from image default:
+# https://github.com/elastic/elasticsearch-docker/blob/master/build/elasticsearch/elasticsearch.yml
+
+cluster.name: akshara-cluster
+
+# for containers, this is the container id
+node.name: ${HOSTNAME}
+
+# set the bind address
+network.host: 0.0.0.0
+
+# we have only one es node right now
+discovery.type: single-node
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 1
+
+# disabling swapping for performance and node stability
+# for container use, make sure that ulimit memlock options are set. See:
+# https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+bootstrap.memory_lock: true
+
+# guard against index deletes with *
+action.destructive_requires_name: true
+
+# disable the disk allocation decider
+cluster.routing.allocation.disk.threshold_enabled: false
+
+# Elasticsearch specific xpack features
+xpack.license.self_generated.type: basic
+xpack.monitoring.enabled: true
+# paid features
+xpack.ml.enabled: false
+xpack.security.enabled: false
+xpack.watcher.enabled: false
