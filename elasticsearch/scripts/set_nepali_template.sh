@@ -5,7 +5,8 @@
 # set the template mapping for akshara nepali indices
 
 # Relative from the elasticsearch config folder (eg: /etc/elasticsearch)
-STOPWORDS_FILE="stopwords/nepali_test.txt"
+#STOPWORDS_FILE="stopwords/nepali_test.txt"
+STOPWORDS_FILE="stopwords/nepali.txt"
 
 # useful if we make this a cron job (should actually run only from one of the nodes only. here we pick the current master)
 #if ! { curl --silent "${HOSTNAME}:9200/_cat/nodes" | grep '\*' | grep --quiet --ignore-case "$HOSTNAME"; }
