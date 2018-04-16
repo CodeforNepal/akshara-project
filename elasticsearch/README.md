@@ -51,7 +51,7 @@ docker-compose up elasticsearch
 
 # force a build for our custom image. useful if we modify the image in any way
 # docker compose does not rebuild the image if it already exists
-docker-compose up elasticsearch --build
+docker-compose up --build elasticsearch
 
 # remove the elasticsearch data volume (reset all the indices)
 docker-compose down --volumes

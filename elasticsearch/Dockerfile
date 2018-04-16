@@ -1,6 +1,3 @@
-#
-# akshara-elasticsearch.dockerfile
-#
 # Custom elasticsearch image for akshara use
 #
 # Example build:

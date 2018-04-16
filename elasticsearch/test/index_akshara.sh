@@ -19,7 +19,7 @@ fi
 
 ##############################################################################
 
-INDEX="nepali"
+INDEX="nepali_test"
 
 ELASTICSEARCH_URL="${HOSTNAME}:9200"
 PIPELINE="akshara_pipeline"
@@ -42,7 +42,7 @@ for file in "$@"; do
   content=$(<"$file")
   #echo "$content"
 
-  curl -XPOST "${ELASTICSEARCH_URL}/${INDEX}/doc/?pipeline=${PIPELINE}&pretty" \
+  curl -XPOST "${ELASTICSEARCH_URL}/${INDEX}/_doc/?pipeline=${PIPELINE}&pretty" \
     --header "Content-Type: application/json" \
     --data "$content"
 

@@ -27,7 +27,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
               "lowercase",
               "indic_normalization",
               "nepali_stop",
-              "nepali_keywords",
+              /* "nepali_keywords", */
               "nepali_stemmer"
             ]
           },
@@ -67,7 +67,8 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
     }
   },
   "mappings": {
-    "doc": {
+    "_doc": {
+      /*
       "dynamic_templates": [{
         "string_template": {
           "path_match": "*",
@@ -78,6 +79,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
           }
         }
       }],
+      */
       "properties": {
         "ingest_time": {
           "type": "date",
