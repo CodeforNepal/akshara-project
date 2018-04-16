@@ -14,7 +14,7 @@ STOPWORDS_FILE="stopwords/nepali_test.txt"
 #fi
 
 curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: application/json" --data '{
-  "template": "nepali*",
+  "index_patterns": ["nepali*"],
   "order": 1,
   "settings": {
     "index": {

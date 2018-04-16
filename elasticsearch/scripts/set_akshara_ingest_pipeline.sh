@@ -15,8 +15,8 @@ curl -XPUT "${HOSTNAME}:9200/_ingest/pipeline/akshara_pipeline" --header "Conten
   "processors" : [
     {
       "script": {
-      "lang": "painless",
-      "inline": "ctx.ingest_time = new Date().getTime()"
+        "lang": "painless",
+        "source": "ctx.ingest_time = new Date().getTime()"
       }
     }
   ]

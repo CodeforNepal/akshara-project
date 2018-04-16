@@ -11,7 +11,7 @@
 #fi
 
 curl -XPUT "${HOSTNAME}:9200/_template/base_template" --header "Content-Type: application/json" --data '{
-  "template": "*",
+  "index_patterns": ["*"],
   "order": 0,
   "settings": {
     "index.codec": "best_compression",
