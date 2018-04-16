@@ -1,13 +1,53 @@
-version: '3.1'
-
+version: '3.6'
 services:
-
   elasticsearch:
-    image: elasticsearch
+    build:
+      context: ./elasticsearch
+      args:
+        # version is picked up from the .env file
+        - es_version=${ES_VERSION}
+    image: akshara/elasticsearch:${ES_VERSION}
+    container_name: akshara_elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
+      # also set the vm.max_map_count kernel setting for production use. See:
+      # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+    ulimits:
+      # disabling swapping for performance and node stability
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
-        - ./esdata:/usr/share/elasticsearch/data
-
+      # share the config in the repo with the container
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./elasticsearch/config/stopwords:/usr/share/elasticsearch/config/stopwords
+      # using local docker volume for es data
+      # gets stored in /var/lib/docker/volumes by default, and can specify a
+      # custom path here, but need to configure the dir perms for container use
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
   kibana:
-    image: kibana
+    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    container_name: akshara_kibana
+    environment:
+      # limit kibana memory usage to 512 mb (default is 1G)
+      - "NODE_OPTIONS=--max-old-space-size=512"
+      # kibana-specific xpack features
+      - xpack.monitoring.enabled=true
+      - xpack.reporting.enabled=true
+      # paid features
+      - xpack.graph.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
     ports:
       - 5601:5601
+    networks:
+      - esnet
+volumes:
+  esdata:
+    driver: local
+networks:
+  esnet:
