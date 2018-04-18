@@ -1,16 +1,13 @@
 """
     A simple script to run tessaract OCR with Python and system calls.
     
-    * First need to build tesseract OCR in your system 
-        - should be fairly straightforward in OSX and Linux 
-        - some linux binaries are available
-        - Resource: https://github.com/tesseract-ocr/tesseract/wiki/Compiling
-    TODO (maybe?) - build an ubuntu docker?
-    
-    * Then download Nepali traineddata.
-        - https://github.com/tesseract-ocr/tesseract/wiki/Data-Files#data-files-for-version-400-november-29-2016
-        
-    * Put the file in /usr/share/tessdata along with other trained data
+    * pull docker image: docker pull nripesh/tessseract4re-nep  
+
+    * then run run_nep.sh
+
+    * then run nep_orc.sh (which runs in the docker container) 
+
+    * modify nep_orc.sh, and this script as you like for more features/results. 
 
     * I get pretty good results with tesseract 4.0 for pngs/jpegs. Pdf's still not good.
 
