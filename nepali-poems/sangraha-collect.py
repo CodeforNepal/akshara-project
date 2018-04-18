@@ -25,12 +25,17 @@ tree = html.fromstring(page.content)
 
 links = tree.xpath('//ul[@id="menu-sahitya-bidhaa"]/li/a')
 to_collect = ["नेपाली कथा", "Engलघुकथा", "नेपाली उपन्यास", "नाटक", "नेवारी रचना", "मैथिली रचना", "भोजपुरी रचना", "हास्य – व्यङ्ग्य"]
-with_menu = ["नेपाली काव्य", "बाल साहित्य", "अनुवादित साहित्य", "अडिओ साहित्य"]
+with_menu = ["नेपाली काव्य", "बाल साहित्य", "अनुवादित साहित्य", "अडिओ साहित्य", "संस्मरण | नियात्रा"]
 for linkElem in links:
     if ctrlc:
         quit()
     else:
-        sahitya_type, link = linkElem.xpath('./text()')[0], linkElem.xpath('./@href')[0]
+        sahitya_types, links = linkElem.xpath('./text()'), linkElem.xpath('./@href')
+        if not sahitya_types or not links:
+            print(sahitya_types, links)
+        if sahitya_types[0] in with_menu:
+            continue
+        sahitya_type, link = sahitya_types[0], links[0]
         if(sahitya_type in to_collect):
             dir = os.path.join("sangraha-data", sahitya_type)
             if not os.path.exists(dir):
@@ -53,7 +58,7 @@ for linkElem in links:
                     sahitya_page = requests.get(collection_link)
                     sahitya_content = html.fromstring(sahitya_page.content).xpath('//div[@id="content"]')[0]
 
-                    data['date'] = time.mktime(parse(sahitya_content.xpath('//div[@class="entry-meta"]/a/span/text()')[0]).timetuple())
+                    data['datetime'] = time.mktime(parse(sahitya_content.xpath('//div[@class="entry-meta"]/a/span/text()')[0]).timetuple())
 
                     content = sahitya_content.xpath('//div[@class="entry-content"]/p')
                     author = content[0].xpath('//strong/text()')[0]
