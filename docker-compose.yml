@@ -34,7 +34,7 @@ services:
     container_name: akshara_kibana
     environment:
       # limit kibana memory usage to 512 mb (default is 1G)
-      - "NODE_OPTIONS=--max-old-space-size=512"
+      - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
       # kibana-specific xpack features
       - xpack.monitoring.enabled=true
       - xpack.reporting.enabled=true
