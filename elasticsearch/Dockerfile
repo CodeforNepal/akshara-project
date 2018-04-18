@@ -7,7 +7,7 @@
 ARG es_version
 
 # based on official image from elastic
-FROM docker.elastic.co/elasticsearch/elasticsearch:${es_version}
+FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${es_version}
 
 # Add metadata.
 LABEL \

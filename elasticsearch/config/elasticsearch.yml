@@ -31,10 +31,10 @@ action.destructive_requires_name: true
 # disable the disk allocation decider
 cluster.routing.allocation.disk.threshold_enabled: false
 
-# Elasticsearch specific xpack features
-xpack.license.self_generated.type: basic
-xpack.monitoring.enabled: true
-# paid features
-xpack.ml.enabled: false
-xpack.security.enabled: false
-xpack.watcher.enabled: false
+## Elasticsearch specific xpack features (to be used when xpack is installed)
+#xpack.license.self_generated.type: basic
+#xpack.monitoring.enabled: true
+## paid features
+#xpack.ml.enabled: false
+#xpack.security.enabled: false
+#xpack.watcher.enabled: false

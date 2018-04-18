@@ -6,7 +6,7 @@ services:
       args:
         # version is picked up from the .env file
         - es_version=${ES_VERSION}
-    image: akshara/elasticsearch:${ES_VERSION}
+    image: akshara/elasticsearch-oss:${ES_VERSION}
     container_name: akshara_elasticsearch
     environment:
       - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
@@ -30,18 +30,18 @@ services:
     networks:
       - esnet
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    image: docker.elastic.co/kibana/kibana-oss:${ES_VERSION}
     container_name: akshara_kibana
     environment:
       # limit kibana memory usage to 512 mb (default is 1G)
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
-      # kibana-specific xpack features
-      - xpack.monitoring.enabled=true
-      - xpack.reporting.enabled=true
-      # paid features
-      - xpack.graph.enabled=false
-      - xpack.ml.enabled=false
-      - xpack.security.enabled=false
+      ## kibana-specific xpack features (to be used when xpack is installed)
+      #- xpack.monitoring.enabled=true
+      #- xpack.reporting.enabled=true
+      ## paid features
+      #- xpack.graph.enabled=false
+      #- xpack.ml.enabled=false
+      #- xpack.security.enabled=false
     ports:
       - 5601:5601
     networks:
