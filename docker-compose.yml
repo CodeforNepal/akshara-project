@@ -10,9 +10,17 @@ services:
     image: akshara/${ES_IMAGE}:${ES_VERSION}
     container_name: akshara_elasticsearch
     environment:
-      - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
       # also set the vm.max_map_count kernel setting for production use. See:
       # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+      - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
+      # elasticsearch-specific xpack features (to be used when xpack is installed)
+      # disable these when using the elasticsearch-oss image
+      - xpack.license.self_generated.type=basic
+      - xpack.monitoring.enabled=true
+      # paid features
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
     ulimits:
       # disabling swapping for performance and node stability
       memlock:
