@@ -44,8 +44,8 @@ services:
     environment:
       # limit kibana memory usage (default is 1G)
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
-      # only error messages
-      - LOGGING_QUIET=false
+      # if true, only error messages are shown
+      - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
       # kibana-specific xpack features (to be used when xpack is installed)
       - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
       # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
