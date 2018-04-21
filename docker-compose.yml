@@ -4,9 +4,10 @@ services:
     build:
       context: ./elasticsearch
       args:
-        # version is picked up from the .env file
+        # the vars here are picked up from the .env file
+        - es_image=${ES_IMAGE}
         - es_version=${ES_VERSION}
-    image: akshara/elasticsearch-oss:${ES_VERSION}
+    image: akshara/${ES_IMAGE}:${ES_VERSION}
     container_name: akshara_elasticsearch
     environment:
       - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
@@ -30,7 +31,7 @@ services:
     networks:
       - esnet
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:${ES_VERSION}
+    image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
     container_name: akshara_kibana
     environment:
       # limit kibana memory usage to 512 mb (default is 1G)

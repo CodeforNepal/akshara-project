@@ -1,13 +1,14 @@
 # Custom elasticsearch image for akshara use
 #
 # Example build:
-#   sudo docker build --tag akshara/elasticsearch:6.2.3 --build-arg es_version=6.2.3 .
+#   sudo docker build --tag akshara/elasticsearch:6.2.4 --build-arg es_version=6.2.4 .
 
-# pass the es version as an arg during docker build
-ARG es_version
+# defaults. pass these as args during docker build to override
+ARG es_image=elasticsearch
+ARG es_version=6.2.4
 
 # based on official image from elastic
-FROM docker.elastic.co/elasticsearch/elasticsearch-oss:${es_version}
+FROM docker.elastic.co/elasticsearch/${es_image}:${es_version}
 
 # Add metadata.
 LABEL \
