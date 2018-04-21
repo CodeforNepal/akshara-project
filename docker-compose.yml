@@ -34,16 +34,18 @@ services:
     image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
     container_name: akshara_kibana
     environment:
-      # limit kibana memory usage to 512 mb (default is 1G)
+      # limit kibana memory usage (default is 1G)
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
+      # only error messages
+      - LOGGING_QUIET=false
       ## kibana-specific xpack features (to be used when xpack is installed)
-      - xpack.license.self_generated.type=basic
-      - xpack.monitoring.enabled=true
-      - xpack.reporting.enabled=true
+      - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
+      - XPACK_MONITORING_ENABLED=true
+      - XPACK_REPORTING_ENABLED=true
       ## paid features
-      - xpack.graph.enabled=false
-      - xpack.ml.enabled=false
-      - xpack.security.enabled=false
+      - XPACK_GRAPH_ENABLED=false
+      - XPACK_ML_ENABLED=false
+      - XPACK_SECURITY_ENABLED=false
     ports:
       - 5601:5601
     networks:
