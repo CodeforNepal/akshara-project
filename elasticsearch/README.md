@@ -32,7 +32,7 @@ This ensures that all the features listed above are available in the cluster.
 
 Things to follow when using the cluster:
 
-* Index documents into indices of pattern *akshara_<language>*, **and** with [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) set to `_doc`. Eg: for Nepali docs, use index name that matches the pattern `akshara_nepali*`. Incoming document should have fields defined in the [index template](scripts/set_nepali_template.sh).
+* Index documents into indices of pattern "akshara_\<language\>*", **and** with [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) set to `_doc`. Eg: for Nepali docs, use index name that matches the pattern `akshara_nepali*`. Incoming document should have fields defined in the [index template](scripts/set_nepali_template.sh).
 * Query for documents using a language specific index pattern. Eg: `akshara_nepali*` for Nepali docs. If you want to query over all indices, use `akshara*`.
 * During indexing, set the *pipeline* param to `akshara_pipeline` (processes docs during ingestion for some useful enrichment).
 
@@ -40,10 +40,9 @@ For an actual usage example, see the script [test/index_akshara.sh](test/index_a
 
 ```
 test/index_akshara.sh test/sample_docs/*.json
-
 ```
 
-To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring) (Note: this is not available when using the [kibana-oss](../.env) image). Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
+To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring) (note: this is not available when using the [kibana-oss](../.env) image). Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
 
 
 ## Useful Commands
