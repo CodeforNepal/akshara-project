@@ -38,14 +38,16 @@ services:
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
       # only error messages
       - LOGGING_QUIET=false
-      ## kibana-specific xpack features (to be used when xpack is installed)
+      # kibana-specific xpack features (to be used when xpack is installed)
       - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
-      - XPACK_MONITORING_ENABLED=true
-      - XPACK_REPORTING_ENABLED=true
-      ## paid features
-      - XPACK_GRAPH_ENABLED=false
-      - XPACK_ML_ENABLED=false
-      - XPACK_SECURITY_ENABLED=false
+      # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
+      # which takes forever. Disabling these and going with the defaults here.
+      #- XPACK_MONITORING_ENABLED=true
+      #- XPACK_REPORTING_ENABLED=true
+      # paid features
+      #- XPACK_GRAPH_ENABLED=false
+      #- XPACK_ML_ENABLED=false
+      #- XPACK_SECURITY_ENABLED=false
     ports:
       - 5601:5601
     networks:
