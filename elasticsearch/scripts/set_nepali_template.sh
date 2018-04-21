@@ -4,6 +4,9 @@
 #
 # set the template mapping for akshara nepali indices
 
+# prefix with akshara, so that we can query for all our indices with akshara*
+INDEX_PATTERN="akshara_nepali*"
+
 # Relative from the elasticsearch config folder (eg: /etc/elasticsearch)
 #STOPWORDS_FILE="stopwords/nepali_test.txt"
 STOPWORDS_FILE="stopwords/nepali.txt"
@@ -15,7 +18,7 @@ STOPWORDS_FILE="stopwords/nepali.txt"
 #fi
 
 curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: application/json" --data '{
-  "index_patterns": ["nepali*"],
+  "index_patterns": ["'"$INDEX_PATTERN"'"],
   "order": 1,
   "settings": {
     "index": {
