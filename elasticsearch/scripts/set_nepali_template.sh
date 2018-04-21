@@ -31,7 +31,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
               "indic_normalization",
               "nepali_stop",
               /* "nepali_keywords", */
-              "nepali_stemmer"
+              "nepali_stemmer_derived"
             ]
           },
           "akshara_nepali_standard": {
@@ -52,13 +52,15 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
             "stopwords_path": "'"$STOPWORDS_FILE"'"
             /* "stopwords": ["छ","यही", "होइन"] */
           },
+          /* words that should be excluded from stemming */
           "nepali_keywords": {
             "type": "keyword_marker",
             "keywords": ["उदाहरण"]
           },
-          "nepali_stemmer": {
+          /* stemmer based on Hindi */
+          /* TODO need a proper stemmer for Nepali */
+          "nepali_stemmer_derived": {
             "type": "stemmer",
-            /* TODO need a proper stemmer for Nepali */
             "language": "hindi"
           },
           "latin_transform": {

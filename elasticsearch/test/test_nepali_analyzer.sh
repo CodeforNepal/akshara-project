@@ -24,7 +24,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_analyze?pretty" --header "Content-Type: a
 }'
 
 echo ""
-echo "With hindi stemmer..."
+echo "Based on a more custom analyzer (stemmer derived from hindi currently)..."
 
 curl -XGET "${HOSTNAME}:9200/${INDEX}/_analyze?pretty" --header "Content-Type: application/json" --data '{
   "analyzer": "akshara_nepali",
