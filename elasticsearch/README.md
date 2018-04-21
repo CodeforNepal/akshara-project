@@ -1,6 +1,6 @@
 # Akshara Elasticsearch
 
-We use [elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) to provide full-text search capabilities for the texts that are in our system.
+We use [elasticsearch](https://en.wikipedia.org/wiki/Elasticsearch) to provide full-text search capabilities for the documents that are in our system.
 
 This folder houses all the custom elasticsearch setup/configuration we do.
 
@@ -32,13 +32,18 @@ This ensures that all the features listed above are available in the cluster.
 
 Things to follow when using the cluster:
 
-* Index documents into indices that start with the language name, **and** with [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) set to `_doc`. Eg: for Nepali docs, use index name that matches the pattern `nepali*`.
-* Query for documents using a lanuage specific index pattern. Eg: `nepali*` for Nepali docs.
+* Index documents into indices of pattern *akshara_<language>*, **and** with [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) set to `_doc`. Eg: for Nepali docs, use index name that matches the pattern `akshara_nepali*`. Incoming document should have fields defined in the [index template](scripts/set_nepali_template.sh).
+* Query for documents using a language specific index pattern. Eg: `akshara_nepali*` for Nepali docs. If you want to query over all indices, use `akshara*`.
 * During indexing, set the *pipeline* param to `akshara_pipeline` (processes docs during ingestion for some useful enrichment).
 
-For an actual usage example, see the script [test/index_akshara.sh](test/index_akshara.sh).
+For an actual usage example, see the script [test/index_akshara.sh](test/index_akshara.sh). The script populates the cluster with some sample documents.
 
-To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring). Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
+```
+test/index_akshara.sh test/sample_docs/*.json
+
+```
+
+To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring) (Note: this is not available when using the [kibana-oss](../.env) image). Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
 
 
 ## Useful Commands
@@ -55,6 +60,9 @@ docker-compose up --build elasticsearch
 
 # remove the elasticsearch data volume (reset all the indices)
 docker-compose down --volumes
+
+# inspect the elasticsearch container
+docker exec -it akshara_elasticsearch bash
 ```
 
 
