@@ -1,9 +1,18 @@
 #!/bin/bash
+#
+# Test the behaviour of akshara nepali analyzer(s)
+# Assumes that the test index is present in the cluster (via index_akshara.sh)
+#
+# Usage: ./test_nepali_analyzer.sh [TEXT]
 
-#TEXT="मेरो चोक"
-#TEXT="मैले नजन्माएको छोरो"
-#TEXT="मेरो घर मूल सडकको छेवैमा छ"
-TEXT="मेरो यो झ्यालसँग धेरै घनिष्टता बढ्यो"
+if [ -z "$@" ]; then
+  #TEXT="मेरो चोक"
+  #TEXT="मैले नजन्माएको छोरो"
+  #TEXT="मेरो घर मूल सडकको छेवैमा छ"
+  TEXT="मेरो यो झ्यालसँग धेरै घनिष्टता बढ्यो"
+else
+  TEXT="$@"
+fi
 
 INDEX="akshara_nepali_test"
 

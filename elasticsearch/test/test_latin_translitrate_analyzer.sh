@@ -1,8 +1,17 @@
 #!/bin/bash
+#
+# Test the behaviour of akshara latin transliterate analyzer
+# Assumes that the test index is present in the cluster (via index_akshara.sh)
+#
+# Usage: ./test_latin_transliterate_analyzer.sh [TEXT]
 
-#TEXT="मेरो चोक"
-#TEXT="मैले नजन्माएको छोरो"
-TEXT="मेरो घर मूल सडकको छेवैमा छ"
+if [ -z "$@" ]; then
+  #TEXT="मेरो चोक"
+  #TEXT="मैले नजन्माएको छोरो"
+  TEXT="मेरो घर मूल सडकको छेवैमा छ"
+else
+  TEXT="$@"
+fi
 
 INDEX="akshara_nepali_test"
 
