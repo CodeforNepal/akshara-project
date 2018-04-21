@@ -32,9 +32,9 @@ action.destructive_requires_name: true
 cluster.routing.allocation.disk.threshold_enabled: false
 
 ## Elasticsearch specific xpack features (to be used when xpack is installed)
-#xpack.license.self_generated.type: basic
-#xpack.monitoring.enabled: true
+xpack.license.self_generated.type: basic
+xpack.monitoring.enabled: true
 ## paid features
-#xpack.ml.enabled: false
-#xpack.security.enabled: false
-#xpack.watcher.enabled: false
+xpack.ml.enabled: false
+xpack.security.enabled: false
+xpack.watcher.enabled: false

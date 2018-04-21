@@ -37,12 +37,13 @@ services:
       # limit kibana memory usage to 512 mb (default is 1G)
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
       ## kibana-specific xpack features (to be used when xpack is installed)
-      #- xpack.monitoring.enabled=true
-      #- xpack.reporting.enabled=true
+      - xpack.license.self_generated.type=basic
+      - xpack.monitoring.enabled=true
+      - xpack.reporting.enabled=true
       ## paid features
-      #- xpack.graph.enabled=false
-      #- xpack.ml.enabled=false
-      #- xpack.security.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
     ports:
       - 5601:5601
     networks:
