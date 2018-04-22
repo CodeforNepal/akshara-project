@@ -20,6 +20,8 @@ Currently, the configuration is optimized for single node cluster, and has sane 
 
 ## Usage
 
+#### Setup
+
 To provision a cluster with the core elasticsearch setup here, run `docker-compose up` from the project root.
 
 After the cluster is up, run the setup script:
@@ -30,11 +32,14 @@ elasticsearch/setup_akshara_cluster.sh
 
 This ensures that all the features listed above are available in the cluster.
 
-Things to follow when using the cluster:
+#### Indexing
 
-* Index documents into indices of pattern "akshara_\<language\>*", **and** with [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) set to `_doc`. Eg: for Nepali docs, use index name that matches the pattern `akshara_nepali*`. Incoming document should have fields defined in the [index template](scripts/set_nepali_template.sh).
-* Query for documents using a language specific index pattern. Eg: `akshara_nepali*` for Nepali docs. If you want to query over all indices, use `akshara*`.
-* During indexing, set the *pipeline* param to `akshara_pipeline` (processes docs during ingestion for some useful enrichment).
+Things to follow when indexing documents into the cluster:
+
+* Use indices of pattern _akshara\_\<language\>*_. Eg: for Nepali docs, use index name that matches the pattern _akshara_nepali*_.
+* Set the [*type*](https://www.elastic.co/guide/en/elasticsearch/reference/current/removal-of-types.html) of the documents to `_doc`.
+* Set the *pipeline* param to `akshara_pipeline` (processes docs during ingestion for some useful enrichment).
+* Document should have fields defined in the [index template](scripts/set_nepali_template.sh).
 
 For an actual usage example, see the script [test/index_akshara.sh](test/index_akshara.sh). The script populates the cluster with some sample documents.
 
@@ -42,7 +47,18 @@ For an actual usage example, see the script [test/index_akshara.sh](test/index_a
 test/index_akshara.sh test/sample_docs/*.json
 ```
 
-To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring) (note: this is not available when using the [kibana-oss](../.env) image). Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
+#### Querying
+
+* Query for documents using a language specific index pattern. Eg: `akshara_nepali*` for Nepali docs.
+* If you want to query over all indices, use `akshara*`.
+
+For some example queries, see the script [test/test_queries.sh](test/test_queries.sh).
+
+#### Monitoring
+
+To monitor cluster status/performance, you can use Kibana's [monitoring UI](http://localhost:5601/app/monitoring) (note: this is not available when using the [kibana-oss](../.env) image).
+
+Also look into elasticsearch's [cat api](https://www.elastic.co/guide/en/elasticsearch/reference/current/cat.html).
 
 
 ## Useful Commands
