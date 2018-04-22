@@ -75,9 +75,16 @@ docker-compose up --build elasticsearch
 
 # remove the elasticsearch data volume (reset all the indices)
 docker-compose down --volumes
+```
 
+Others:
+
+```
 # inspect the elasticsearch container
 docker exec -it akshara_elasticsearch bash
+
+# delete the test index
+curl -XDELETE $HOSTNAME:9200/akshara_nepali_test
 ```
 
 

@@ -93,7 +93,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: ap
 ##############################################################################
 
 echo ""
-echo "Aggregate by author field (find top authors with most contributions):"
+echo "Aggregate by a field (find top authors with most contributions):"
 
 curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "size": 0,
