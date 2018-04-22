@@ -3,7 +3,7 @@
 # Some example queries demonstrating the usage of akshara elasticsearch cluster.
 # Assumes that the test index is present in the cluster (via index_akshara.sh)
 #
-# Usage: ./test_queries.sh
+# Usage: ./sample_queries.sh
 
 INDEX="akshara_nepali_test"
 

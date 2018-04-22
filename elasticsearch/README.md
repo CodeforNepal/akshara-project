@@ -52,7 +52,7 @@ test/index_akshara.sh test/sample_docs/*.json
 * Query for documents using a language specific index pattern. Eg: `akshara_nepali*` for Nepali docs.
 * If you want to query over all indices, use `akshara*`.
 
-For some example queries, see the script [test/test_queries.sh](test/test_queries.sh).
+For some example queries, see the script [test/sample_queries.sh](test/sample_queries.sh).
 
 #### Monitoring
 
