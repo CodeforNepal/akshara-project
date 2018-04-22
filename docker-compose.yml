@@ -46,6 +46,8 @@ services:
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
       # if true, only error messages are shown
       - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
+      # which page to launch by default
+      - KIBANA_DEFAULTAPPID=discover
       # kibana-specific xpack features (to be used when xpack is installed)
       - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
       # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
