@@ -27,8 +27,8 @@ export default props => (
 			dangerouslySetInnerHTML={{
 				__html: get(
 					props.result,
-					'highlight.content',
-					props.result._source.content
+					'highlight.text',
+					props.result._source.text
 				)
 			}}
 		/>

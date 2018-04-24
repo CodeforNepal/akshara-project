@@ -13,7 +13,9 @@ import style from './style';
 const RefinementOption = props => (
 	<List.LinkItem onClick={props.onClick}>
 		<Checkbox checked={props.active} id="basic-checkbox" />
-		<span className={style.RefinementOption__Label} for="basic-checkbox">{props.label}</span>
+		<span className={style.RefinementOption__Label} for="basic-checkbox">
+			{props.label}
+		</span>
 		<span className={style.RefinementOption__Option}>{props.count}</span>
 	</List.LinkItem>
 );
@@ -33,29 +35,34 @@ const FiltersList = () => (
 class Filters extends Component {
 	render() {
 		return (
-			<div>
-				<Button
-					primary
-					raised
-					onClick={() => {
-						this.scrollingDlg.MDComponent.show();
-					}}
-				>
-					Filters
-				</Button>
-				<Dialog
-					ref={scrollingDlg => {
-						this.scrollingDlg = scrollingDlg;
-					}}
-				>
-					<Dialog.Header>Select Filters</Dialog.Header>
-					<Dialog.Body scrollable>
-						<FiltersList />
-					</Dialog.Body>
-					<Dialog.Footer>
-						<Dialog.FooterButton cancel>Close</Dialog.FooterButton>
-					</Dialog.Footer>
-				</Dialog>
+			<div className={style.Filters__Container}>
+				<div className={style.Filters__Mobile}>
+					<Button
+						primary
+						raised
+						onClick={() => {
+							this.scrollingDlg.MDComponent.show();
+						}}
+					>
+						Filters
+					</Button>
+					<Dialog
+						ref={scrollingDlg => {
+							this.scrollingDlg = scrollingDlg;
+						}}
+					>
+						<Dialog.Header>Select Filters</Dialog.Header>
+						<Dialog.Body scrollable>
+							<FiltersList />
+						</Dialog.Body>
+						<Dialog.Footer>
+							<Dialog.FooterButton cancel>Close</Dialog.FooterButton>
+						</Dialog.Footer>
+					</Dialog>
+				</div>
+				<div className={style.Filters__Desktop}>
+					<FiltersList />
+				</div>
 			</div>
 		);
 	}

@@ -5,3 +5,15 @@
 .RefinementOption__Option {
   width: 10%;
 }
+
+@media (min-width: 839px) {
+  .Filters__Mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 839px) {
+  .Filters__Desktop {
+    display: none;
+  }
+}
