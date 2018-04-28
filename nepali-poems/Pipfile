@@ -14,6 +14,7 @@ name = "pypi"
 lxml = "*"
 requests = "*"
 elasticsearch = "*"
+dateutils = "*"
 
 
 [requires]

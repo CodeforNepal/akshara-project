@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# Test the behaviour of akshara latin transliterate analyzer
+# Assumes that the test index is present in the cluster (via index_akshara.sh)
+#
+# Usage: ./test_latin_transliterate_analyzer.sh [TEXT]
+
+if [ -z "$@" ]; then
+  #TEXT="मेरो चोक"
+  #TEXT="मैले नजन्माएको छोरो"
+  TEXT="मेरो घर मूल सडकको छेवैमा छ"
+else
+  TEXT="$@"
+fi
+
+INDEX="akshara_nepali_test"
+
+curl -XGET "${HOSTNAME}:9200/${INDEX}/_analyze?pretty" --header "Content-Type: application/json" --data '{
+  "analyzer": "akshara_latin_transliterate",
+  "text": "'"$TEXT"'"
+}'

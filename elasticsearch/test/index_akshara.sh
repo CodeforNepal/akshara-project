@@ -19,9 +19,9 @@ fi
 
 ##############################################################################
 
-INDEX="nepali_test"
-
 ELASTICSEARCH_URL="${HOSTNAME}:9200"
+
+INDEX="akshara_nepali_test"
 PIPELINE="akshara_pipeline"
 
 # as unix time

@@ -4,14 +4,23 @@ services:
     build:
       context: ./elasticsearch
       args:
-        # version is picked up from the .env file
+        # the vars here are picked up from the .env file
+        - es_image=${ES_IMAGE}
         - es_version=${ES_VERSION}
-    image: akshara/elasticsearch:${ES_VERSION}
+    image: akshara/${ES_IMAGE}:${ES_VERSION}
     container_name: akshara_elasticsearch
     environment:
-      - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
       # also set the vm.max_map_count kernel setting for production use. See:
       # https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html#docker-cli-run-prod-mode
+      - "ES_JAVA_OPTS=-Xms${ES_JAVA_HEAP_SIZE} -Xmx${ES_JAVA_HEAP_SIZE}"
+      # elasticsearch-specific xpack features (to be used when xpack is installed)
+      # disable these when using the elasticsearch-oss image
+      - xpack.license.self_generated.type=basic
+      - xpack.monitoring.enabled=true
+      # paid features
+      - xpack.ml.enabled=false
+      - xpack.security.enabled=false
+      - xpack.watcher.enabled=false
     ulimits:
       # disabling swapping for performance and node stability
       memlock:
@@ -30,18 +39,25 @@ services:
     networks:
       - esnet
   kibana:
-    image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+    image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
     container_name: akshara_kibana
     environment:
-      # limit kibana memory usage to 512 mb (default is 1G)
-      - "NODE_OPTIONS=--max-old-space-size=512"
-      # kibana-specific xpack features
-      - xpack.monitoring.enabled=true
-      - xpack.reporting.enabled=true
+      # limit kibana memory usage (default is 1G)
+      - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
+      # if true, only error messages are shown
+      - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
+      # which page to launch by default
+      - KIBANA_DEFAULTAPPID=discover
+      # kibana-specific xpack features (to be used when xpack is installed)
+      - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
+      # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
+      # which takes forever. Disabling these and going with the defaults here.
+      #- XPACK_MONITORING_ENABLED=true
+      #- XPACK_REPORTING_ENABLED=true
       # paid features
-      - xpack.graph.enabled=false
-      - xpack.ml.enabled=false
-      - xpack.security.enabled=false
+      #- XPACK_GRAPH_ENABLED=false
+      #- XPACK_ML_ENABLED=false
+      #- XPACK_SECURITY_ENABLED=false
     ports:
       - 5601:5601
     networks:
