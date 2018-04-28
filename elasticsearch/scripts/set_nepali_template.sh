@@ -4,6 +4,9 @@
 #
 # set the template mapping for akshara nepali indices
 
+# prefix with akshara, so that we can query for all our indices with akshara*
+INDEX_PATTERN="akshara_nepali*"
+
 # Relative from the elasticsearch config folder (eg: /etc/elasticsearch)
 #STOPWORDS_FILE="stopwords/nepali_test.txt"
 STOPWORDS_FILE="stopwords/nepali.txt"
@@ -15,7 +18,7 @@ STOPWORDS_FILE="stopwords/nepali.txt"
 #fi
 
 curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: application/json" --data '{
-  "index_patterns": ["nepali*"],
+  "index_patterns": ["'"$INDEX_PATTERN"'"],
   "order": 1,
   "settings": {
     "index": {
@@ -28,7 +31,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
               "indic_normalization",
               "nepali_stop",
               /* "nepali_keywords", */
-              "nepali_stemmer"
+              "nepali_stemmer_derived"
             ]
           },
           "akshara_nepali_standard": {
@@ -49,13 +52,15 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
             "stopwords_path": "'"$STOPWORDS_FILE"'"
             /* "stopwords": ["छ","यही", "होइन"] */
           },
+          /* words that should be excluded from stemming */
           "nepali_keywords": {
             "type": "keyword_marker",
             "keywords": ["उदाहरण"]
           },
-          "nepali_stemmer": {
+          /* stemmer based on Hindi */
+          /* TODO need a proper stemmer for Nepali */
+          "nepali_stemmer_derived": {
             "type": "stemmer",
-            /* TODO need a proper stemmer for Nepali */
             "language": "hindi"
           },
           "latin_transform": {
