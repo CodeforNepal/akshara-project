@@ -1,0 +1,5 @@
+.SearchActions__Container {
+  margin: 1rem;
+  display: flex;
+  align-items: right;
+}
