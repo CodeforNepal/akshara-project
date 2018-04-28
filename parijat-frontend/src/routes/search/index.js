@@ -33,7 +33,7 @@ import SearchActions from '../../components/searchactions';
 import style from './style';
 
 const searchkit = new SearchkitManager(
-	`${location.protocol}//${location.hostname}:9200/nepali_poems`
+	`//${location.hostname}:9200/akshara_nepali_poems`
 );
 
 export default class Search extends Component {
