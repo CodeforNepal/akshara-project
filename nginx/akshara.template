@@ -1,0 +1,49 @@
+upstream elasticsearch_upstream {
+  hash   ${DOLLAR}remote_addr;
+  server elasticsearch:9200; # docker sets this up for us
+}
+
+server {
+  listen ${NGINX_PORT} default_server;
+  listen [::]:${NGINX_PORT} default_server;
+  #listen ${NGINX_PORT};
+
+  #root /var/www/html;
+
+  #include status.conf;
+  server_name ${NGINX_SERVER_NAME};
+
+  # redirect server error pages to the static page /50x.html
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+      root   /usr/share/nginx/html;
+  }
+
+  location / {
+    # First attempt to serve request as file, then
+    # as directory, then fall back to displaying a 404.
+    try_files ${DOLLAR}uri ${DOLLAR}uri/ =404;
+  }
+
+  #location / {
+  #  root   /usr/share/nginx/html;
+  #  index  index.html index.htm;
+  #}
+
+  location /es/ {
+      proxy_set_header X-Forwarded-For ${DOLLAR}remote_addr;
+      proxy_set_header Host            ${DOLLAR}host;
+      proxy_set_header Upgrade         ${DOLLAR}http_upgrade;
+      proxy_set_header Connection      "upgrade";
+      proxy_http_version               1.1;
+
+      # / at the end here is important
+      proxy_pass                       http://elasticsearch_upstream/;
+
+      # only GET requests are accepted from external hosts
+      limit_except GET {
+        allow 127.0.0.1;
+        deny all;
+      }
+  }
+}

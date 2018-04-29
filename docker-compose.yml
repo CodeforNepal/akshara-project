@@ -3,11 +3,16 @@ services:
   web:
     image: nginx:${NGINX_VERSION}
     container_name: akshara_nginx
-    #environment:
-    #  - NGINX_HOST=thinkpad
+    environment:
+      # the vars here are picked up from the .env file
+      # and they will be injected into our config template via the run_nginx script
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
+      - NGINX_PORT=${NGINX_PORT}
+    command: run_nginx.sh
     volumes:
       # share the config in the repo with the container
-      - ./nginx/akshara.conf:/etc/nginx/conf.d/akshara.conf
+      - ./nginx/akshara.template:/etc/nginx/conf.d/akshara.template
+      - ./nginx/run_nginx.sh:/usr/local/bin/run_nginx.sh
     ports:
       - 80:80
     networks:
