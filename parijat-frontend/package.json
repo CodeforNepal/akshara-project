@@ -6,7 +6,7 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
-    "serve": "preact serve",
+    "serve": "preact serve --server superstatic",
     "dev": "preact watch",
     "lint": "eslint src"
   },
@@ -26,7 +26,8 @@
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
     "if-env": "^1.0.0",
-    "preact-cli": "^2.0.0"
+    "preact-cli": "^2.0.0",
+    "superstatic": "^5.0.1"
   },
   "dependencies": {
     "lodash": "^4.17.5",
