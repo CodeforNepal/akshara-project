@@ -8,7 +8,6 @@ import sys
 import json
 import time
 
-from dateutil.parser import parse
 from time import sleep
 
 global ctrlc
@@ -58,7 +57,7 @@ for linkElem in links:
                     sahitya_page = requests.get(collection_link)
                     sahitya_content = html.fromstring(sahitya_page.content).xpath('//div[@id="content"]')[0]
 
-                    data['datetime'] = time.mktime(parse(sahitya_content.xpath('//div[@class="entry-meta"]/a/span/text()')[0]).timetuple())
+                    data['author_date'] = sahitya_content.xpath('//div[@class="entry-meta"]/a/span/text()')[0]
 
                     content = sahitya_content.xpath('//div[@class="entry-content"]/p')
                     author = content[0].xpath('//strong/text()')[0]
