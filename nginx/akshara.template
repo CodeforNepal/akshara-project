@@ -1,17 +1,23 @@
 upstream elasticsearch_upstream {
   hash   ${DOLLAR}remote_addr;
-  server elasticsearch:9200; # docker sets this up for us
+
+  # docker sets this up for us
+  server elasticsearch:9200;
 }
 
 server {
   listen ${NGINX_PORT} default_server;
   listen [::]:${NGINX_PORT} default_server;
-  #listen ${NGINX_PORT};
 
-  #root /var/www/html;
-
-  #include status.conf;
   server_name ${NGINX_SERVER_NAME};
+
+  # for some diagnostics
+  location /nginx_status {
+    stub_status on;
+    access_log off;
+    allow 127.0.0.1;
+    deny all;
+  }
 
   # redirect server error pages to the static page /50x.html
   error_page   500 502 503 504  /50x.html;
