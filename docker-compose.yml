@@ -19,7 +19,6 @@ services:
       - esnet
     links:
       - elasticsearch
-    #restart: on-failure
   elasticsearch:
     build:
       context: ./elasticsearch
