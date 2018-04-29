@@ -1,5 +1,20 @@
 version: '3.6'
 services:
+  web:
+    image: nginx:${NGINX_VERSION}
+    container_name: akshara_nginx
+    #environment:
+    #  - NGINX_HOST=thinkpad
+    volumes:
+      # share the config in the repo with the container
+      - ./nginx/akshara.conf:/etc/nginx/conf.d/akshara.conf
+    ports:
+      - 80:80
+    networks:
+      - esnet
+    links:
+      - elasticsearch
+    #restart: on-failure
   elasticsearch:
     build:
       context: ./elasticsearch
