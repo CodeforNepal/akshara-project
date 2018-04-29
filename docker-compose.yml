@@ -5,7 +5,7 @@ services:
     container_name: akshara_nginx
     environment:
       # the vars here are picked up from the .env file
-      # and they will be injected into our config template via the run_nginx script
+      # and they will be injected into our nginx config template via `run_nginx.sh` script
       - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
       - NGINX_PORT=${NGINX_PORT}
     command: run_nginx.sh
