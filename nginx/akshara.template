@@ -1,8 +1,8 @@
-upstream parijat_frontend_upstream {
+upstream frontend_upstream {
   hash   ${DOLLAR}remote_addr;
 
   # docker sets this up for us
-  server parijat_frontend:8080;
+  server frontend:8080;
 }
 
 upstream elasticsearch_upstream {
@@ -40,7 +40,7 @@ server {
     proxy_http_version               1.1;
 
     # / at the end here is important
-    proxy_pass                       http://parijat_frontend_upstream/;
+    proxy_pass                       http://frontend_upstream/;
   }
 
   location /es/ {
