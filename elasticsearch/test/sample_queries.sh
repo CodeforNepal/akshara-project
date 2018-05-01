@@ -7,11 +7,13 @@
 
 INDEX="akshara_nepali_test"
 
+ELASTICSEARCH_URL="http://${HOSTNAME}:9200"
+
 ##############################################################################
 
 echo "Search for a text match across all the fields:"
 
-curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
+curl -XGET "${ELASTICSEARCH_URL}/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "query": {
     "bool": {
       "must": [
@@ -32,7 +34,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: ap
 echo ""
 echo "Search for an exact text match in the title field:"
 
-curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
+curl -XGET "${ELASTICSEARCH_URL}/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "query": {
     "bool": {
       "must": [
@@ -53,7 +55,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: ap
 echo ""
 echo "Search with a stop word (should only give results for the other word):"
 
-curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
+curl -XGET "${ELASTICSEARCH_URL}/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "query": {
     "bool": {
       "must": [
@@ -74,7 +76,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: ap
 echo ""
 echo "Search with latin transliterated text:"
 
-curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
+curl -XGET "${ELASTICSEARCH_URL}/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "query": {
     "bool": {
       "must": [
@@ -95,7 +97,7 @@ curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: ap
 echo ""
 echo "Aggregate by a field (find top authors with most contributions):"
 
-curl -XGET "${HOSTNAME}:9200/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
+curl -XGET "${ELASTICSEARCH_URL}/${INDEX}/_search?pretty" --header "Content-Type: application/json" --data '{
   "size": 0,
   "aggs": {
     "2": {

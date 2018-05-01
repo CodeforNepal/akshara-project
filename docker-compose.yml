@@ -34,6 +34,8 @@ services:
       # disable these when using the elasticsearch-oss image
       - xpack.license.self_generated.type=basic
       - xpack.monitoring.enabled=true
+      # default is 7 days. Enable if we run short of disk space
+      #- xpack.monitoring.history.duration=3d
       # paid features
       - xpack.ml.enabled=false
       - xpack.security.enabled=false
