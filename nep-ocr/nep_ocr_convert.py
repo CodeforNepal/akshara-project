@@ -20,7 +20,7 @@ import sys
 
 
 # these have to be changed for different file types/formats
-RESIZE_PCT = 200
+RESIZE_PCT = 1024
 DENSITY = 100
 DEPTH = 8
 
@@ -48,12 +48,12 @@ def convert_to_tif(img_path, resize_pct=RESIZE_PCT, density=DENSITY):
 
     strip = True
     if strip:
-        cmd = 'convert {} -resize {}%%  -density {} -depth {} ' \
+        cmd = 'convert {} -resize {}  -density {} -depth {} ' \
               '-strip -background {} -alpha {} {}/{}.tif'.format(
                 img_path, resize_pct, density, depth, 
                 background, alpha, folder, img_name_no_ext)
     else:
-        cmd = 'convert {} -resize {}%%  -density {} -depth {} ' \
+        cmd = 'convert {} -resize {}  -density {} -depth {} ' \
               '{}/{}.tif'.format(img_path, resize_pct,
                 density, depth, folder, img_name_no_ext)
     print(cmd)
@@ -71,8 +71,8 @@ def convert_img_to_txt(img_path, lang='nep', oem=1, psm=3):
         convert_to_tif(img_path)
         
     out_name = img_no_ext + '_' + lang + '_ocr'
-    cmd = 'tesseract -l %s --oem %d --psm %d %s %s/%s' % \
-                (lang, oem, psm, img_w_tif_ext, folder, out_name)
+    cmd = 'tesseract -l %s --tessdata-dir %s --oem %d --psm %d %s %s/%s' % \
+                (lang, './tessdata/',oem, psm, img_w_tif_ext, folder, out_name)
     out = subprocess.run(cmd, stdout=subprocess.PIPE,
                          shell=True, check=True)
     return out
@@ -84,9 +84,9 @@ def main():
     img_src = os.path.abspath(sys.argv[1])
 
     # TODO: add more arguments as necessary 
-    oem = 3
-    lang = 'nep'
-    psm = 1
+    oem = 1
+    lang = 'nep+Devanagari'
+    psm = 3
     out = convert_img_to_txt(img_src, lang=lang, oem=oem, psm=psm)
 
 
