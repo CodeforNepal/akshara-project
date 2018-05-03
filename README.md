@@ -10,8 +10,14 @@ Please follow the official docs to install [docker](https://docs.docker.com/inst
 
 Then a simple `docker-compose up` (from the project root directory) will start all of the akshara services. Full list of those services:
 
-* Elasticsearch, for the search backend (http://localhost:9200)
+* Parijat frontend, for the main site (http://localhost:8080)
+* Elasticsearch, for the search backend and datastore (http://localhost:9200)
 * Kibana, for exploring the elasticsearch data (http://localhost:5601)
+
+There's also a nginx service that acts as a reverse proxy to the core services, and provides access to them over the web:
+
+* Parijat frontend, at http://localhost/
+* Elasticsearch, at http://localhost/es/
 
 #### Notes
 

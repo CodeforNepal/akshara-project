@@ -19,7 +19,7 @@ fi
 
 ##############################################################################
 
-ELASTICSEARCH_URL="${HOSTNAME}:9200"
+ELASTICSEARCH_URL="http://${HOSTNAME}:9200"
 
 INDEX="akshara_nepali_test"
 PIPELINE="akshara_pipeline"

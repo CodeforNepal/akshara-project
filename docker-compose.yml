@@ -1,5 +1,22 @@
 version: '3.6'
 services:
+  web:
+    image: nginx:${NGINX_VERSION}
+    container_name: akshara_nginx
+    environment:
+      # the vars here are picked up from the .env file
+      # and they will be injected into our nginx config template via `run_nginx.sh` script
+      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
+      - NGINX_PORT=${NGINX_PORT}
+    command: run_nginx.sh
+    volumes:
+      # share the config in the repo with the container
+      - ./nginx/akshara.template:/etc/nginx/conf.d/akshara.template
+      - ./nginx/run_nginx.sh:/usr/local/bin/run_nginx.sh
+    ports:
+      - ${NGINX_PORT}:${NGINX_PORT}
+    networks:
+      - esnet
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -17,6 +34,8 @@ services:
       # disable these when using the elasticsearch-oss image
       - xpack.license.self_generated.type=basic
       - xpack.monitoring.enabled=true
+      # default is 7 days. Enable if we run short of disk space
+      #- xpack.monitoring.history.duration=3d
       # paid features
       - xpack.ml.enabled=false
       - xpack.security.enabled=false
@@ -44,6 +63,8 @@ services:
     environment:
       # limit kibana memory usage (default is 1G)
       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
+      # for valid options here, see:
+      # https://github.com/elastic/kibana-docker/blob/master/build/kibana/bin/kibana-docker
       # if true, only error messages are shown
       - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
       # which page to launch by default
