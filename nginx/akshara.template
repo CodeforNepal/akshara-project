@@ -16,8 +16,10 @@ server {
   listen 80;
   listen [::]:80;
 
+  server_name ${NGINX_SERVER_NAME};
+
   # redirect all http traffic to the https address
-  return 301 https://$host$request_uri;
+  return 301 https://${DOLLAR}host${DOLLAR}request_uri;
 }
 
 server {
@@ -51,9 +53,8 @@ server {
 
   location / {
     proxy_set_header Host              ${DOLLAR}host;
-    #proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
-    #proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-For   ${DOLLAR}remote_addr;
+    proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
+    proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
     proxy_set_header Upgrade           ${DOLLAR}http_upgrade;
     proxy_set_header Connection        "upgrade";
@@ -62,16 +63,12 @@ server {
 
     # / at the end here is important
     proxy_pass                         http://frontend_upstream/;
-    #proxy_read_timeout                 90;
-
-    #proxy_redirect frontend:8080 https://${NGINX_SERVER_NAME};
   }
 
   location /es/ {
     proxy_set_header Host              ${DOLLAR}host;
-    #proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
-    #proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
-    proxy_set_header X-Forwarded-For   ${DOLLAR}remote_addr;
+    proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
+    proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
     proxy_set_header Upgrade           ${DOLLAR}http_upgrade;
     proxy_set_header Connection        "upgrade";
@@ -80,9 +77,6 @@ server {
 
     # / at the end here is important
     proxy_pass                         http://elasticsearch_upstream/;
-    #proxy_read_timeout                 90;
-
-    #proxy_redirect elasticsearch:9200 https://${NGINX_SERVER_NAME};
 
     # only GET requests are accepted from external hosts
     limit_except GET {
