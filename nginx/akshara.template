@@ -13,8 +13,8 @@ upstream elasticsearch_upstream {
 }
 
 server {
-  listen 80;
-  listen [::]:80;
+  listen 80 default_server;
+  listen [::]:80 default_server;
 
   server_name ${NGINX_SERVER_NAME};
 
@@ -23,8 +23,8 @@ server {
 }
 
 server {
-  listen 443 default_server;
-  listen [::]:443 default_server;
+  listen 443 ssl;
+  listen [::]:443 ssl;
 
   server_name ${NGINX_SERVER_NAME};
 
