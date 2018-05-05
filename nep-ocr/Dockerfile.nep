@@ -1,0 +1,7 @@
+# to build: docker build -t tesseractshadow/tesseract4re-nep -f Dockerfile.nep .
+FROM tesseractshadow/tesseract4re
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+RUN apt-get install -y wget imagemagick ghostscript
