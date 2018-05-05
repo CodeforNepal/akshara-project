@@ -16,7 +16,7 @@ server {
   listen 80 default_server;
   listen [::]:80 default_server;
 
-  server_name ${NGINX_SERVER_NAME};
+  server_name ${SERVER_NAME};
 
   # redirect all http traffic to the https address
   return 301 https://${DOLLAR}host${DOLLAR}request_uri;
@@ -26,10 +26,10 @@ server {
   listen 443 ssl;
   listen [::]:443 ssl;
 
-  server_name ${NGINX_SERVER_NAME};
+  server_name ${SERVER_NAME};
 
-  ssl_certificate     /etc/nginx/certificates/${NGINX_SERVER_NAME}.crt;
-  ssl_certificate_key /etc/nginx/certificates/${NGINX_SERVER_NAME}.key;
+  ssl_certificate     /etc/nginx/certificates/${SSL_CERTIFICATE_FILE};
+  ssl_certificate_key /etc/nginx/certificates/${SSL_CERTIFICATE_KEY_FILE};
 
   ssl on;
   ssl_session_cache  builtin:1000  shared:SSL:10m;

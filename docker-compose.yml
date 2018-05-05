@@ -6,13 +6,16 @@ services:
     environment:
       # the vars here are picked up from the .env file
       # and they will be injected into our nginx config template via `run_nginx.sh` script
-      - NGINX_SERVER_NAME=${NGINX_SERVER_NAME}
+      - SERVER_NAME=${SERVER_NAME}
+      - SSL_CERTIFICATE_FILE=${SERVER_NAME}.crt
+      - SSL_CERTIFICATE_KEY_FILE=${SERVER_NAME}.key
+      #- SSL_CERTIFICATE_DIR=${SSL_CERTIFICATE_DIR}
     command: run_nginx.sh
     volumes:
       # share the config in the repo with the container
       - ./nginx/akshara.template:/etc/nginx/conf.d/akshara.template
       - ./nginx/run_nginx.sh:/usr/local/bin/run_nginx.sh
-      - ./nginx/certificates:/etc/nginx/certificates
+      - ${SSL_CERTIFICATE_DIR}:/etc/nginx/certificates
     ports:
       - 80:80
       - 443:443
