@@ -1,13 +1,9 @@
 upstream frontend_upstream {
-  hash   ${DOLLAR}remote_addr;
-
   # docker sets this up for us
   server frontend:8080;
 }
 
 upstream elasticsearch_upstream {
-  hash   ${DOLLAR}remote_addr;
-
   # docker sets this up for us
   server elasticsearch:9200;
 }
@@ -51,6 +47,7 @@ server {
     root /usr/share/nginx/html;
   }
 
+  # main site
   location / {
     proxy_set_header Host              ${DOLLAR}host;
     proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
@@ -65,6 +62,7 @@ server {
     proxy_pass                         http://frontend_upstream/;
   }
 
+  # elasticsearch endpoint
   location /es/ {
     proxy_set_header Host              ${DOLLAR}host;
     proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
