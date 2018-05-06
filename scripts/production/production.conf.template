@@ -1,0 +1,111 @@
+upstream frontend_upstream {
+  # docker sets this up for us
+  server frontend:8080;
+}
+
+upstream elasticsearch_upstream {
+  # docker sets this up for us
+  server elasticsearch:9200;
+}
+
+server {
+    listen      80;
+    listen [::]:80;
+    server_name ;
+
+    location ^~ /.well-known/acme-challenge {
+        root   /usr/share/nginx/html;
+        default_type text/plain;
+        allow all;
+    }
+
+    location / {
+        rewrite ^ https://$host$request_uri? permanent;
+    }
+}
+
+#https://${SERVER_NAME}
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name ${SERVER_NAME};
+
+    server_tokens off;
+
+    ssl_certificate /etc/letsencrypt/live/${SERVER_NAME}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${SERVER_NAME}/privkey.pem;
+
+    ssl_buffer_size 8k;
+
+    ssl_dhparam /etc/ssl/certs/dhparam-2048.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.1 TLSv1;
+    ssl_prefer_server_ciphers on;
+
+    ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;
+
+    ssl_ecdh_curve secp384r1;
+    ssl_session_tickets off;
+
+    # OCSP stapling
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    resolver 1.1.1.1;
+
+    location ^~ /.well-known/acme-challenge {
+        root   /usr/share/nginx/html;
+        default_type text/plain;
+        allow all;
+    }
+
+  # for some diagnostics
+  location /nginx_status {
+    stub_status on;
+    access_log  off;
+    allow       127.0.0.1;
+    deny        all;
+  }
+
+  # redirect server error pages to the static page /50x.html
+  error_page   500 502 503 504  /50x.html;
+  location = /50x.html {
+    root /usr/share/nginx/html;
+  }
+
+
+  # main site
+  location / {
+    proxy_set_header Host              ${DOLLAR}host;
+    proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
+    proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
+    proxy_set_header Upgrade           ${DOLLAR}http_upgrade;
+    proxy_set_header Connection        "upgrade";
+
+    proxy_http_version                 1.1;
+
+    # / at the end here is important
+    proxy_pass                         http://frontend_upstream/;
+  }
+
+  # elasticsearch endpoint
+  location /es/ {
+    proxy_set_header Host              ${DOLLAR}host;
+    proxy_set_header X-Real-IP         ${DOLLAR}remote_addr;
+    proxy_set_header X-Forwarded-For   ${DOLLAR}proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
+    proxy_set_header Upgrade           ${DOLLAR}http_upgrade;
+    proxy_set_header Connection        "upgrade";
+
+    proxy_http_version                 1.1;
+
+    # / at the end here is important
+    proxy_pass                         http://elasticsearch_upstream/;
+
+    # only GET requests are accepted from external hosts
+    limit_except GET {
+      allow 127.0.0.1;
+      deny  all;
+    }
+  }
+}
