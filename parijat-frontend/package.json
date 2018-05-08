@@ -6,7 +6,8 @@
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
     "build": "preact build",
-    "serve": "preact serve --server superstatic",
+    "serve": "yarn serve:gen-config && superstatic --port 8080 --host 0.0.0.0",
+    "serve:gen-config": "preact serve --server config --dest superstatic.json",
     "dev": "preact watch",
     "lint": "eslint src"
   },
