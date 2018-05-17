@@ -33,8 +33,9 @@ import SearchActions from '../../components/searchactions';
 import style from './style';
 
 const searchkit = new SearchkitManager(
-	`/es/akshara_nepali_kavita`
-	// `http://parijat.kabootar.im:9200/akshara_nepali_kavita`
+	process.env.NODE_ENV === 'production'
+		? `/es/akshara_nepali_kavita`
+		: `http://parijat.kabootar.im:9200/akshara_nepali_kavita`
 );
 
 export default class Search extends Component {
