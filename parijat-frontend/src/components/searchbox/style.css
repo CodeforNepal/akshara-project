@@ -1,0 +1,26 @@
+.SearchBox {
+  position: relative;
+  border: 1px solid gray;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.SearchBox__Input {
+  background: white;
+  border: none;
+  box-sizing: border-box;
+  width: 100%;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+.SearchBox__Button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 3rem;
+  left: -4rem;
+  position: relative;
+}
