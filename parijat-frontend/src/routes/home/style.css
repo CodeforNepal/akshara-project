@@ -1,13 +1,27 @@
-.home {
-	padding: 20px;
-	min-height: 100%;
+body {
+	overflow-x: hidden;
+}
+
+.Home {
+	margin-top: 5rem;
+}
+
+.Logo {
+	font-size: 3rem;
 	width: 100%;
+	text-align: center;
 }
 
-.cardHeader {
-	padding: 16px;
+.SearchBox {
+	padding: 1rem;
 }
 
-.cardBody {
-	padding: 16px
+@media only screen and (min-width: 600px) {
+	.SearchBox {
+		padding: 5rem;
+	}
 }
+
+
+
+

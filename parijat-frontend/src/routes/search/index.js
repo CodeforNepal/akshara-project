@@ -33,7 +33,8 @@ import SearchActions from '../../components/searchactions';
 import style from './style';
 
 const searchkit = new SearchkitManager(
-	`//${location.hostname}:9200/akshara_nepali_poems`
+	// `/es/akshara_nepali_kavita
+	`http://parijat.kabootar.im:9200/akshara_nepali_kavita`
 );
 
 export default class Search extends Component {
@@ -48,8 +49,8 @@ export default class Search extends Component {
 							queryFields={[
 								'title',
 								'author',
-								'text',
-								'text.latin',
+								'content',
+								'content.latin',
 								'title.latin',
 								'author.latin'
 							]}
