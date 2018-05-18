@@ -31,11 +31,10 @@ import Filters from '../../components/filters';
 import ResetFiltersComponent from '../../components/resetfilters';
 import SearchActions from '../../components/searchactions';
 import style from './style';
+import { API_ENDPOINT } from '../../api';
 
 const searchkit = new SearchkitManager(
-	process.env.NODE_ENV === 'production'
-		? `/es/akshara_nepali_kavita`
-		: `http://parijat.kabootar.im:9200/akshara_nepali_kavita`
+	API_ENDPOINT
 );
 
 export default class Search extends Component {

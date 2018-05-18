@@ -3,15 +3,19 @@ import get from 'lodash/get';
 import Card from 'preact-material-components/Card';
 import 'preact-material-components/Card/style.css';
 import style from './style';
+import { Link } from 'preact-router/match';
+
 
 export default props => (
 	<Card className={style.SearchItem__Container}>
-		<div
-			className={style.SearchItem__Title}
-			dangerouslySetInnerHTML={{
-				__html: get(props.result, 'highlight.title', props.result._source.title)
-			}}
-		/>
+		<Link href={`/content/${props.result._id}`}>
+			<div
+				className={style.SearchItem__Title}
+				dangerouslySetInnerHTML={{
+					__html: get(props.result, 'highlight.title', props.result._source.title)
+				}}
+			/>
+		</Link>
 		<div
 			className={style.SearchItem__Author}
 			dangerouslySetInnerHTML={{
@@ -19,16 +23,6 @@ export default props => (
 					props.result,
 					'highlight.author',
 					props.result._source.author
-				)
-			}}
-		/>
-		<div
-			className={style.SearchItem__Description}
-			dangerouslySetInnerHTML={{
-				__html: get(
-					props.result,
-					'highlight.text',
-					props.result._source.text
 				)
 			}}
 		/>

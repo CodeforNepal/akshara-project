@@ -19,4 +19,7 @@
 
 .SearchItem__Description {
   font-size: small;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
