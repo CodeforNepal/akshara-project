@@ -1,3 +1,8 @@
+.Item {
+  padding: 16px;
+  padding: var(--mdc-layout-grid-margin-tablet, 16px);
+}
+
 .Item p {
   min-height: 10px;
 }

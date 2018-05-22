@@ -1,4 +1,7 @@
 import { h, Component } from 'preact';
+import Toolbar from 'preact-material-components/Toolbar';
+import 'preact-material-components/Toolbar/style.css';
+import { route } from 'preact-router';
 import Header from '../../components/header';
 import { getContent } from '../../api';
 import style from './style';
@@ -11,9 +14,18 @@ const Item = ({ result }) => (
 	</div>
 );
 
+const NavigationBack = () => (
+	<Toolbar.Icon navigation onClick={() => { history.back() }}>arrow_back_ios</Toolbar.Icon>
+);
+
 const Content = ({ result }) => (
 	<div>
-		<Header>सङ्ग्रह</Header>
+		<Header>
+			<Toolbar.Section align-start>
+				<NavigationBack />
+				<Toolbar.Title> सङ्ग्रह</Toolbar.Title>
+			</Toolbar.Section>
+		</Header>
 		{result.found ? <Item result={result._source} /> : <div>Not Found</div>}
 	</div>
 );

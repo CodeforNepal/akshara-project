@@ -5,16 +5,21 @@ import 'preact-material-components/Card/style.css';
 import style from './style';
 import { Link } from 'preact-router/match';
 
-
 export default props => (
 	<Card className={style.SearchItem__Container}>
 		<Link href={`/content/${props.result._id}`}>
 			<div
 				className={style.SearchItem__Title}
 				dangerouslySetInnerHTML={{
-					__html: get(props.result, 'highlight.title', props.result._source.title)
+					__html: get(
+						props.result,
+						'highlight.title',
+						props.result._source.title
+					)
 				}}
-			/>
+			>
+				{props.result._source.title}
+			</div>
 		</Link>
 		<div
 			className={style.SearchItem__Author}
