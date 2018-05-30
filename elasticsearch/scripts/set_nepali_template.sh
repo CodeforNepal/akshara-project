@@ -106,6 +106,9 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
             "latin": {
               "type": "text",
               "analyzer": "akshara_latin_transliterate"
+            },
+            "suggest": {
+              "type": "completion"
             }
           }
         },
