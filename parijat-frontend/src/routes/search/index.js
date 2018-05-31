@@ -18,6 +18,7 @@ import {
 	ActionBarRow,
 	SideBar,
 	TopBar,
+	InitialLoader,
 	NoHits
 } from 'searchkit';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
@@ -28,14 +29,13 @@ import Header from '../../components/header';
 import SearchItem from '../../components/searchitem';
 import SelectedFilter from '../../components/selectedfilter';
 import Filters from '../../components/filters';
+import Loading from '../../components/loading';
 import ResetFiltersComponent from '../../components/resetfilters';
 import SearchActions from '../../components/searchactions';
 import style from './style';
 import { API_ENDPOINT } from '../../api';
 
-const searchkit = new SearchkitManager(
-	API_ENDPOINT
-);
+const searchkit = new SearchkitManager(API_ENDPOINT);
 
 export default class Search extends Component {
 	render() {
@@ -75,13 +75,13 @@ export default class Search extends Component {
 								</div>
 								<div className={style.Search__Body}>
 									<Hits
-										mod="sk-hits-grid"
 										hitsPerPage={10}
 										highlightFields={['title', 'author', 'text']}
 										itemComponent={SearchItem}
 									/>
 									<Pagination />
 									<NoHits />
+									<InitialLoader component={Loading} />
 								</div>
 							</LayoutGrid.Cell>
 						</LayoutGrid.Inner>

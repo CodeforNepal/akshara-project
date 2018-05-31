@@ -12,10 +12,10 @@ function goBack() {
 }
 
 const Item = ({ result }) => (
-	<div className={style.Item}>
+	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
 		<h4>{result.author}</h4>
-		<div>{result.content.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
+		<div>{result.text.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
 	</div>
 );
 
@@ -27,12 +27,6 @@ const NavigationBack = () => (
 
 const Content = ({ result }) => (
 	<div>
-		<Header>
-			<Toolbar.Section align-start>
-				<NavigationBack />
-				<Toolbar.Title> सङ्ग्रह</Toolbar.Title>
-			</Toolbar.Section>
-		</Header>
 		{result.found ? <Item result={result._source} /> : <div>Not Found</div>}
 	</div>
 );
@@ -53,6 +47,12 @@ class ContentPage extends Component {
 	render() {
 		return (
 			<div>
+				<Header>
+					<Toolbar.Section align-start>
+						<NavigationBack />
+						<Toolbar.Title> सङ्ग्रह</Toolbar.Title>
+					</Toolbar.Section>
+				</Header>
 				{this.state.result != null ? (
 					<Content result={this.state.result} />
 				) : (
