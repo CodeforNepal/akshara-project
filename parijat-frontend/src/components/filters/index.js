@@ -22,7 +22,7 @@ const FiltersList = () => (
 	<ul className={style.FiltersList__Container}>
 		<RefinementListFilter
 			id="author"
-			size="7"
+			size={7}
 			title="Author"
 			field="author.keyword"
 			operator="OR"
