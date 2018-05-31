@@ -3,8 +3,13 @@ import Toolbar from 'preact-material-components/Toolbar';
 import 'preact-material-components/Toolbar/style.css';
 import { route } from 'preact-router';
 import Header from '../../components/header';
+import Loading from '../../components/loading';
 import { getContent } from '../../api';
 import style from './style';
+
+function goBack() {
+	route('/search');
+}
 
 const Item = ({ result }) => (
 	<div className={style.Item}>
@@ -15,7 +20,9 @@ const Item = ({ result }) => (
 );
 
 const NavigationBack = () => (
-	<Toolbar.Icon navigation onClick={() => { history.back() }}>arrow_back_ios</Toolbar.Icon>
+	<Toolbar.Icon navigation onClick={goBack}>
+		arrow_back_ios
+	</Toolbar.Icon>
 );
 
 const Content = ({ result }) => (
@@ -49,7 +56,7 @@ class ContentPage extends Component {
 				{this.state.result != null ? (
 					<Content result={this.state.result} />
 				) : (
-					<div>Loading...</div>
+					<Loading />
 				)}
 			</div>
 		);
