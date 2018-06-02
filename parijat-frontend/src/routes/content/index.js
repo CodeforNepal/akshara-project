@@ -15,7 +15,7 @@ const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
 		<h4>{result.author}</h4>
-		<div>{result.text.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
+		<div>{result.content.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
 	</div>
 );
 

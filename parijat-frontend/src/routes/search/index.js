@@ -33,9 +33,9 @@ import Loading from '../../components/loading';
 import ResetFiltersComponent from '../../components/resetfilters';
 import SearchActions from '../../components/searchactions';
 import style from './style';
-import { API_ENDPOINT } from '../../api';
+import { API_ENDPOINT, INDEX_NAME } from '../../api';
 
-const searchkit = new SearchkitManager(API_ENDPOINT);
+const searchkit = new SearchkitManager(`${API_ENDPOINT}${INDEX_NAME}`);
 
 export default class Search extends Component {
 	render() {
