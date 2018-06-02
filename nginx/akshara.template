@@ -53,8 +53,8 @@ server {
     # / at the end here is important
     proxy_pass                       http://elasticsearch_upstream/;
 
-    # only GET requests are accepted from external hosts
-    limit_except GET {
+    # only GET and POST requests are accepted from external hosts
+    limit_except GET POST {
       allow 127.0.0.1;
       deny  all;
     }
