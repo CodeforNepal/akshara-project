@@ -96,6 +96,9 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
             "keyword": {
               "type": "keyword",
               "norms": false
+            },
+            "suggest": {
+              "type": "completion"
             }
           }
         },
