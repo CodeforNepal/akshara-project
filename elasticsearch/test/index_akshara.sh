@@ -36,6 +36,10 @@ PIPELINE="akshara_pipeline"
 
 ##############################################################################
 
+#echo "Deleting index ${INDEX} (if it exists)..."
+#curl --silent -XDELETE "${ELASTICSEARCH_URL}/${INDEX}"
+#echo ""
+
 for file in "$@"; do
   echo "Indexing ${file}..."
 
