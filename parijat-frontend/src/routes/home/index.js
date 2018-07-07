@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 import 'preact-material-components/Button/style.css';
 import { route } from 'preact-router';
 import SearchBox from '../../components/searchbox';
+import Footer from '../../components/footer';
 import style from './style';
 
 export default class Home extends Component {
@@ -17,6 +18,7 @@ export default class Home extends Component {
 						}}
 					/>
 				</div>
+				<Footer/>
 			</div>
 		);
 	}
