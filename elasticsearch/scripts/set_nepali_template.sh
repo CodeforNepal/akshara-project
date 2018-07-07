@@ -44,12 +44,6 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
             "filter": [
               "latin_transform"
             ]
-          },
-          "akshara_shingle": {
-            "tokenizer": "lowercase",
-            "filter": [
-              "nepali_shingle"
-            ]
           }
         },
         "filter": {
@@ -72,11 +66,6 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
           "latin_transform": {
             "type": "icu_transform",
             "id": "Any-Latin; NFD; [:Nonspacing Mark:] Remove; NFC"
-          },
-          "nepali_shingle": {
-            "type": "shingle",
-            "max_shingle_size": 2,
-            "min_shingle_size": 2
           }
         }
       }
@@ -109,9 +98,7 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
               "norms": false
             },
             "suggest": {
-              "type": "completion",
-              "analyzer": "akshara_shingle",
-              "preserve_position_increments": false
+              "type": "completion"
             }
           }
         },
