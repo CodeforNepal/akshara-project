@@ -1,0 +1,30 @@
+.About__Content {
+	padding: 16px;
+	padding: var(--mdc-layout-grid-margin-tablet, 16px);
+	font-family: Arial;
+	font-weight: normal;
+}
+
+.About__Content p {
+  min-height: 10px;
+}
+
+.About__ContentGroup {
+	background: rgb(98,0,238, 0.1);
+	padding: 10px 20px;
+}
+
+.About__Divider {
+	padding: 10px;
+}
+
+.About__Link {
+	text-decoration: none;
+	font-weight: 700;
+	color: #444;
+	font-family: Arial;
+}
+
+.About__Link:hover {
+	color: #6200ee;
+}
