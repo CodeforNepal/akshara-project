@@ -18,8 +18,7 @@
 
 .Footer__ListItem {
   display: inline;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .Footer__ListItem > a {
