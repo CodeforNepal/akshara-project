@@ -1,8 +1,6 @@
 import { h, Component } from 'preact';
 import Dialog from 'preact-material-components/Dialog';
 import Button from 'preact-material-components/Button';
-import List from 'preact-material-components/List';
-import 'preact-material-components/List/style.css';
 import 'preact-material-components/Button/style.css';
 import 'preact-material-components/Dialog/style.css';
 import Checkbox from 'preact-material-components/Checkbox';
@@ -11,25 +9,26 @@ import { RefinementListFilter } from 'searchkit';
 import style from './style';
 
 const RefinementOption = props => (
-	<List.LinkItem onClick={props.onClick}>
-		<Checkbox checked={props.active} id="basic-checkbox" />
+	<li className={style.RefinementOption__Container} onClick={props.onClick}>
+		<input type="checkbox" checked={props.active} id="basic-checkbox" />
 		<span className={style.RefinementOption__Label} for="basic-checkbox">
 			{props.label}
 		</span>
-		<span className={style.RefinementOption__Option}>{props.count}</span>
-	</List.LinkItem>
+		<span className={style.RefinementOption__Count}>({props.count})</span>
+	</li>
 );
 
 const FiltersList = () => (
-	<List>
+	<ul className={style.FiltersList__Container}>
 		<RefinementListFilter
 			id="author"
+			size={7}
 			title="Author"
 			field="author.keyword"
 			operator="OR"
 			itemComponent={RefinementOption}
 		/>
-	</List>
+	</ul>
 );
 
 class Filters extends Component {

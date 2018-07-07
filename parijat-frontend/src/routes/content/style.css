@@ -1,8 +1,9 @@
-.Item {
+.Item__Poem {
   padding: 16px;
   padding: var(--mdc-layout-grid-margin-tablet, 16px);
 }
 
-.Item p {
+.Item__Poem p {
   min-height: 10px;
+  white-space: nowrap;
 }

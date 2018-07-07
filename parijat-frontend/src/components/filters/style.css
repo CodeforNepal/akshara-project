@@ -1,19 +1,40 @@
-.RefinementOption__Label {
-  width: 90%;
+.RefinementOption__Container {
+  white-space: nowrap;
+  list-style: none;
+  margin: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
-.RefinementOption__Option {
-  width: 10%;
+.RefinementOption__Label {
+  display: inline-block;
+}
+
+.RefinementOption__Count {
+  display: inline-block;
+  color: darkgray;
+  margin-left: 15px;
+}
+
+.FiltersList__Container {
+  margin: 0;
+  padding: 0;
+}
+
+.Filters__Container {
+  width: 100%;
 }
 
 @media (min-width: 839px) {
   .Filters__Mobile {
     display: none;
+    width: 100%;
   }
 }
 
 @media (max-width: 839px) {
   .Filters__Desktop {
     display: none;
+    width: 100%;
   }
 }

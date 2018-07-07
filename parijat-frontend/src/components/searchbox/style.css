@@ -7,6 +7,17 @@
   white-space: nowrap;
 }
 
+.SearchBox > div {
+  width: 100%;
+}
+
+.SearchBox__Menu {
+  width: 100%;
+  position: fixed;
+  overflow: auto;
+  padding: 0.5rem;
+}
+
 .SearchBox__Input {
   background: white;
   border: none;
@@ -14,6 +25,7 @@
   width: 100%;
   height: 3rem;
   padding: 0.5rem;
+  font-size: 1rem;
 }
 
 .SearchBox__Button {
@@ -21,6 +33,46 @@
   border: none;
   cursor: pointer;
   width: 3rem;
-  left: -4rem;
-  position: relative;
+  height: 3rem;
+  right: 0rem;
+  top: 0rem;
+  position: absolute;
+}
+
+.SuggestionItem {
+  display: flex;
+  cursor: pointer;
+  height: 2rem;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+}
+
+.TransliteratedList {
+  margin: 0 0.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+}
+
+.TransliteratedList__Header {
+  font-size: small;
+  margin-right: 1rem;
+}
+
+.TransliteratedList__Item {
+  background: #e6e6e6;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+}
+
+.TransliteratedList__Item:hover {
+  background: lightblue;
+}
+
+.NoSuggestion {
+  padding: 0.5rem;
+}
+
+.NoSuggestion > span {
+  margin: 0.25rem;
 }

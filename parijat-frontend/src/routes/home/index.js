@@ -11,6 +11,7 @@ export default class Home extends Component {
 				<div class={style.Logo}>सङ्ग्रह</div>
 				<div class={style.SearchBox}>
 					<SearchBox
+						fields={['title', 'author']}
 						onSubmit={queryValue => {
 							route(`search?q=${queryValue}`);
 						}}
