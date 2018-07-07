@@ -1,0 +1,34 @@
+.Footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: inline;
+}
+
+.Footer__Content {
+  text-align: center;   /* Allow the centering to work */
+  margin: 0 auto;
+}
+
+.Footer__List {
+  list-style: none;
+  display: inline;
+  padding: 0;
+}
+
+.Footer__ListItem {
+  display: inline;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.Footer__ListItem > a {
+  text-decoration: none;
+  font-family: 'Helvetica Neue', arial, sans-serif;
+  font-weight: 500;
+  color: #444;
+}
+
+.Footer__ListItem > a:hover {
+  color: #6200ee;
+}
