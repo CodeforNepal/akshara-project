@@ -6,28 +6,26 @@
 }
 
 .Footer__Content {
-  text-align: center;   /* Allow the centering to work */
-  margin: 0 auto;
+  text-align: center; /* Allow the centering to work */
+  margin: 3rem 0;
 }
 
 .Footer__List {
   list-style: none;
   display: inline;
   padding: 0;
+  margin: 3rem 0;
 }
 
 .Footer__ListItem {
+  margin: 2rem;
   display: inline;
-  padding: 20px;
 }
 
 .Footer__ListItem > a {
-  text-decoration: none;
-  font-family: 'Helvetica Neue', arial, sans-serif;
-  font-weight: 500;
-  color: #444;
+  color: grey;
 }
 
 .Footer__ListItem > a:hover {
-  color: #6200ee;
+  color: #5ABFA1;
 }

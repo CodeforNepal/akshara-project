@@ -47,3 +47,14 @@ html, body {
 	background-color: #333;
 	color: #fff;
 }
+
+/* Sangraha Styles */
+
+a {
+  text-decoration: none;
+  color: #5ABFA1;
+}
+
+a:hover {
+  text-decoration: underline;
+}

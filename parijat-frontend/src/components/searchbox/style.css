@@ -76,6 +76,14 @@
   padding: 0.5rem;
 }
 
-.NoSuggestion > span {
+.NoSuggestion > p {
   margin: 0.25rem;
+  width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+.NoSuggestion__Icon {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
 }

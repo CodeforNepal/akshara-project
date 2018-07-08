@@ -12,8 +12,14 @@ function isSuggestionsEmpty(sug1, sug2) {
 
 const NoSuggestion = () => (
 	<div className={style.NoSuggestion}>
-		<Icon>help</Icon>
-		<span>नेपाली साहित्य खोज्नु होस् । खोजका उदाहरणहरु - <a href="/search?author[0]=लक्ष्मीप्रसाद%20देवकोटा">देवकोटा </a></span>
+		<p>
+			<Icon className={style.NoSuggestion__Icon}>help</Icon>
+			नेपाली साहित्य खोज्नु होस् । खोजका उदाहरणहरु -{' '}
+			<a href="/search?author[0]=लक्ष्मीप्रसाद%20देवकोटा">
+				लक्ष्मीप्रसाद देवकोटा
+			</a>, &nbsp;
+			<a href="/search?author[0]=भूपी%20शेरचन">भूपी शेरचन</a> ।
+		</p>
 	</div>
 );
 
