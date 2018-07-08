@@ -3,6 +3,7 @@ import Toolbar from 'preact-material-components/Toolbar';
 import 'preact-material-components/Toolbar/style.css';
 import { route } from 'preact-router';
 import Header from '../../components/header';
+import Footer from '../../components/footer';
 import Loading from '../../components/loading';
 import { getContent } from '../../api';
 import style from './style';
@@ -14,7 +15,7 @@ function goBack() {
 const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
-		<h4>{result.author}</h4>
+		<h4><a href={"../search?author[0]="+result.author}>{result.author}</a></h4>
 		<div>{result.content.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
 	</div>
 );
@@ -58,6 +59,7 @@ class ContentPage extends Component {
 				) : (
 					<Loading />
 				)}
+				<Footer/>
 			</div>
 		);
 	}

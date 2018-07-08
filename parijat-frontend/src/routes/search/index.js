@@ -25,6 +25,7 @@ import 'preact-material-components/LayoutGrid/style.css';
 import Chips from 'preact-material-components/Chips';
 import 'preact-material-components/Chips/style.css';
 import Header from '../../components/header';
+import Footer from '../../components/footer';
 import SearchItem from '../../components/searchitem';
 import SelectedFilter from '../../components/selectedfilter';
 import Filters from '../../components/filters';
@@ -86,6 +87,7 @@ export default class Search extends Component {
 							</LayoutGrid.Cell>
 						</LayoutGrid.Inner>
 					</LayoutGrid>
+					<Footer/>
 				</div>
 			</SearchkitProvider>
 		);
