@@ -1,15 +1,15 @@
-.SelectedFilter {
-  display: flex;
+.ResetFilters {
+  display: inline-block;
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.25rem;
   border: 1px solid grey;
 }
 
-.SelectedFilter__Label {
-
+.ResetFilters > div {
+  display: flex;
 }
 
-.SelectedFilter__Icon {
+.ResetFilters__Icon {
   cursor: pointer;
 }

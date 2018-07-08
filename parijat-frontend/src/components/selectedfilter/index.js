@@ -1,29 +1,20 @@
 import { h } from 'preact';
-import get from 'lodash/get';
-import Chips from 'preact-material-components/Chips';
-import 'preact-material-components/Chips/style.css';
+import Icon from 'preact-material-components/Icon';
 import style from './style';
 
-export class Chip extends Chips.Chip {
-	componentWillUnmount() {
-		return;
-	}
-}
-
-export default props => (
-	<Chip className={style.SelectedFilter__Container}>
-		<Chips.Text>
+const SelectedFilter = props => (
+	<span className={style.SelectedFilter}>
+		<span className={style.SelectedFilter__Label}>
 			<strong>{props.labelKey}:</strong> {props.labelValue}
-		</Chips.Text>
-		<Chips.Icon
-			className="material-icons"
-			trailing
-			tabindex="0"
-			role="button"
+		</span>
+		<Icon
 			title="Remove Filter"
+			className={style.SelectedFilter__Icon}
 			onClick={props.removeFilter}
 		>
 			close
-		</Chips.Icon>
-	</Chip>
+		</Icon>
+	</span>
 );
+
+export default SelectedFilter;

@@ -13,9 +13,12 @@
 
 .SearchBox__Menu {
   width: 100%;
-  position: fixed;
   overflow: auto;
   padding: 0.5rem;
+  background: white;
+  border: 1px solid gray;
+  z-index: 100;
+  box-sizing: border-box;
 }
 
 .SearchBox__Input {

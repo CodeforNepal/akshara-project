@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import {
 	SearchkitManager,
 	SearchkitProvider,
-	SearchBox,
 	Hits,
 	HitsStats,
 	Pagination,
@@ -32,6 +31,7 @@ import Filters from '../../components/filters';
 import Loading from '../../components/loading';
 import ResetFiltersComponent from '../../components/resetfilters';
 import SearchActions from '../../components/searchactions';
+import SearchBox from './SearchBox';
 import style from './style';
 import { API_ENDPOINT, INDEX_NAME } from '../../api';
 

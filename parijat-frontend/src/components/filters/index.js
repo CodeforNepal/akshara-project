@@ -1,10 +1,9 @@
 import { h, Component } from 'preact';
 import Dialog from 'preact-material-components/Dialog';
-import Button from 'preact-material-components/Button';
-import 'preact-material-components/Button/style.css';
 import 'preact-material-components/Dialog/style.css';
 import Checkbox from 'preact-material-components/Checkbox';
 import 'preact-material-components/Checkbox/style.css';
+import Button from '../button';
 import { RefinementListFilter } from 'searchkit';
 import style from './style';
 
@@ -37,8 +36,6 @@ class Filters extends Component {
 			<div className={style.Filters__Container}>
 				<div className={style.Filters__Mobile}>
 					<Button
-						primary
-						raised
 						onClick={() => {
 							this.scrollingDlg.MDComponent.show();
 						}}

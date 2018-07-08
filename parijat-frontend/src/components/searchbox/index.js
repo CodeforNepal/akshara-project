@@ -56,7 +56,6 @@ export default class SearchBox extends Component {
 	getSuggestions = searchValue => {
 		if (searchValue.length > 0) {
 			getSuggestions(searchValue, this.props.fields).then(suggestions => {
-				console.log('New Suggestions', suggestions);
 				this.setState({
 					suggestions: suggestions.map(item => `${item.title} - ${item.author}`)
 				});
@@ -101,6 +100,7 @@ export default class SearchBox extends Component {
 	};
 
 	handleSubmit = evnt => {
+		evnt.preventDefault();
 		this.props.onSubmit(this.state.searchValue);
 	};
 
@@ -112,7 +112,7 @@ export default class SearchBox extends Component {
 					items={[...this.state.suggestions]}
 					getItemValue={item => item}
 					renderMenu={children => (
-						<div className="SearchBox__Menu">
+						<div className={style.SearchBox__Menu}>
 							<TransliteratedList
 								items={this.state.transliterationSuggestions}
 								onSelect={this.onTransliterationSelect}
