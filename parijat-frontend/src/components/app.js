@@ -7,6 +7,7 @@ import { Router } from 'preact-router';
 import Home from 'async!../routes/home';
 import Search from 'async!../routes/search';
 import Content from 'async!../routes/content';
+import About from 'async!../routes/about';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.
@@ -25,6 +26,7 @@ export default class App extends Component {
 					<Search path="/search/" query="" />
 					<Search path="/search/:query" />
 					<Content path="/content/:id" />
+					<About path="/about" />
 				</Router>
 			</div>
 		);
