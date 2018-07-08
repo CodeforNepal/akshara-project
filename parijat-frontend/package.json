@@ -9,6 +9,7 @@
     "serve": "yarn serve:gen-config && superstatic --port 8080 --host 0.0.0.0",
     "serve:gen-config": "preact serve --server config --dest superstatic.json",
     "dev": "preact watch",
+    "test": "mocha --require babel-polyfill --require babel-register",
     "lint": "eslint src"
   },
   "eslintConfig": {
@@ -24,18 +25,24 @@
     "build/*"
   ],
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
+    "expect": "^23.1.0",
     "if-env": "^1.0.0",
+    "mocha": "^5.2.0",
     "preact-cli": "^2.0.0",
     "superstatic": "^5.0.1"
   },
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
     "lodash": "^4.17.5",
     "preact": "^8.2.1",
     "preact-compat": "^3.17.0",
     "preact-material-components": "^1.4.0",
     "preact-router": "^2.5.5",
+    "react-autocomplete": "^1.8.1",
     "searchkit": "^2.3.0"
   }
 }
