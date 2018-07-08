@@ -1,11 +1,11 @@
 {
-  "name": "parijat-frontend",
-  "short_name": "parijat-frontend",
+  "name": "सङ्ग्रह",
+  "short_name": "सङ्ग्रह",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fff",
-  "theme_color": "#673ab8",
+  "theme_color": "#5ABFA1",
   "icons": [
     {
       "src": "/assets/icons/android-chrome-192x192.png",

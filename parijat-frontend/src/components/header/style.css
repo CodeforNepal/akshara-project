@@ -2,4 +2,10 @@
   height: 3rem;
   overflow: visible;
   padding: 0.5rem;
+  color: black;
+  background: #5ABFA1;
+}
+
+a {
+    color:  #489880;
 }
