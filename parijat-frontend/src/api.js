@@ -1,4 +1,4 @@
-export const INDEX_NAME = `akshara_nepali_kavita`;
+export const INDEX_NAME = `akshara_nepali`;
 
 export const API_ENDPOINT =
 	process.env.NODE_ENV === 'production'

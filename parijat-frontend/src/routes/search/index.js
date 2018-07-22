@@ -50,8 +50,8 @@ export default class Search extends Component {
 							queryFields={[
 								'title',
 								'author',
-								'content',
-								'content.latin',
+								'text',
+								'text.latin',
 								'title.latin',
 								'author.latin'
 							]}

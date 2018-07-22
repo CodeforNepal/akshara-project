@@ -16,7 +16,7 @@ const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
 		<h4><a href={"../search?author[0]="+result.author}>{result.author}</a></h4>
-		<div>{result.content.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
+		<div>{result.text.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
 	</div>
 );
 
