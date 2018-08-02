@@ -1,4 +1,4 @@
-# सङ्ग्रह | [sangraha.org](sangraha.org)
+# सङ्ग्रह | [sangraha.org](http://sangraha.org)
 
 सङ्ग्रह is a portal to digitize and archive literary works from Nepal and make them accessible online through a user-friendly searchable interface to readers all around the world.
 
