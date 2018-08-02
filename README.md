@@ -61,7 +61,7 @@ There's also a nginx service that acts as a reverse proxy to the core services, 
     - ☐ New languages - Newari, Maithili, Bhojpuri
     - ☐ Add e-books and OCR the content
     
- - ☐ Phase 2.5: Marketting and Community
+ - ☐ Phase 2.5: Marketing and Community
      - ☐ Build techical community of contributors
      - ☐ Build community of content contributors and curators 
      - ☐ Market the product for wider adoption
