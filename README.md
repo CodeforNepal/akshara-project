@@ -1,4 +1,4 @@
-# सङ्ग्रह | sangraha.org
+# सङ्ग्रह | [sangraha.org](sangraha.org)
 
 सङ्ग्रह is a portal to digitize and archive literary works from Nepal and make them accessible online through a user-friendly searchable interface to readers all around the world.
 
@@ -56,7 +56,7 @@ There's also a nginx service that acts as a reverse proxy to the core services, 
     - ☐ Adding new Nepali language content to the Index
     - ☐ Increase documentation
   
-- ☐ Phase 2: Crowd Sourcing & New Content
+- ☐ Phase 2: Crowd Sourcing & New Languages
     - ☐ A Wiki style backend to support crowd sourcing of content
     - ☐ New languages - Newari, Maithili, Bhojpuri
     - ☐ Add e-books and OCR the content
@@ -72,4 +72,4 @@ Code for Nepal's Bay Area Chapter has been active since January 2017 and focuses
 
 ## License
 
-Our code is provided under the Free and Open Source software license [GNU GPL 3.0](LICENSE) . Except otherwise noted all contents is licensed under a [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by-sa/2.5/).
+The code is provided under the Free and Open Source software license [GNU GPL 3.0](LICENSE) . Except where otherwise noted all content is licensed under a [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by-sa/2.5/).
