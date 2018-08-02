@@ -20,6 +20,7 @@
 .Footer__ListItem {
   margin: 2rem;
   display: inline;
+  white-space: nowrap;
 }
 
 .Footer__ListItem > a {
