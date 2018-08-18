@@ -35,6 +35,7 @@ export const DEVANAGARI_CONSONANTS = {
 	ra: 'र',
 	la: 'ल',
 	va: 'व',
+	wa: 'व',
 	sa: 'स',
 	sha: 'श',
 	Sa: 'ष',
@@ -98,12 +99,16 @@ export function genKeymap(consonants, diacriticVowels, independentVowels) {
 	return fullKeymap;
 }
 
+function getValue(keymap, key) {
+	return keymap[key] || keymap[key.toLowerCase()];
+}
+
 function transliterate(part1, part2 = '', result = '', keymap) {
 	if (empty(part1) && empty(part2)) {
 		return result;
 	}
-	else if (keymap[part1]) {
-		return transliterate(part2, '', `${result}${keymap[part1]}`, keymap);
+	else if (getValue(keymap, part1)) {
+		return transliterate(part2, '', `${result}${getValue(keymap, part1)}`, keymap);
 	}
 	else if (part1.length === 1) {
 		// ??

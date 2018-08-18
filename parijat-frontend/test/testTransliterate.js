@@ -18,6 +18,8 @@ describe('tools/transliterate', () => {
 
 	const correctTransliterations = {
 		namaste: 'नमस्ते',
+		bewaastaa: 'बेवास्ता',
+		Bewaastaa: 'बेवास्ता',
 		'sa~njaya': 'सञ्जय'
 	};
 
