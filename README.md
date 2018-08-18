@@ -2,7 +2,6 @@
 
 ### सङ्ग्रह | [sangraha.org](http://sangraha.org)
 
-सङ्ग्रह is a portal to digitize and archive literary works from Nepal and make them accessible online through a user-friendly searchable interface to readers all around the world.
 
 <!-- toc -->
 
@@ -18,6 +17,8 @@
 <!-- tocstop -->
 
 ## Introduction
+
+सङ्ग्रह is a portal to digitize and archive literary works from Nepal and make them accessible online through a user-friendly searchable interface to readers all around the world.
 
 Recognizing the lack of an easy access to Nepali literary works in the internet, the सङ्ग्रह project started as an initiative to create an online repository that gathers literary works from Nepal in Nepali and other indigenous languages. The aim is to use digital technology to place Nepali literature before the widest possible audience and raise it to a more visible and influential position in Nepali culture. The objectives of सङ्ग्रह project are:
 
@@ -95,5 +96,5 @@ Code for Nepal's Bay Area Chapter has been active since January 2017 and focuses
 
 ## License
 
-The code is provided under the Free and Open Source software license [GNU GPL 3.0](LICENSE) . Except where otherwise noted all content is licensed under a [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/).
+The code is provided under the Free and Open Source software license [GNU GPL 3.0](LICENSE) . Except where otherwise noted all content is licensed under [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/).
 
