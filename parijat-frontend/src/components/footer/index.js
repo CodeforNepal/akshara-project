@@ -18,6 +18,14 @@ const Footer = () => (
 				</li>
 				<li className={style.Footer__ListItem}>
 					<a
+						href="https://goo.gl/forms/XfIMqXmRMp3MMMMh2"
+						target="_blank"
+					>
+						सुझाव
+					</a>
+				</li>
+				<li className={style.Footer__ListItem}>
+					<a
 						href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AMU2VD5FMCHCJ"
 						target="_blank"
 					>
