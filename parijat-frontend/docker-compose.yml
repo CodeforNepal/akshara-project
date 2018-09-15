@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  web:
+    image: nginx:1.15
+    container_name: akshara_nginx
+    network_mode: host
+    environment:
+      # the vars here are picked up from the .env file
+      # and they will be injected into our nginx config template via `run_nginx.sh` script
+      - NGINX_SERVER_NAME=localhost
+      - NGINX_PORT=8000
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/mysite.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
+    volumes:
+      - ./mysite.template:/etc/nginx/conf.d/mysite.template
+    ports:
+      - 8000:8000

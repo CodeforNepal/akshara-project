@@ -1,9 +1,6 @@
 export const INDEX_NAME = `akshara_nepali`;
 
-export const API_ENDPOINT =
-	process.env.NODE_ENV === 'production'
-		? `/es/`
-		: `http://parijat.kabootar.im:9200/`;
+export const API_ENDPOINT = `http://localhost:8000/production/`;
 
 export function getContent(id, index = INDEX_NAME, _type = '_doc') {
 	return fetch(`${API_ENDPOINT}${index}/${_type}/${id}`).then(response =>
