@@ -42,7 +42,7 @@ Please provide feedbacks here - https://goo.gl/forms/XfIMqXmRMp3MMMMh2 . For bug
 
 ## Development Notes
 
-We use docker during development as well as for production use.
+We use docker during development as well as for production use. If you're only working on front-end components, you do not need to set up docker environment. See the frontend specific docs [parijat-frontend-docs](parijat-frontend/README.md)
 
 Please follow the official docs to install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) on your system.
 
@@ -59,7 +59,7 @@ There's also a nginx service that acts as a reverse proxy to the core services, 
 
 #### Notes
 
-* You will need to prefix the docker commands with *sudo*, if you haven't added your user to the *docker* group.
+* You will need to prefix the docker commands with *sudo*, if you haven't added your user to the *docker* group (https://docs.docker.com/install/linux/linux-postinstall/). 
 
 * If you are a developer running the elasticsearch instance here for testing, please read through the elasticsearch-specific [akshara docs](elasticsearch/README.md), especailly the [usage](elasticsearch/README.md#usage) section. Our elasticsearch setup makes certain assumptions that you need to follow while indexing documents, to ensure that all search features are available.
 
