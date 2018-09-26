@@ -35,6 +35,6 @@ cluster.routing.allocation.disk.threshold_enabled: false
 http.cors.enabled: true
 http.cors.allow-origin: "/.*/"
 http.cors.allow-credentials: true
-http.cors.allow-methods : OPTIONS, HEAD, GET
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST
 http.cors.allow-headers: "X-Requested-With, Content-Type, Content-Length, Authorization"
 
