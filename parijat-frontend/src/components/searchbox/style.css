@@ -83,6 +83,10 @@
   word-wrap: break-word;
 }
 
+.NoSuggestion a {
+  cursor: pointer;
+}
+
 .NoSuggestion__Icon {
   margin-right: 0.25rem;
   margin-left: 0.25rem;

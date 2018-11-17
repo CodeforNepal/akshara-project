@@ -10,15 +10,19 @@ function isSuggestionsEmpty(sug1, sug2) {
 	return sug1.length === 0 && sug2.length === 0;
 }
 
-const NoSuggestion = () => (
+const NoSuggestion = ({ onSuggestionClick }) => (
 	<div className={style.NoSuggestion}>
 		<p>
 			<Icon className={style.NoSuggestion__Icon}>help</Icon>
 			नेपाली साहित्य खोज्नु होस् । खोजका उदाहरणहरु -{' '}
-			<a href="/search?author[0]=लक्ष्मीप्रसाद%20देवकोटा">
+			<a onClick={() => onSuggestionClick('लक्ष्मीप्रसाद%20देवकोटा')}>
 				लक्ष्मीप्रसाद देवकोटा
-			</a>, &nbsp;
-			<a href="/search?author[0]=भूपी%20शेरचन">भूपी शेरचन</a> ।
+			</a>
+			, &nbsp;
+			<a onClick={() => onSuggestionClick('भूपी%20शेरचन')}>
+				भूपी शेरचन
+			</a>{' '}
+			।
 		</p>
 	</div>
 );
@@ -128,7 +132,7 @@ export default class SearchBox extends Component {
 								this.state.suggestions,
 								this.state.transliterationSuggestions
 							) ? (
-									<NoSuggestion />
+									<NoSuggestion onSuggestionClick={this.props.onSubmit} />
 								) : null}
 						</div>
 					)}
