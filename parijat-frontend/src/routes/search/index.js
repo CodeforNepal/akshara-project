@@ -28,6 +28,7 @@ import Header from '../../components/header';
 import Footer from '../../components/footer';
 import SearchItem from '../../components/searchitem';
 import SelectedFilter from '../../components/selectedfilter';
+import ContentContainer from '../../components/contentContainer';
 import Filters from '../../components/filters';
 import Loading from '../../components/loading';
 import ResetFiltersComponent from '../../components/resetfilters';
@@ -42,7 +43,7 @@ export default class Search extends Component {
 	render() {
 		return (
 			<SearchkitProvider searchkit={searchkit}>
-				<div className={style.Search__Container}>
+				<div>
 					<Header>
 						<SearchBox
 							autofocus
@@ -57,37 +58,39 @@ export default class Search extends Component {
 							]}
 						/>
 					</Header>
-					<LayoutGrid>
-						<LayoutGrid.Inner>
-							<LayoutGrid.Cell cols="3">
-								<div className={style.Search__Actions}>
-									<SearchActions />
-								</div>
-							</LayoutGrid.Cell>
-							<LayoutGrid.Cell cols="9">
-								<div className={style.Search__Context}>
-									<div>
-										<SelectedFilters itemComponent={SelectedFilter} />
-										<ResetFilters component={ResetFiltersComponent} />
+					<ContentContainer>
+						<LayoutGrid>
+							<LayoutGrid.Inner>
+								<LayoutGrid.Cell cols="3">
+									<div className={style.Search__Actions}>
+										<SearchActions />
 									</div>
-									<div>
-										<HitsStats />
+								</LayoutGrid.Cell>
+								<LayoutGrid.Cell cols="9">
+									<div className={style.Search__Context}>
+										<div>
+											<SelectedFilters itemComponent={SelectedFilter} />
+											<ResetFilters component={ResetFiltersComponent} />
+										</div>
+										<div>
+											<HitsStats />
+										</div>
 									</div>
-								</div>
-								<div className={style.Search__Body}>
-									<Hits
-										hitsPerPage={10}
-										highlightFields={['title', 'author', 'text']}
-										itemComponent={SearchItem}
-									/>
-									<Pagination />
-									<NoHits />
-									<InitialLoader component={Loading} />
-								</div>
-							</LayoutGrid.Cell>
-						</LayoutGrid.Inner>
-					</LayoutGrid>
-					<Footer/>
+									<div className={style.Search__Body}>
+										<Hits
+											hitsPerPage={10}
+											highlightFields={['title', 'author', 'text']}
+											itemComponent={SearchItem}
+										/>
+										<Pagination />
+										<NoHits />
+										<InitialLoader component={Loading} />
+									</div>
+								</LayoutGrid.Cell>
+							</LayoutGrid.Inner>
+						</LayoutGrid>
+					</ContentContainer>
+					<Footer />
 				</div>
 			</SearchkitProvider>
 		);

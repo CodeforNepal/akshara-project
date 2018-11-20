@@ -1,0 +1,7 @@
+@media (min-width: 839px) {
+  .ContentContainer {
+    margin-left: 10%;
+    width: 80%;
+    background: white;
+  }
+}

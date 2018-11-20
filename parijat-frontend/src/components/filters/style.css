@@ -1,6 +1,5 @@
 .RefinementOption__Container {
   white-space: nowrap;
-  list-style: none;
   margin: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
@@ -25,6 +24,40 @@
   width: 100%;
 }
 
+/* FiltersListInput */
+
+.FiltersListInput__Container {
+  display: flex;
+}
+
+.FiltersListInput__Editable {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  border: 1px solid;
+  padding-left: 0.5rem;
+}
+
+.FiltersListInput__Editable input {
+  background: none;
+  border: none;
+  width: 100%;
+}
+
+.FiltersListInput__NonEditable {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.FiltersListInput__Button {
+  background: none;
+  border: none;
+  width: 3rem;
+  height: 3rem;
+}
+
+/* To swith to a button view when in small screens */
 @media (min-width: 839px) {
   .Filters__Mobile {
     display: none;

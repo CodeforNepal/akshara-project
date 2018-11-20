@@ -58,3 +58,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+/* Over-rides */
+.sk-panel__header {
+  display: none;
+  cursor: pointer;
+}
+

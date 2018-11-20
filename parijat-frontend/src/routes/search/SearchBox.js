@@ -30,7 +30,7 @@ export default class SearchBox extends SearchkitComponent {
 	}
 
 	onSubmit = query => {
-		const shouldResetOtherState = false;
+		const shouldResetOtherState = true;
 		this.accessor.setQueryString(query, shouldResetOtherState);
 		this.searchkit.performSearch(true);
 	};

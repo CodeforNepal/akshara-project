@@ -5,6 +5,7 @@ import { route } from 'preact-router';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Loading from '../../components/loading';
+import ContentContainer from '../../components/contentContainer';
 import { getContent } from '../../api';
 import style from './style';
 
@@ -15,8 +16,14 @@ function goBack() {
 const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
-		<h4><a href={"../search?author[0]="+result.author}>{result.author}</a></h4>
-		<div>{result.text.split('\n').map(paragraph => <p>{paragraph}</p>)}</div>
+		<h4>
+			<a href={'../search?author[0]=' + result.author}>{result.author}</a>
+		</h4>
+		<div>
+			{result.text.split('\n').map(paragraph => (
+				<p>{paragraph}</p>
+			))}
+		</div>
 	</div>
 );
 
@@ -27,7 +34,7 @@ const NavigationBack = () => (
 );
 
 const Content = ({ result }) => (
-	<div>
+	<div className={style.Content__Container}>
 		{result.found ? <Item result={result._source} /> : <div>Not Found</div>}
 	</div>
 );
@@ -54,12 +61,14 @@ class ContentPage extends Component {
 						<Toolbar.Title> सङ्ग्रह</Toolbar.Title>
 					</Toolbar.Section>
 				</Header>
-				{this.state.result != null ? (
-					<Content result={this.state.result} />
-				) : (
-					<Loading />
-				)}
-				<Footer/>
+				<ContentContainer>
+					{this.state.result != null ? (
+						<Content result={this.state.result} />
+					) : (
+						<Loading />
+					)}
+				</ContentContainer>
+				<Footer />
 			</div>
 		);
 	}
