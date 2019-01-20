@@ -1,15 +1,14 @@
 upstream frontend_upstream {
   hash   ${DOLLAR}remote_addr;
 
-  # docker sets this up for us
-  server frontend:8080;
+  server localhost:8080;
 }
 
 upstream elasticsearch_upstream {
   hash   ${DOLLAR}remote_addr;
 
   # docker sets this up for us
-  server elasticsearch:9200;
+  server localhost:9200;
 }
 
 server {
