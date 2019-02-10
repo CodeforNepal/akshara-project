@@ -8,13 +8,13 @@ import Loading from '../../components/loading';
 import { getContent } from '../../api';
 import style from './style';
 
-function goBack() {
+function goHome() {
 	route('/');
 }
 
-const NavigationBack = () => (
-	<Toolbar.Icon navigation onClick={goBack}>
-		arrow_back_ios
+const NavigationHome = () => (
+	<Toolbar.Icon navigation onClick={goHome}>
+		home
 	</Toolbar.Icon>
 );
 
@@ -36,7 +36,7 @@ class ContentPage extends Component {
 			<div>
 				<Header>
 					<Toolbar.Section align-start>
-						<NavigationBack />
+						<NavigationHome />
 						<Toolbar.Title> हाम्रो बारेमा</Toolbar.Title>
 					</Toolbar.Section>
 				</Header>
