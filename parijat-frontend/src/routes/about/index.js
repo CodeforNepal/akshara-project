@@ -42,63 +42,66 @@ class ContentPage extends Component {
 				</Header>
 				<div className={style.About__Content}>
 					<div className={style.About__ContentGroup}>
-						<h3>About सङ्ग्रह</h3>
+						<h3>सङ्ग्रहको बारेमा</h3>
 						<p>
-							सङ्ग्रह is a portal to digitize and archive literary works from
-							Nepal and make them accessible online through a user-friendly
-							searchable interface to readers all around the world.
+							सङ्ग्रह नेपाली‌ तथा नेपालका अरु भाषामा लेखिएको साहित्यिक रचनाको एक डिजीटल संगालो हो। 
+							यस परियोजनाको उद्देश्य संसारभरि फैलिएका नेपाली‌ समुदायका साहित्यप्रेमी पाठकहरुको लागि 
+							साहित्य-सिर्जनाहरु सजिलैसगँ खोजी गर्न मिल्ने ,पढ्न मिल्ने र साहित्यिक संसारमा डुब्न
+							 मिल्ने अनलाइन गन्तव्य बन्नु हो । 
 						</p>
 						<p>
-							Recognizing the lack of an easy access to Nepali literary works in
-							the internet, the सङ्ग्रह project started as an initiative to
-							create an online repository that gathers literary works from Nepal
-							in Nepali and other indigenous languages. The aim is to use
-							digital technology to place Nepali literature before the widest
-							possible audience and raise it to a more visible and influential
-							position in Nepali culture. The objectives of सङ्ग्रह project are:
+							नेपाल एक बहुभाषिक, बहु सांस्कृतिक देश हो। तर, नेपाली र नेपालका 
+							अन्य भाषाहरुको धेरैजसो रचना तथा कृतिहरु इन्टरनेटमा राखिएका छैनन्। 
+							राखिएका सामग्रीहरु पनि एकै ठाउँमा छैनन्, र तिनलाई खोज्न कठिन छ।हाम्रो 
+							यो सङ्ग्रह.कम को उद्देश्य नेपाली र नेपालका अन्य भाषाका साहित्य सृजनाहरु 
+							एकै ठाउँमा खोज्न, पढ्न र मज्जा लिन मिल्ने साझा थलो बन्ने तथा नेपाली 
+							साहित्यको समग्र विकास र प्रबर्धनको लागि पैरवी गर्ने हो।
+
+							
+						</p>
+						<p>
+							सङ्ग्रह प्रोजेक्टको प्रमुख उद्देश्यहरु यसप्रकार छन् :
 							<ul>
 								<li>
-									Digitize literatures of Nepal in Nepali and non-Nepali
-									languages by established as well as emerging writers
+									नेपाली तथा नेपालमा बोलिने अन्य भाषाको स्थापित तथा 
+									नया साहित्यकारहरुका रचनाहरुलाई डिजीटाइज गर्ने
 								</li>
 								<li>
-									Create a platform where readers and enthusiasts of literature
-									can browse, search and find relevant content with a customized
-									powerful search facility
+									साहित्यप्रेमी पाठक तथा श्रोताले सजिलै आफूले चाहेको गद्य 
+									तथा पद्य रचना खोज्न सक्ने साझा थलो बन्ने
 								</li>
 								<li>
-									Provide tools and resources for students and readers of
-									literature to learn about different literary cultures of Nepal
+									नेपालका विभिन्न भाषा र तिनको विविध साहित्यिक प्रचलनको 
+									बारेमा जानकारी लिने स्रोत र साधन प्रदान गर्ने
 								</li>
 								<li>
-									Maintain a free content, open source environment where users
-									can edit the available content and upload new content
+									संग्रह.कम को सम्पूर्ण सामग्री र सृजना निशुल्क पढ्न मिल्ने 
+									तथा ओपन सोर्स कोडको मार्फत प्रयोगकर्तालाई आफुलाई चाहिने 
+									लेख सामग्री अन्य भाषा वा श्रोतमा बदल्न सक्ने सुबिधा दिने
 								</li>
 							</ul>
 						</p>
 						<p>
-							The सङ्ग्रह web portal will be equipped with the following
-							features:
+							संग्रह.कम मा यी विशेषता हुनेछन् :
 							<ul>
-								<li>Full text search</li>
+								<li>पाठ्य खोज (अङ्ग्रेजी तथा नेपालीमा)</li>
 								<li>
-									Facility to browse by different categories such as themes,
-									genre, poets, periods, literary movements, languages, region,
-									etc
+									 विभिन्न समयकाल, भाषा, साहित्यकार, साहित्य विधा, 
+									 प्रसङ्ग, आदिको आधारमा रचनाहरुलाई‌ वर्गीकृत गर्ने क्षमता 
 								</li>
 								<li>
-									Interactive content designed to explore and learn more about
-									the literature and the authors
+									साहित्य तथा साहित्यकार सम्बन्धी सुचना र अन्तर्क्रियात्मक 
+									सामग्रीहरु
 								</li>
 								<li>
-									Links to related media - audio, video, art, and web resources{' '}
+									साहित्य र साहित्यकार सम्बन्धित अडियो, भिडियो, कला तथा अन्य 
+									सामग्रीको लिङ्कहरु
 								</li>
 								<li>
-									Side-by-side translations of texts in different languages
+									साहित्य सामग्रीको समाविष्ट भाषाहरुमा अनुवाद
 								</li>
 								<li>
-									A dictionary, especially for materials in non Nepali languages
-									so that they are accessible to all Nepali speakers
+									समाविष्ट भाषाहरुको लागि शव्दकोश (नेपाली तथा अङ्ग्रेजीमा) 
 								</li>
 							</ul>
 						</p>
@@ -106,14 +109,14 @@ class ContentPage extends Component {
 
 					<div className={style.About__ContentGroup}>
 						<h3>
-							About{' '}
 							<a
 								className={style.About__Link}
 								href="http://codefornepal.org/en/"
 								target="_blank"
 							>
-								Code for Nepal
+								कोड फर नेपाल
 							</a>
+							को बारेमा
 						</h3>
 						<p>
 							<a
@@ -121,86 +124,53 @@ class ContentPage extends Component {
 								href="http://codefornepal.org/en/"
 								target="_blank"
 							>
-								Code for Nepal
+								कोड फर नेपाल
 							</a>{' '}
-							uses digital technology to help Nepal prosper in the 21st century.
-							Since 2014, it has focused on increasing digital literacy,
-							building tools to improve lives, increasing access to open data &
-							right to information.
+							 नेपालमा डिजिटल साक्षरता तथा खुला डाटाको प्रयोग बढाउनका लागि 
+							 युनाइटेड स्टेट्स अफ अमेरिकामा दर्ता गरिएको एउटा 501(c)(3) गैर सरकारी संस्था हो| 
+							 यो संस्था सन् २०१४ मा दर्ता भएको हो र त्यस बेला देखि नेपालमा डाटा र सुचनालाई 
+							 सुलभ बनाउन विभिन्न पहल लिएको छ । कोड फर नेपालले गरेका प्रोजेक्टको केही 
+							 उदाहरणहरु :  नेपालको राष्ट्रिय र जिल्लागत तहको तथ्याङ्क देखाउने अन्तर्क्रियात्मक 
+							 वेबसाईट 
+							 <a
+								className={style.About__Link}
+								href="https://nepalmap.org/"
+								target="_blank"
+							> nepalmap.org</a>,
+							सार्वजनिक-आर्थिक सहायता संगठनसंग जानकारी लिन मिल्ने वेब 
+							 पोर्टल  
+							 <a
+								className={style.About__Link}
+								href="https://asknepal.info/"
+								target="_blank"
+							> asknepal.info</a>
+							, तथा  सन् २०१५ को भुकम्पको सहयोगका लागि नेपालमा आएको 
+							 अनुदानको सार्वजनिक रुपमा हिसाब किताब राख्ने वेबसाइट 
+							 <a
+								className={style.About__Link}
+								href="http://codefornepal.org/2015/10/didugetrelief-initial-findings-code-nepal-rahat-payo-pilot-project-earthquake-relief/"
+								target="_blank"
+							> rahatpayo.org</a>। 
 						</p>
 						<p>
-							<a
-								className={style.About__Link}
-								href="http://codefornepal.org/en/"
-								target="_blank"
-							>
-								Code for Nepal
-							</a>{' '}
-							has identified the importance of open data and has proactively
-							provided data on its platform. They were the pioneers to publish
-							an interactive map (nepalmap.org) that easily showed national and
-							district level data. They were also the first to launch an
-							interactive, open-source map of earthquake casualties, which was
-							picked up by Time magazine, Fast Company and the New York Times.
-							They regularly conduct their own data mining projects, by
-							collecting data manually from the internet or conducting surveys
-							both online and offline.
-						</p>
-						<p>
-							<a
-								className={style.About__Link}
-								href="http://codefornepal.org/en/"
-								target="_blank"
-							>
-								Code for Nepal
-							</a>{' '}
-							strongly supports technological advancement that improves lives.
-							The organization launched a prototype to rank schools in Nepal,
-							created Asknepal.info, an open web platform, to increase the
-							access of information to the general public & RahatPayo
-							(rahatpayo.org), a web application, to collect real time feedback
-							on earthquake survivors on kind of help they have received and to
-							gauge the existing gap.
-						</p>
-						<p>
-							As of December 2017,{' '}
-							<a
-								className={style.About__Link}
-								href="http://codefornepal.org/en/"
-								target="_blank"
-							>
-								Code for Nepal
-							</a>{' '}
-							has partnered with local organizations to conduct digital training
-							workshops in Nepal in Kathmandu, Dang, Birgunj, and few other
-							places in Nepal. They were the first to organize a digital
-							conference (#DigitalNepal) in Nepal
-						</p>
-						<p>
-							<a
-								className={style.About__Link}
-								href="http://codefornepal.org/en/"
-								target="_blank"
-							>
-								Code for Nepal
-							</a>{' '}
-							is an all-volunteer non-profit organization. The passion in the
-							volunteers and community support has helped the organization
-							conduct these projects so far. They received their first grant
-							from Harvard’s Carr Center for Human Rights Policy in Spring 2014.
+							यस बाहेक कोड फर नेपालले स्थानिय संघ संस्थाहरुसगँ मिलेर नेपालमा प्राविधिक सीप 
+							बढाउने कार्यक्रमहरु पनिचलाउँछ । कोड फर नेपालले काठमाण्डु, दाङ, वीरगन्ज, र अन्य 
+							शहरहरुमा डिजिटल प्रविधिको तालीम कार्यशाला चलाएको छ । सन् २०१८ मा कोड फर 
+							नेपालकै पहलमा नेपालको पहिलो डिजीटल सम्मेलन (#DigitalNepal) जनकपुरमा आयोजना भयो । 
+
 						</p>
 					</div>
 					<div className={style.About__Divider} />
 					<div className={style.About__ContentGroup}>
 						<h3>
-							About{' '}
 							<a
 								className={style.About__Link}
 								href="https://github.com/Code4Nepal/bay-area"
 								target="_blank"
 							>
-								Code for Nepal - Bay Area
+								कोड फर नेपाल को बे एरिया शाखा 
 							</a>
+							को बारेमा
 						</h3>
 						<p>
 							<a
@@ -208,14 +178,14 @@ class ContentPage extends Component {
 								href="https://github.com/Code4Nepal/bay-area"
 								target="_blank"
 							>
-								Code for Nepal's Bay Area Chapter
+								कोड फर नेपाल को बे एरिया शाखा 
 							</a>{' '}
-							has been active since January 2017 and focuses on creating a warm
-							open community in the bay area and elsewhere for volunteers to
-							collaborate and engage in pushing forward digital technology for
-							Nepal and Nepalese communities around the globe. We try to meet
-							every Wednesday at 7:30 pm PST. Join us by subscribing to our
-							mailing list: akshara-development-list@googlegroups.com
+							सन् २०१७ को जनवरीदेखि क्रियाशील छ । यस समुहको मुख्य उद्देश्य सन् फ्रन्सिस्को 
+							बे एरियामा भएका सफ्ट्वेर र सुचना प्रवृद्धि क्षेत्रमा कार्यरत स्वयंसेवकहरुलाई 
+							भेटघाट गर्न र भेपाल र नेपालीको लागि डिजीटल विकासमा योगदान पुर्याउने माध्यम 
+							बन्नु हो । अहिले यो समुह  मुख्यतय सङ्ग्रह को विकासमा क्रियाशील छ र पाक्षिक 
+							रुपमा हरेक अर्को बुधबार बेलुकाको ७.३० बजे (पसिफिक समय) भेट्छ । यस समुहमा संलग्न 
+							हुन akshara-development-list@googlegroups.com मा सम्पर्क राख्नुहोस् । 
 						</p>
 					</div>
 					<div className={style.About__Divider} />
