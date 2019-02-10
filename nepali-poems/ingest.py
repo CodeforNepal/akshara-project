@@ -3,7 +3,7 @@ from os import walk
 from os import path
 from datetime import datetime
 
-es = elasticsearch.Elasticsearch(['35.188.165.211'], port=9200)
+es = elasticsearch.Elasticsearch(['localhost'], port=9200)
 
 for (dirpath, dirnames, filenames) in walk("data"):
     for filename in filenames:
