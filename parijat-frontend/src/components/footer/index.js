@@ -6,7 +6,7 @@ const Footer = () => (
 		<div className={style.Footer__Content}>
 			<ul className={style.Footer__List}>
 				<li className={style.Footer__ListItem}>
-					<a href="about">हाम्रो बारेमा</a>
+					<a href="/about">हाम्रो बारेमा</a>
 				</li>
 				<li className={style.Footer__ListItem}>
 					<a
