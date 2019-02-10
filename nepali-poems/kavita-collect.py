@@ -21,6 +21,7 @@ signal.signal(signal.SIGINT, signal_handler)
 website = "http://kavitakosh.org"
 page = requests.get(website + '/kk/%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A5%80')
 tree = html.fromstring(page.content)
+source = tree.xpath('//title')[0].text
 
 links = tree.xpath('//div[@class="multi-col-list div-with-shadow"]/ul/li')
 
@@ -32,7 +33,10 @@ for linkElem in links:
         author, link = linkElem.xpath('./a/@title')[0], linkElem.xpath('./a/@href')[0]
         data['author'] = author
         data['genre'] = "कविता"
-        author_page = requests.get(website + link)
+        url = website + link
+        author_page = requests.get(url)
+        data['source_link'] = url
+        data['source'] = source
         poem_links = html.fromstring(author_page.content).xpath('//div[@id="mw-content-text"]/ul/li/a')
         dir = os.path.join("kavitakosh", author)
         if not os.path.exists(dir):

@@ -34,7 +34,7 @@ website = "http://sahityasangraha.com"
 
 page = requests.get(website)
 tree = html.fromstring(page.content)
-
+source = tree.xpath('//title')[0].text
 links = tree.xpath('//ul[@id="menu-sahitya-bidhaa"]/li/a')
 
 to_collect = ["नेपाली कथा", "लघुकथा", "नेपाली उपन्यास", "नाटक", "नेवारी रचना", "मैथिली रचना", "भोजपुरी रचना", "हास्य – व्यङ्ग्य"]
@@ -58,6 +58,8 @@ for linkElem in links:
                 os.makedirs(dir)
 
             collection_page = requests.get(link)
+            data['source'] = source
+            data['source_link'] = link
             collection_links = html.fromstring(collection_page.content).xpath('//h2[@class="entry-title"]/a')
             # print(collection_links)
 
