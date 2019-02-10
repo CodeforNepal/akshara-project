@@ -39,6 +39,17 @@ import { API_ENDPOINT, INDEX_NAME } from '../../api';
 
 const searchkit = new SearchkitManager(`${API_ENDPOINT}${INDEX_NAME}`);
 
+searchkit.translateFunction = (key) => {
+  let translations = {
+    "pagination.previous":"पछिल्लो पृष्ठ",
+    "pagination.next":"अर्को पृष्ठ", 
+    "reset.clear_all" : "छनोटहरु हटाउनुहोस्",
+    "facets.view_all" : "सबै हेर्नुहोस्",
+    "facets.view_more": "अरु हेर्नुहोस्"
+  }
+  return translations[key]
+}
+
 export default class Search extends Component {
 	render() {
 		return (
