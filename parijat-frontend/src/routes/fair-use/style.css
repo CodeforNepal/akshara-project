@@ -1,0 +1,29 @@
+.FairUse__Content {
+	padding: 16px;
+	padding: var(--mdc-layout-grid-margin-tablet, 16px);
+	font-family: Arial;
+	font-weight: normal;
+}
+
+.FairUse__Content p {
+  min-height: 10px;
+}
+
+.FairUse__ContentGroup {
+	padding: 10px 20px;
+}
+
+.FairUse__Divider {
+	padding: 10px;
+}
+
+.FairUse__Link {
+	text-decoration: none;
+	font-weight: 700;
+	color: #444;
+	font-family: Arial;
+}
+
+.FairUse__Link:hover {
+	color: #6200ee;
+}
