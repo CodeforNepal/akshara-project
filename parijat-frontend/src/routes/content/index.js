@@ -24,6 +24,9 @@ const Item = ({ result }) => (
 				<p>{paragraph}</p>
 			))}
 		</div>
+		<h4>
+			श्रोत: {result.source ? <a href={result.source_link}>{result.source}</a> : <span>अज्ञात</span> }
+		</h4>
 	</div>
 );
 
