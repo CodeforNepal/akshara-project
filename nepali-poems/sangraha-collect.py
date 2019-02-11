@@ -58,10 +58,7 @@ for linkElem in links:
                 os.makedirs(dir)
 
             collection_page = requests.get(link)
-            data['source'] = source
-            data['source_link'] = link
             collection_links = html.fromstring(collection_page.content).xpath('//h2[@class="entry-title"]/a')
-            # print(collection_links)
 
             to_sleep = True
             for collection_link in collection_links:
@@ -70,13 +67,12 @@ for linkElem in links:
                 if ctrlc:
                     quit()
                 else:
-                    data = {}
+                    data = { 'source': source, 'source_link': link}
                     if sahitya_type in genre_map:
                         print('genre: ' + genre_map[sahitya_type])
                         data['genre'] = genre_map[sahitya_type]
                     collection_link, title = collection_link.xpath('./@href')[0], collection_link.xpath('./text()')[0]
                     data['title'] = title
-                    print('Collection link: ', collection_link, "and title: ", title)
                     sahitya_page = requests.get(collection_link)
                     sahitya_content = html.fromstring(sahitya_page.content).xpath('//div[@id="content"]')[0]
 
@@ -86,19 +82,14 @@ for linkElem in links:
                         print("Continue")
                         continue
                     content = sahitya_content.xpath('//div[@class="entry-content"]/p')
-                    print(1)
                     author = content[0].xpath('//strong/text()')[0]
-                    # print('author: ', author)
                     data['author'] = author
                     content_str = ''.join(map(lambda x: html.tostring(x, encoding='unicode', pretty_print = True), content[1:]))
                     data['text'] = content_str
-                    print(2)
                     if sahitya_type in lang_map:
                         data['lang'] = lang_map[sahitya_type]
-                        print("language: " + lang)
                     else:
                         try:
-                            print(collection_link)
                             lang = detect_lang(content_str)
                         except lang_detect_exception.LangDetectException:
                             print("error caught")
@@ -114,7 +105,6 @@ for linkElem in links:
                             # data['lang'] = lang
                         else:
                             continue
-                        print("language: " + lang)
 
                     author_dir = os.path.join(dir, author)
                     if not os.path.exists(author_dir):
