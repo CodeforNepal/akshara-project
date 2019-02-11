@@ -1,4 +1,6 @@
 */Pipfile.lock
-*/data*
-*/sangraha-data
+*/sahitya-sangraha
+*/kavitakosh
 esdata/*
+
+*/__pycache__*
