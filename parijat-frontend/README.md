@@ -1,12 +1,12 @@
 # Sangraha Frontend
 
-Sangraha frontend is a single page application created using Preact. Preact is a lightwright React alternative. 
+Sangraha frontend is a single page application created using Preact. Preact is a lightwright React alternative.
 
 ## Development Instructions
 
 ### Pre-requisites
 
-Node.js is required to develop the frontend. To install Node.js and npm (Node Package Manager) either follow the [official instructions](https://nodejs.org/en/) or [use nvm](https://github.com/creationix/nvm). 
+Node.js is required to develop the frontend. To install Node.js and npm (Node Package Manager) either follow the [official instructions](https://nodejs.org/en/) or [use nvm](https://github.com/creationix/nvm).
 
 #### Using nvm
 
@@ -18,6 +18,16 @@ Then install the stable version of `node` and `npm`. At the time when this was w
 nvm install 8.12.0
 ```
 
+#### Install yarn
+
+For linux, follow instructions here [yarn installation](https://yarnpkg.com/lang/en/docs/install/#debian-stable).
+
+alternatively in OSX,
+
+```bash
+brew install yarn
+```
+
 ### Install Dependencies
 
 Head to the directory where this README.md file is located and install all development dependencies using npm:
@@ -27,7 +37,6 @@ npm install
 ```
 
 This downloads all the dependencies locally in `node_modules` directory.
-
 
 ### Start Development Server
 
