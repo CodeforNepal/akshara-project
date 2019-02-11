@@ -21,6 +21,7 @@ import {
 	NoHits
 } from 'searchkit';
 import Toolbar from 'preact-material-components/Toolbar';
+import { route } from 'preact-router';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import 'preact-material-components/LayoutGrid/style.css';
 import Chips from 'preact-material-components/Chips';
@@ -68,20 +69,22 @@ export default class Search extends Component {
 			<SearchkitProvider searchkit={searchkit}>
 				<div>
 					<Header>
-						<Toolbar.Section align-start>
+						<Toolbar.Section>
 							<NavigationHome/>
-							<SearchBox
-								autofocus
-								searchOnChange
-								queryFields={[
-									'title',
-									'author',
-									'text',
-									'text.latin',
-									'title.latin',
-									'author.latin'
-								]}
-							/>
+							<div className={style.SearchBox__Container}>
+								<SearchBox
+									autofocus
+									searchOnChange
+									queryFields={[
+										'title',
+										'author',
+										'text',
+										'text.latin',
+										'title.latin',
+										'author.latin'
+									]}
+								/>
+							</div>
 						</Toolbar.Section>
 					</Header>
 					<ContentContainer>
