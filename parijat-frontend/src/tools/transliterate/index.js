@@ -39,7 +39,11 @@ export const DEVANAGARI_CONSONANTS = {
 	sa: 'स',
 	sha: 'श',
 	Sa: 'ष',
-	ha: 'ह'
+	ha: 'ह',
+
+	ksha: 'क्ष',
+	Gya: 'ज्ञ'
+
 };
 
 export const DEVANAGARI_DIACRITIC_VOWELS = {
