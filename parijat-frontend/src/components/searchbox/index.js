@@ -19,22 +19,22 @@ const NoSuggestion = ({ onSuggestionClick }) => (
 				लक्ष्मीप्रसाद देवकोटा
 			</a>
 			, &nbsp;
-			<a onClick={() => onSuggestionClick('भूपी%20शेरचन')}>
-				भूपी शेरचन
-			</a>{' '}
-			।
+			<a onClick={() => onSuggestionClick('भूपी%20शेरचन')}>भूपी शेरचन</a> ।
 		</p>
 	</div>
 );
 
-const SuggestionItem = (item, highlighted) => (
-	<div
-		className={style.SuggestionItem}
-		style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
-	>
-		{item}
-	</div>
-);
+const SuggestionItem = (item, highlighted) =>
+	item.header ? (
+		<div className={style.SuggestionItem__Header}>{item.header}</div>
+	) : (
+		<div
+			className={style.SuggestionItem}
+			style={{ backgroundColor: highlighted ? '#eee' : 'transparent' }}
+		>
+			{item}
+		</div>
+	);
 
 const TransliteratedList = ({ items, onSelect }) =>
 	items.length > 0 ? (
@@ -64,10 +64,24 @@ export default class SearchBox extends Component {
 	}
 
 	getSuggestions = searchValue => {
+		const { fields: fieldsMap } = this.props;
+		const fields = Object.keys(fieldsMap);
 		if (searchValue.length > 0) {
-			getSuggestions(searchValue, this.props.fields).then(suggestions => {
+			getSuggestions(searchValue, fields).then(suggestionRes => {
+				let categorizedSuggestions = [];
+				fields.forEach(fieldName => {
+					const suggestionList = suggestionRes[`${fieldName}-suggest`];
+					const header = { header: fieldsMap[fieldName] };
+					if (suggestionList.length > 0) {
+						categorizedSuggestions = [
+							...categorizedSuggestions,
+							header,
+							...suggestionList
+						];
+					}
+				});
 				this.setState({
-					suggestions: suggestions.map(item => `${item.title} - ${item.author}`)
+					suggestions: categorizedSuggestions
 				});
 			});
 		}
@@ -141,6 +155,7 @@ export default class SearchBox extends Component {
 					onChange={this.onTextInputChange}
 					onSelect={this.onAutocompleteSelect}
 					inputProps={{ className: style.SearchBox__Input }}
+					isItemSelectable={item => !item.header}
 				/>
 				<button type="submit" className={style.SearchBox__Button}>
 					<Icon>search</Icon>
