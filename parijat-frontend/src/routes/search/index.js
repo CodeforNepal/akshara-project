@@ -45,7 +45,9 @@ searchkit.translateFunction = (key) => {
     "pagination.next":"अर्को पृष्ठ", 
     "reset.clear_all" : "छनोटहरु हटाउनुहोस्",
     "facets.view_all" : "सबै हेर्नुहोस्",
-    "facets.view_more": "अरु हेर्नुहोस्"
+    "facets.view_more": "अरु हेर्नुहोस्",
+    "NoHits.NoResultsFound": "{query} को लागि नतिजा भेटिएन ।",
+    "hitstats.results_found":"{hitCount} नतिजा {timeTaken}ms मा भेटियो ।"
   }
   return translations[key]
 }

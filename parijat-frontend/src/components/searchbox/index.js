@@ -19,7 +19,9 @@ const NoSuggestion = ({ onSuggestionClick }) => (
 				लक्ष्मीप्रसाद देवकोटा
 			</a>
 			, &nbsp;
-			<a onClick={() => onSuggestionClick('भूपी%20शेरचन')}>भूपी शेरचन</a> ।
+			<a onClick={() => onSuggestionClick('भूपी%20शेरचन')}>भूपी शेरचन</a>,
+			&nbsp;
+			<a onClick={() => onSuggestionClick('पारिजात')}>पारिजात</a> ।
 		</p>
 	</div>
 );
