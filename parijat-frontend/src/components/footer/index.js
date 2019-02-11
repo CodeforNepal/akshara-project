@@ -32,6 +32,9 @@ const Footer = () => (
 						सहयोग
 					</a>
 				</li>
+        <li className={style.Footer__ListItem}>
+          <a href="fair-use">उचित उपयोग</a>
+        </li>
 			</ul>
 		</div>
 	</footer>

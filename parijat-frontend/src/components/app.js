@@ -8,6 +8,7 @@ import Home from 'async!../routes/home';
 import Search from 'async!../routes/search';
 import Content from 'async!../routes/content';
 import About from 'async!../routes/about';
+import FairUse from 'async!../routes/fair-use';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.
@@ -27,6 +28,7 @@ export default class App extends Component {
 					<Search path="/search/:query" />
 					<Content path="/content/:id" />
 					<About path="/about" />
+          <FairUse path="/fair-use" />
 				</Router>
 			</div>
 		);
