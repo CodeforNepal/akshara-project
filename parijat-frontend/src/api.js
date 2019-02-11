@@ -11,43 +11,31 @@ export function getContent(id, index = INDEX_NAME, _type = '_doc') {
 	);
 }
 
+function _parseSuggestValue(suggestValue) {
+  return [ ... new Set(suggestValue[0].options.map(x => x.text)) ];
+}
+
 export function getSuggestions(
 	query,
 	fields = ['title', 'author'],
 	size = 7,
 	index = INDEX_NAME
 ) {
-	const body = {
-		_source: fields,
-		query: {
-			bool: {
-				must: [
-					{
-						bool: {
-							must: [
-								{
-									bool: {
-										should: fields.map(fieldName => ({
-											multi_match: {
-												query,
-												fields: [fieldName],
-												type: 'best_fields',
-												operator: 'or',
-												fuzziness: 0
-											}
-										})),
-										minimum_should_match: '1'
-									}
-								}
-							]
-						}
-					}
-				]
-			}
-		},
-		size,
-		from: 0
-	};
+  const body = {
+    "_source": fields,
+    "suggest": fields.reduce((result, fieldName) => ({
+        ...result,
+       [`${fieldName}-suggest`]: {
+         "prefix": query,
+         "completion": {
+         "field": `${fieldName}.suggest`,
+         "fuzzy": false,
+         "size": 5
+        }
+      }
+    }), {}),
+  };
+
 	return fetch(`${API_ENDPOINT}${index}/_search`, {
 		method: 'POST',
 		body: JSON.stringify(body),
@@ -56,5 +44,11 @@ export function getSuggestions(
 		}
 	})
 		.then(response => response.json())
-		.then(res => Promise.resolve(res.hits.hits.map(hit => hit._source)));
+		.then(res => {
+      return Object.keys(res.suggest)
+        .reduce((result, suggestKey) => ({
+          ...result,
+          [suggestKey]: _parseSuggestValue(res.suggest[suggestKey])
+        }), {});
+    });
 }

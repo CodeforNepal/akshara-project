@@ -38,7 +38,7 @@ export default class SearchBox extends SearchkitComponent {
 	render() {
 		return (
 			<SearchBoxComponent
-				fields={['title', 'author']}
+				fields={{ title: 'शिर्षक', author: 'लेखक' }}
 				onSubmit={this.onSubmit}
 			/>
 		);

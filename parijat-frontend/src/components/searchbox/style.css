@@ -50,6 +50,10 @@
   padding: 0.25rem 0.5rem;
 }
 
+.SuggestionItem__Header {
+  font-weight: bold;
+}
+
 .TransliteratedList {
   margin: 0 0.5rem;
   height: 3rem;
