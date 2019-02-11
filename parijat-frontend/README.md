@@ -40,20 +40,6 @@ npm run dev
 This will start local development server at `localhost:8080` . The development server has hot-reloading enabled and any changes reflect in the browser once the files are saved.
 
 
-### Build for production
-
-To build the application for deployment (minified static files), use the following:
-
-```bash
-npm run build
-```
-
-### Start Production Server
-
-```bash
-npm run serve
-```
-
 ## Preact-CLI
 
 The frontend was bootstrapped using Preact-CLI. For further instructions, and detailed explanation on how things work, checkout the [CLI Readme](https://github.com/developit/preact-cli/blob/master/README.md).
