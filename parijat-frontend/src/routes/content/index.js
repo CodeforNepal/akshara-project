@@ -8,6 +8,7 @@ import Loading from '../../components/loading';
 import ContentContainer from '../../components/contentContainer';
 import { getContent } from '../../api';
 import style from './style';
+import renderHTML from 'react-render-html';
 
 function goBack() {
 	route('/search');
@@ -21,7 +22,7 @@ const Item = ({ result }) => (
 		</h4>
 		<div>
 			{result.text.split('\n').map(paragraph => (
-				<p>{paragraph}</p>
+				<p>{renderHTML(paragraph)}</p>
 			))}
 		</div>
 		<h4>
