@@ -43,6 +43,7 @@
     "preact-material-components": "^1.4.0",
     "preact-router": "^2.5.5",
     "react-autocomplete": "^1.8.1",
+    "react-render-html": "^0.6.0",
     "searchkit": "^2.3.0"
   }
 }
