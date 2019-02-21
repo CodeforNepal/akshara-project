@@ -20,6 +20,8 @@ import {
 	InitialLoader,
 	NoHits
 } from 'searchkit';
+import Toolbar from 'preact-material-components/Toolbar';
+import { route } from 'preact-router';
 import LayoutGrid from 'preact-material-components/LayoutGrid';
 import 'preact-material-components/LayoutGrid/style.css';
 import Chips from 'preact-material-components/Chips';
@@ -52,24 +54,40 @@ searchkit.translateFunction = (key) => {
   return translations[key]
 }
 
+
+function goHome() {
+	route('/');
+}
+
+const NavigationHome = () => (
+	<Toolbar.Icon navigation onClick={goHome}>
+		home
+	</Toolbar.Icon>
+);
+
 export default class Search extends Component {
 	render() {
 		return (
 			<SearchkitProvider searchkit={searchkit}>
 				<div>
 					<Header>
-						<SearchBox
-							autofocus
-							searchOnChange
-							queryFields={[
-								'title',
-								'author',
-								'text',
-								'text.latin',
-								'title.latin',
-								'author.latin'
-							]}
-						/>
+						<Toolbar.Section>
+							<NavigationHome/>
+							<div className={style.SearchBox__Container}>
+								<SearchBox
+									autofocus
+									searchOnChange
+									queryFields={[
+										'title',
+										'author',
+										'text',
+										'text.latin',
+										'title.latin',
+										'author.latin'
+									]}
+								/>
+							</div>
+						</Toolbar.Section>
 					</Header>
 					<ContentContainer>
 						<LayoutGrid>
