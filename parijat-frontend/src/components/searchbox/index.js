@@ -4,7 +4,8 @@ import ReactAutocomplete from 'react-autocomplete';
 import debounce from 'lodash/debounce';
 import { getSuggestions } from '../../api';
 import { nepaliTransliterator } from '../../tools/transliterate';
-import style from './style';
+let style = {};
+// import style from './style';
 
 function isSuggestionsEmpty(sug1, sug2) {
 	return sug1.length === 0 && sug2.length === 0;
