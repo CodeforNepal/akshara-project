@@ -12,6 +12,7 @@ const Footer = () => (
 					<a
 						href="https://github.com/Code4Nepal/akshara-project"
 						target="_blank"
+						rel="noopener noreferrer"
 					>
 						{'{ '}सोर्स कोड{' }'}
 					</a>
@@ -20,6 +21,7 @@ const Footer = () => (
 					<a
 						href="https://goo.gl/forms/XfIMqXmRMp3MMMMh2"
 						target="_blank"
+						rel="noopener noreferrer"
 					>
 						सुझाव
 					</a>
@@ -28,13 +30,14 @@ const Footer = () => (
 					<a
 						href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AMU2VD5FMCHCJ"
 						target="_blank"
+						rel="noopener noreferrer"
 					>
 						सहयोग
 					</a>
 				</li>
-        <li className={style.Footer__ListItem}>
-          <a href="fair-use">उचित उपयोग</a>
-        </li>
+				<li className={style.Footer__ListItem}>
+					<a href="/fair-use">उचित उपयोग</a>
+				</li>
 			</ul>
 		</div>
 	</footer>
