@@ -122,7 +122,7 @@ export default class SearchBox extends Component {
 	};
 
 	onAutocompleteSelect = searchValue => {
-		this.setState({ searchValue, transliterationSuggestions: [] });
+		this.props.onSubmit(this.state.searchValue);
 	};
 
 	handleSubmit = evnt => {
