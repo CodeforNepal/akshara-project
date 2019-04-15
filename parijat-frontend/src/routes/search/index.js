@@ -78,9 +78,9 @@ export default class Search extends Component {
 									autofocus
 									searchOnChange
 									queryFields={[
-										'title',
-										'author',
-										'text',
+										'title^3',
+										'author^2',
+										'text^1',
 										'text.latin',
 										'title.latin',
 										'author.latin'
