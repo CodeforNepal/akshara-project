@@ -48,7 +48,8 @@ for linkElem in links:
                 quit()
             else:
                 link2, title = poem_link.xpath('./@href')[0], poem_link.xpath('./@title')[0]
-                data['title'] = title
+                # Note: The title in Kavitakosh contains title + '/' + author_name
+                data['title'] = title.split(' / ')[0]
                 poem_page = requests.get(website + link2)
                 poem = html.fromstring(poem_page.content).xpath('//div[@class="poem"]/p/text()')
                 poem_str = "".join(poem).strip()
