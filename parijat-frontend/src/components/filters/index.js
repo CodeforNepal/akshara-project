@@ -4,6 +4,7 @@ import Dialog from 'preact-material-components/Dialog';
 import 'preact-material-components/Dialog/style.css';
 import Checkbox from 'preact-material-components/Checkbox';
 import 'preact-material-components/Checkbox/style.css';
+import TransliteratedInput from '../transliteratedinput';
 const map = require('lodash/map');
 const omitBy = require('lodash/omitBy');
 const isUndefined = require('lodash/isUndefined');
@@ -22,7 +23,7 @@ import style from './style';
 
 class SearchableFacetAccessor extends FacetAccessor {
 	setSearchValue(searchValue) {
-		this.searchValue = searchValue;
+	 	this.searchValue = searchValue;
 		this.searchkit.performSearch();
 	}
 
@@ -130,8 +131,7 @@ class FiltersListInput extends Component {
 			<div className={style.FiltersListInput__Container}>
 				{editable ? (
 					<div className={style.FiltersListInput__Editable}>
-						<input
-							autoFocus
+						<TransliteratedInput
 							placeholder={`${title}`}
 							value={this.props.searchValue}
 							onInput={this.props.onInput}
@@ -150,7 +150,7 @@ class FiltersListInput extends Component {
 							className={style.FiltersListInput__Button}
 							onClick={this.showEdit}
 						>
-							<Icon>filter_list</Icon>
+							<Icon>search</Icon>
 						</button>
 					</div>
 				)}
@@ -164,9 +164,9 @@ class FiltersList extends Component {
 		searchValue: ''
 	};
 
-	onSearchValueChange(evnt) {
+	onSearchValueChange(newSearchValue) {
 		this.setState({
-			searchValue: evnt.target.value
+			searchValue: newSearchValue
 		});
 	}
 

@@ -1,7 +1,6 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import Toolbar from 'preact-material-components/Toolbar';
-import 'preact-material-components/Toolbar/style.css';
 import 'preact-material-components/TextField/style.css';
 import style from './style.css';
 
@@ -15,8 +14,6 @@ export default class Header extends Component {
 
 	render() {
 		const { query, children } = this.props;
-		return (<div className={style.Header}>
-			{children}
-		</div>);
+		return <div className={style.Header}>{children}</div>;
 	}
 }

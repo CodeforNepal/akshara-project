@@ -47,7 +47,9 @@
 .FiltersListInput__NonEditable {
   display: flex;
   width: 100%;
+  padding-left: 14px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .FiltersListInput__Button {
@@ -55,6 +57,7 @@
   border: none;
   width: 3rem;
   height: 3rem;
+  line-height: 0rem;
 }
 
 /* To swith to a button view when in small screens */

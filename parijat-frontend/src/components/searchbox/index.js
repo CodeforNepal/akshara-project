@@ -2,14 +2,9 @@ import { h, Component } from 'preact';
 import Icon from 'preact-material-components/Icon';
 import ReactAutocomplete from 'react-autocomplete';
 import debounce from 'lodash/debounce';
+import TransliteratedInput from '../transliteratedinput';
 import { getSuggestions } from '../../api';
-import { nepaliTransliterator } from '../../tools/transliterate';
-let style = {};
-// import style from './style';
-
-function isSuggestionsEmpty(sug1, sug2) {
-	return sug1.length === 0 && sug2.length === 0;
-}
+import style from './style.css';
 
 const NoSuggestion = ({ onSuggestionClick }) => (
 	<div className={style.NoSuggestion}>
@@ -39,30 +34,19 @@ const SuggestionItem = (item, highlighted) =>
 		</div>
 	);
 
-const TransliteratedList = ({ items, onSelect }) =>
-	items.length > 0 ? (
-		<div className={style.TransliteratedList}>
-			<span className={style.TransliteratedList__Header}>लिपी परिवर्तन</span>
-			{items.map(item => (
-				<span
-					className={style.TransliteratedList__Item}
-					onClick={() => {
-						onSelect(item);
-					}}
-				>
-					{item}
-				</span>
-			))}
-		</div>
-	) : null;
+const renderInput = ({ onChange, ...props }) => {
+	const onInput = value => {
+		onChange && onChange({ target: { value } });
+	};
+	return <TransliteratedInput onInput={onInput} {...props} />;
+};
 
 export default class SearchBox extends Component {
 	constructor() {
 		super();
 		this.state = {
 			searchValue: '',
-			suggestions: [],
-			transliterationSuggestions: []
+			suggestions: []
 		};
 	}
 
@@ -99,27 +83,12 @@ export default class SearchBox extends Component {
 		});
 		if (searchValue.length > 0) {
 			this.getSuggestionsDebounced(searchValue);
-			if (searchValue.match(/[a-z]/i)) {
-				nepaliTransliterator
-					.transliterate(searchValue)
-					.then(transliteratedText => {
-						this.setState({
-							transliterationSuggestions: [transliteratedText]
-						});
-					});
-			}
 		}
 		else {
 			this.setState({
-				transliterationSuggestions: [],
 				suggestions: []
 			});
 		}
-	};
-
-	onTransliterationSelect = suggestion => {
-		this.setState({ searchValue: suggestion, transliterationSuggestions: [] });
-		this.getSuggestions(suggestion);
 	};
 
 	onAutocompleteSelect = searchValue => {
@@ -138,21 +107,16 @@ export default class SearchBox extends Component {
 					className={style.SearchBox__Input}
 					items={[...this.state.suggestions]}
 					getItemValue={item => item}
-					renderMenu={children => (
-						<div className={style.SearchBox__Menu}>
-							<TransliteratedList
-								items={this.state.transliterationSuggestions}
-								onSelect={this.onTransliterationSelect}
-							/>
+					renderInput={renderInput}
+					renderMenu={children => {
+						console.log("Reached here");
+						return <div className={style.SearchBox__Menu}>
 							{children}
-							{isSuggestionsEmpty(
-								this.state.suggestions,
-								this.state.transliterationSuggestions
-							) ? (
-									<NoSuggestion onSuggestionClick={this.props.onSubmit} />
-								) : null}
+							{this.state.suggestions.length === 0 ? (
+								<NoSuggestion onSuggestionClick={this.props.onSubmit} />
+							) : null}
 						</div>
-					)}
+					}}
 					renderItem={SuggestionItem}
 					value={this.state.searchValue}
 					onChange={this.onTextInputChange}

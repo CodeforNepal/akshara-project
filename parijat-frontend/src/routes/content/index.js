@@ -1,6 +1,5 @@
 import { h, Component } from 'preact';
 import Toolbar from 'preact-material-components/Toolbar';
-import 'preact-material-components/Toolbar/style.css';
 import { route } from 'preact-router';
 import Header from '../../components/header';
 import Footer from '../../components/footer';

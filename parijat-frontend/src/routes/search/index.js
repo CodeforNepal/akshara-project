@@ -72,7 +72,6 @@ export default class Search extends Component {
 				<div>
 					<Header>
 						<Toolbar.Section>
-							<NavigationHome/>
 							<div className={style.SearchBox__Container}>
 								<SearchBox
 									autofocus
