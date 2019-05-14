@@ -124,6 +124,25 @@ curl -XPUT "${HOSTNAME}:9200/_template/nepali_template" --header "Content-Type: 
               "analyzer": "akshara_latin_transliterate"
             }
           }
+        },
+        "genre": {
+          "type":"keyword",
+          "norms": false
+        },
+        "lang": {
+          "type":"keyword",
+          "norms": false
+        },
+        "source": {
+          "type":"keyword",
+          "norms": false
+        },
+        "source_link": {
+          "enabled": false
+        },
+        "publish_date": {
+          "type":"keyword",
+          "norms": false
         }
       }
     }
