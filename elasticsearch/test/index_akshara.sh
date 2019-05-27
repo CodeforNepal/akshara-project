@@ -21,7 +21,9 @@ fi
 
 ELASTICSEARCH_URL="http://${HOSTNAME}:9200"
 
-INDEX="akshara_nepali_test"
+#INDEX="akshara_nepali_test" # for testing
+INDEX="akshara_nepali"       # prod index name
+
 PIPELINE="akshara_pipeline"
 
 # as unix time
@@ -37,16 +39,18 @@ PIPELINE="akshara_pipeline"
 ##############################################################################
 
 #echo "Deleting index ${INDEX} (if it exists)..."
-#curl --silent -XDELETE "${ELASTICSEARCH_URL}/${INDEX}"
+#curl --silent --show-error --request DELETE "${ELASTICSEARCH_URL}/${INDEX}"
 #echo ""
 
 for file in "$@"; do
-  echo "Indexing ${file}..."
+  echo ""
+  echo "Indexing '${file}' to index '${INDEX}'"
 
   content=$(<"$file")
   #echo "$content"
 
-  curl -XPOST "${ELASTICSEARCH_URL}/${INDEX}/_doc/?pipeline=${PIPELINE}&pretty" \
+  curl --silent --show-error --request POST \
+    "${ELASTICSEARCH_URL}/${INDEX}/_doc/?pipeline=${PIPELINE}&pretty" \
     --header "Content-Type: application/json" \
     --data "$content"
 
