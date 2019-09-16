@@ -17,32 +17,38 @@ class TransliteratedInput extends Component {
 		nepaliTransliterator.transliterate(value).then(tranSuggestion => {
 			this.setState({ tranSuggestion, value });
 		});
-		onInput && onInput(value);
+		onInput && onInput({ target: { value } });
 	};
 
 	onSuggestionClick = evnt => {
-		const { tranSuggestion } = this.state;
+		const { tranSuggestion: value } = this.state;
 		const { onInput } = this.props;
-		onInput && onInput(tranSuggestion);
-		this.setState({ value: tranSuggestion });
+		onInput && onInput({ target: { value } });
+		this.setState({ value });
 		this.focus();
 	};
 
+	// getBoundingClientRect = () => {
+	// 	this.input.getBoundingClientRect();
+	// }
+
 	focus = () => {
-		this.inputElm.focus();
-	}
+		// Preact 8 doesn't support forward ref. Causing issues
+		// with custom input
+	// 	this.input.focus();
+	};
 
 	render() {
-		const { props } = this.props;
+		const { value, ref, ...otherProps } = this.props;
 		const showSuggestion = this.state.value !== this.state.tranSuggestion;
 		return (
 			<span className={style.TransliteratedInput}>
 				<input
-				  ref={ inp => this.inputElm = inp }
+					ref={ref}
+					defaultValue={value}
 					className={style.TransliteratedInput__Input}
-					value={this.state.value || this.props.value}
+					{...otherProps}
 					onInput={this.onInput}
-					{...props}
 				/>
 				{showSuggestion ? (
 					<button

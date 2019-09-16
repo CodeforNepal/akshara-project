@@ -133,7 +133,7 @@ class FiltersListInput extends Component {
 					<div className={style.FiltersListInput__Editable}>
 						<TransliteratedInput
 							placeholder={`${title}`}
-							value={this.props.searchValue}
+							// value={this.props.searchValue}
 							onInput={this.props.onInput}
 						/>
 						<button
@@ -164,9 +164,9 @@ class FiltersList extends Component {
 		searchValue: ''
 	};
 
-	onSearchValueChange(newSearchValue) {
+	onSearchValueChange(event) {
 		this.setState({
-			searchValue: newSearchValue
+			searchValue: event.target.value
 		});
 	}
 

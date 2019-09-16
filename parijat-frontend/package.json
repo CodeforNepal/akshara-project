@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "lodash": "^4.17.5",
-    "preact": "^8.2.1",
+    "preact": "^8.5.2",
     "preact-compat": "^3.17.0",
     "preact-material-components": "^1.4.0",
     "preact-router": "^2.5.5",

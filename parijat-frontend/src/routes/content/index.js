@@ -1,6 +1,4 @@
 import { h, Component } from 'preact';
-import Toolbar from 'preact-material-components/Toolbar';
-import { route } from 'preact-router';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Loading from '../../components/loading';
@@ -8,10 +6,6 @@ import ContentContainer from '../../components/contentContainer';
 import { getContent } from '../../api';
 import style from './style';
 import renderHTML from 'react-render-html';
-
-function goBack() {
-	route('/search');
-}
 
 const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
@@ -28,12 +22,6 @@ const Item = ({ result }) => (
 			श्रोत: {result.source ? <a href={result.source_link}>{result.source}</a> : <span>अज्ञात</span> }
 		</h4>
 	</div>
-);
-
-const NavigationBack = () => (
-	<Toolbar.Icon navigation onClick={goBack}>
-		arrow_back_ios
-	</Toolbar.Icon>
 );
 
 const Content = ({ result }) => (
@@ -58,12 +46,7 @@ class ContentPage extends Component {
 	render() {
 		return (
 			<div>
-				<Header>
-					<Toolbar.Section align-start>
-						<NavigationBack />
-						<Toolbar.Title> सङ्ग्रह</Toolbar.Title>
-					</Toolbar.Section>
-				</Header>
+				<Header />
 				<ContentContainer>
 					{this.state.result != null ? (
 						<Content result={this.state.result} />

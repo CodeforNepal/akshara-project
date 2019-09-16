@@ -35,10 +35,15 @@ const SuggestionItem = (item, highlighted) =>
 	);
 
 const renderInput = ({ onChange, ...props }) => {
-	const onInput = value => {
-		onChange && onChange({ target: { value } });
+	const onInput = evnt => {
+		onChange && onChange({ target: evnt.target.value });
 	};
-	return <TransliteratedInput onInput={onInput} {...props} />;
+	return (
+		<TransliteratedInput
+			onInput={onInput}
+			{...props}
+		/>
+	);
 };
 
 export default class SearchBox extends Component {
@@ -51,7 +56,7 @@ export default class SearchBox extends Component {
 	}
 
 	getSuggestions = searchValue => {
-		const { fields: fieldsMap } = this.props;
+		const { queryFields: fieldsMap } = this.props;
 		const fields = Object.keys(fieldsMap);
 		if (searchValue.length > 0) {
 			getSuggestions(searchValue, fields).then(suggestionRes => {
@@ -67,6 +72,7 @@ export default class SearchBox extends Component {
 						];
 					}
 				});
+				console.log(categorizedSuggestions);
 				this.setState({
 					suggestions: categorizedSuggestions
 				});
@@ -77,11 +83,11 @@ export default class SearchBox extends Component {
 	getSuggestionsDebounced = debounce(this.getSuggestions, 100);
 
 	onTextInputChange = evnt => {
-		const searchValue = evnt.target.value;
+		const searchValue = evnt.target;
 		this.setState({
 			searchValue
 		});
-		if (searchValue.length > 0) {
+		if (searchValue && searchValue.length > 0) {
 			this.getSuggestionsDebounced(searchValue);
 		}
 		else {
@@ -89,6 +95,7 @@ export default class SearchBox extends Component {
 				suggestions: []
 			});
 		}
+		console.log(this.state);
 	};
 
 	onAutocompleteSelect = searchValue => {
@@ -105,24 +112,25 @@ export default class SearchBox extends Component {
 			<form onSubmit={this.handleSubmit} className={style.SearchBox}>
 				<ReactAutocomplete
 					className={style.SearchBox__Input}
+					inputProps={{ className: style.SearchBox__Input }}
+					isItemSelectable={item => !item.header}
 					items={[...this.state.suggestions]}
 					getItemValue={item => item}
 					renderInput={renderInput}
 					renderMenu={children => {
-						console.log("Reached here");
-						return <div className={style.SearchBox__Menu}>
-							{children}
-							{this.state.suggestions.length === 0 ? (
-								<NoSuggestion onSuggestionClick={this.props.onSubmit} />
-							) : null}
-						</div>
+						return (
+							<div className={style.SearchBox__Menu}>
+								{children}
+								{this.state.suggestions.length === 0 ? (
+									<NoSuggestion onSuggestionClick={this.props.onSubmit} />
+								) : null}
+							</div>
+						);
 					}}
 					renderItem={SuggestionItem}
 					value={this.state.searchValue}
 					onChange={this.onTextInputChange}
 					onSelect={this.onAutocompleteSelect}
-					inputProps={{ className: style.SearchBox__Input }}
-					isItemSelectable={item => !item.header}
 				/>
 				<button type="submit" className={style.SearchBox__Button}>
 					<Icon>search</Icon>
