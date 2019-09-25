@@ -10,7 +10,8 @@
     "serve:gen-config": "preact serve --server config --dest superstatic.json",
     "dev": "preact watch",
     "test": "mocha --require babel-polyfill --require babel-register",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test:e2e": "node_modules/cucumber/bin/cucumber-js --require test/acceptance/index.js --require test/acceptance/stepDefinitions"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor",
@@ -27,11 +28,14 @@
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
+    "cucumber": "^5.1.0",
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
     "expect": "^23.1.0",
     "if-env": "^1.0.0",
     "mocha": "^5.2.0",
+    "nightwatch": "^1.2.4",
+    "nightwatch-api": "^2.3.0",
     "preact-cli": "^2.0.0",
     "superstatic": "^5.0.1"
   },
