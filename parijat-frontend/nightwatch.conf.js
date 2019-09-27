@@ -1,5 +1,6 @@
 module.exports = {
 	src_folders: ['test'],
+	page_objects_path: './test/acceptance/pageObjects',
 	test_settings: {
 		default: {
 			selenium_host: '127.0.0.1',
