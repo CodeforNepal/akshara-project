@@ -1,7 +1,7 @@
 Feature: transliteration
   As a user
   I want to be able to transliterate latin characters into nepali characters
-  So, I would be able to search using latin characters
+  So, I can search using latin characters
 
   Background:
     Given the user has browsed to the homepage

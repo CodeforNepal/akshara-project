@@ -1,4 +1,4 @@
-const util = require('util')
+const util = require('util');
 module.exports = {
 	commands: {
 		searchResultDisplayed() {

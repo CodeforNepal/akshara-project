@@ -1,7 +1,7 @@
-const { Given, When, Then } = require('cucumber')
-const { client } = require('nightwatch-api')
-const transliterationTextField = "//span[contains(@class,'TransliteratedList__Item')]"
+const { Given, When, Then } = require('cucumber');
+const { client } = require('nightwatch-api');
 const assert = require('assert');
+const transliterationTextField = "//span[contains(@class,'TransliteratedList__Item')]";
 
 Given('the user has browsed to the homepage', () => client.page.homePage().navigate());
 
