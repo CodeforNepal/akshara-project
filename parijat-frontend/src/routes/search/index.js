@@ -29,6 +29,7 @@ import 'preact-material-components/Chips/style.css';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import SearchItem from '../../components/searchitem';
+import CurrentQuery from '../../components/CurrentQuery';
 import SelectedFilter from '../../components/selectedfilter';
 import ContentContainer from '../../components/contentContainer';
 import Filters from '../../components/filters';
@@ -80,6 +81,7 @@ export default class Search extends Component {
 								<LayoutGrid.Cell cols="9">
 									<div className={style.Search__Context}>
 										<div>
+											<CurrentQuery />
 											<SelectedFilters itemComponent={SelectedFilter} />
 											<ResetFilters component={ResetFiltersComponent} />
 										</div>

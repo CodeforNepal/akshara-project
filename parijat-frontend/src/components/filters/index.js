@@ -11,7 +11,6 @@ const isUndefined = require('lodash/isUndefined');
 import Button from '../button';
 import debounce from 'lodash/debounce';
 import {
-	RefinementListFilter,
 	FacetFilter,
 	FacetAccessor,
 	FilterBucket,

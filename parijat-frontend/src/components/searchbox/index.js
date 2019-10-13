@@ -34,18 +34,6 @@ const SuggestionItem = (item, highlighted) =>
 		</div>
 	);
 
-const renderInput = ({ onChange, ...props }) => {
-	const onInput = evnt => {
-		onChange && onChange({ target: evnt.target.value });
-	};
-	return (
-		<TransliteratedInput
-			onInput={onInput}
-			{...props}
-		/>
-	);
-};
-
 export default class SearchBox extends Component {
 	constructor() {
 		super();
@@ -72,7 +60,6 @@ export default class SearchBox extends Component {
 						];
 					}
 				});
-				console.log(categorizedSuggestions);
 				this.setState({
 					suggestions: categorizedSuggestions
 				});
@@ -95,7 +82,6 @@ export default class SearchBox extends Component {
 				suggestions: []
 			});
 		}
-		console.log(this.state);
 	};
 
 	onAutocompleteSelect = searchValue => {
@@ -107,6 +93,24 @@ export default class SearchBox extends Component {
 		this.props.onSubmit(this.state.searchValue);
 	};
 
+	renderInput = ({ onChange, ...props }) => {
+		const onInput = evnt => {
+			onChange && onChange({ target: evnt.target.value });
+		};
+		const placeholder = decodeURI(
+			this.context
+			&& this.context.searchkit
+			&& this.context.searchkit.query.index.queryString
+		  || '');
+		return (
+			<TransliteratedInput
+				onInput={onInput}
+				placeholder={placeholder}
+				{...props}
+			/>
+		);
+	};
+
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit} className={style.SearchBox}>
@@ -116,7 +120,7 @@ export default class SearchBox extends Component {
 					isItemSelectable={item => !item.header}
 					items={[...this.state.suggestions]}
 					getItemValue={item => item}
-					renderInput={renderInput}
+					renderInput={this.renderInput}
 					renderMenu={children => {
 						return (
 							<div className={style.SearchBox__Menu}>
