@@ -42,6 +42,7 @@ export const DEVANAGARI_CONSONANTS = {
 	ha: 'ह',
 
 	ksha: 'क्ष',
+	xa: 'क्ष',
 	Gya: 'ज्ञ'
 
 };
