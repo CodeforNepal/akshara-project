@@ -15,6 +15,7 @@ export default class Home extends Component {
 				</div>
 				<div class={style.SearchBox}>
 					<SearchBox
+						autofocus
 						queryFields={{
 							'title': 'शिर्षक',
 							'author': 'लेखक'

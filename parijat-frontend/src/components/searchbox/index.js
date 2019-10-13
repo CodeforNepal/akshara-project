@@ -106,6 +106,7 @@ export default class SearchBox extends Component {
 			<TransliteratedInput
 				onInput={onInput}
 				placeholder={placeholder}
+				autofocus={this.props.autofocus}
 				{...props}
 			/>
 		);
