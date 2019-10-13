@@ -25,7 +25,7 @@ class TransliteratedInput extends Component {
 		const { onInput } = this.props;
 		onInput && onInput({ target: { value } });
 		this.setState({ value });
-		this.focus();
+		setTimeout(this.focus, 100);
 	};
 
 	// getBoundingClientRect = () => {
@@ -35,7 +35,8 @@ class TransliteratedInput extends Component {
 	focus = () => {
 		// Preact 8 doesn't support forward ref. Causing issues
 		// with custom input
-	// 	this.input.focus();
+		this.input.focus();
+		this.input.setSelectionRange(999, 999);
 	};
 
 	render() {
@@ -44,7 +45,7 @@ class TransliteratedInput extends Component {
 		return (
 			<span className={style.TransliteratedInput}>
 				<input
-					ref={ref}
+					ref={ref => { this.input = ref; }}
 					defaultValue={value}
 					className={style.TransliteratedInput__Input}
 					{...otherProps}
@@ -64,7 +65,10 @@ class TransliteratedInput extends Component {
 	}
 
 	componentDidMount() {
-		this.focus();
+		const { autofocus } = this.props;
+		if (autofocus) {
+			this.focus();
+		}
 	}
 }
 

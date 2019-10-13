@@ -137,6 +137,7 @@ class FiltersListInput extends Component {
 				{editable ? (
 					<div className={style.FiltersListInput__Editable}>
 						<TransliteratedInput
+							autofocus
 							placeholder={`${title}`}
 							value={this.props.searchValue}
 							onInput={this.props.onInput}
