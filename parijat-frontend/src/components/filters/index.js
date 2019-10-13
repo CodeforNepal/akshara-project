@@ -9,6 +9,7 @@ const map = require('lodash/map');
 const omitBy = require('lodash/omitBy');
 const isUndefined = require('lodash/isUndefined');
 import Button from '../button';
+import debounce from 'lodash/debounce';
 import {
 	RefinementListFilter,
 	FacetFilter,
@@ -22,9 +23,13 @@ import style from './style';
 /* This is disgusting code. We need our own state management. Searchkit abstractions are not very good */
 
 class SearchableFacetAccessor extends FacetAccessor {
+	performSearch = debounce(() => {
+		this.searchkit.performSearch();
+	}, 200);
+
 	setSearchValue(searchValue) {
 	 	this.searchValue = searchValue;
-		this.searchkit.performSearch();
+		this.performSearch();
 	}
 
 	buildOwnQuery(query) {
@@ -133,7 +138,7 @@ class FiltersListInput extends Component {
 					<div className={style.FiltersListInput__Editable}>
 						<TransliteratedInput
 							placeholder={`${title}`}
-							// value={this.props.searchValue}
+							value={this.props.searchValue}
 							onInput={this.props.onInput}
 						/>
 						<button
@@ -165,13 +170,15 @@ class FiltersList extends Component {
 	};
 
 	onSearchValueChange(event) {
-		this.setState({
-			searchValue: event.target.value
-		});
+		this.setSearchValue(event.target.value);
 	}
 
 	clearSearchValue() {
-		this.setState({ searchValue: '' });
+		this.setSearchValue('');
+	}
+
+	setSearchValue(searchValue) {
+		this.setState({ searchValue });
 	}
 
 	render() {

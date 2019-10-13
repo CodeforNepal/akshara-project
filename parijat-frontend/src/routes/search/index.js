@@ -39,7 +39,7 @@ import SearchBox from './SearchBox';
 import style from './style';
 import { API_ENDPOINT, INDEX_NAME } from '../../api';
 
-const searchkit = new SearchkitManager(`${API_ENDPOINT}${INDEX_NAME}`);
+const searchkit = new SearchkitManager(`${API_ENDPOINT}${INDEX_NAME}`, { timeout: 60000 });
 
 searchkit.translateFunction = key => {
 	let translations = {
