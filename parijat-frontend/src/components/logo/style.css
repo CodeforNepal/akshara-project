@@ -1,4 +1,4 @@
-.path {
+.AnimatedStroke {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash 5s linear forwards;
@@ -9,4 +9,9 @@
     stroke-dashoffset: 0;
     fill: black;
   }
+}
+
+.DeadStroke {
+  stroke-dashoffset: 0;
+  fill: black;
 }
