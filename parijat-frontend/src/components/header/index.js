@@ -24,7 +24,10 @@ export default class Header extends Component {
 				<HeaderLogo />
 				{children.length === 0 ? (
 					<SearchBox
-						fields={['title', 'author']}
+						queryFields={{
+							'title': 'शिर्षक',
+							'author': 'लेखक'
+						}}
 						onSubmit={queryValue => {
 							route(`search?q=${queryValue}`);
 						}}
