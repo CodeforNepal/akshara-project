@@ -27,6 +27,7 @@ export const DEVANAGARI_CONSONANTS = {
 
 	pa: 'प',
 	pha: 'फ',
+	fa: 'फ',
 	ba: 'ब',
 	bha: 'भ',
 	ma: 'म',
