@@ -14,8 +14,13 @@ upstream elasticsearch_upstream {
 server {
   listen ${NGINX_PORT} default_server;
   listen [::]:${NGINX_PORT} default_server;
+  listen 443 ssl;
 
   server_name ${NGINX_SERVER_NAME};
+  ssl_certificate      /etc/letsencrypt/live/sangraha.org/fullchain.pem;
+  ssl_certificate_key  /etc/letsencrypt/live/sangraha.org/privkey.pem;
+
+
 
   # for some diagnostics
   location /nginx_status {
