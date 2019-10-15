@@ -281,19 +281,19 @@ class Filters extends Component {
 							this.scrollingDlg.MDComponent.show();
 						}}
 					>
-						Filters
+						खोज सुधार
 					</Button>
 					<Dialog
 						ref={scrollingDlg => {
 							this.scrollingDlg = scrollingDlg;
 						}}
 					>
-						<Dialog.Header>Select Filters</Dialog.Header>
+						<Dialog.Header>खोज सुधार</Dialog.Header>
 						<Dialog.Body scrollable>
 							<FiltersList />
 						</Dialog.Body>
 						<Dialog.Footer>
-							<Dialog.FooterButton cancel>Close</Dialog.FooterButton>
+							<Dialog.FooterButton cancel>बन्द गर्नुहोस्</Dialog.FooterButton>
 						</Dialog.Footer>
 					</Dialog>
 				</div>

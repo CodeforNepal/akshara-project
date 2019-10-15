@@ -85,7 +85,7 @@ export default class SearchBox extends Component {
 	};
 
 	onAutocompleteSelect = searchValue => {
-		this.props.onSubmit(this.state.searchValue);
+		this.props.onSubmit(searchValue);
 	};
 
 	handleSubmit = evnt => {
