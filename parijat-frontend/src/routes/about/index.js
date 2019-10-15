@@ -1,22 +1,11 @@
 import { h, Component } from 'preact';
 import Toolbar from 'preact-material-components/Toolbar';
-import 'preact-material-components/Toolbar/style.css';
 import { route } from 'preact-router';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Loading from '../../components/loading';
 import { getContent } from '../../api';
 import style from './style';
-
-function goHome() {
-	route('/');
-}
-
-const NavigationHome = () => (
-	<Toolbar.Icon navigation onClick={goHome}>
-		home
-	</Toolbar.Icon>
-);
 
 class ContentPage extends Component {
 	constructor() {
@@ -34,12 +23,7 @@ class ContentPage extends Component {
 	render() {
 		return (
 			<div>
-				<Header>
-					<Toolbar.Section align-start>
-						<NavigationHome />
-						<Toolbar.Title> हाम्रो बारेमा</Toolbar.Title>
-					</Toolbar.Section>
-				</Header>
+				<Header />
 				<div className={style.About__Content}>
 					<div className={style.About__ContentGroup}>
 						<h3>सङ्ग्रहको बारेमा</h3>

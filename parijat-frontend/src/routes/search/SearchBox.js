@@ -18,7 +18,7 @@ export default class SearchBox extends SearchkitComponent {
 		return new QueryAccessor(id, {
 			prefixQueryFields,
 			prefixQueryOptions: { ...prefixQueryOptions },
-			queryFields: queryFields || ['_all'],
+			queryFields: Object.keys(queryFields) || ['_all'],
 			queryOptions: { ...queryOptions },
 			queryBuilder,
 			onQueryStateChange: () => {
@@ -38,7 +38,7 @@ export default class SearchBox extends SearchkitComponent {
 	render() {
 		return (
 			<SearchBoxComponent
-				fields={{ title: 'शिर्षक', author: 'लेखक' }}
+				queryFields={this.props.queryFields}
 				onSubmit={this.onSubmit}
 			/>
 		);

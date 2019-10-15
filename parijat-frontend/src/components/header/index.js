@@ -1,22 +1,41 @@
 import { h, Component } from 'preact';
 import { route } from 'preact-router';
-import Toolbar from 'preact-material-components/Toolbar';
-import 'preact-material-components/Toolbar/style.css';
+import SearchBox from '../searchbox';
+import Logo from '../logo';
 import 'preact-material-components/TextField/style.css';
 import style from './style.css';
+
+const HeaderLogo = () => (
+	<div className={style.HeaderLogo}>
+		<Logo />
+	</div>
+);
 
 export default class Header extends Component {
 	linkTo = path => () => {
 		route(path);
 	};
 
-	// goHome = this.linkTo('/');
-	// goToMyProfile = this.linkTo('/profile');
-
 	render() {
 		const { query, children } = this.props;
-		return (<div className={style.Header}>
-			{children}
-		</div>);
+
+		return (
+			<div className={style.Header}>
+				<HeaderLogo />
+				{children.length === 0 ? (
+					<SearchBox
+						queryFields={{
+							'title': 'शिर्षक',
+							'author': 'लेखक'
+						}}
+						onSubmit={queryValue => {
+							route(`search?q=${queryValue}`);
+						}}
+					/>
+				) : (
+					children
+				)}
+			</div>
+		);
 	}
 }

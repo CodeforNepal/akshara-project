@@ -11,11 +11,15 @@ export default class Home extends Component {
 		return (
 			<div class={style.Home}>
 				<div class={style.Logo}>
-					<Logo />
+					<Logo animated />
 				</div>
 				<div class={style.SearchBox}>
 					<SearchBox
-						fields={['title', 'author']}
+						autofocus
+						queryFields={{
+							title: 'शिर्षक',
+							author: 'लेखक'
+						}}
 						onSubmit={queryValue => {
 							route(`search?q=${queryValue}`);
 						}}
