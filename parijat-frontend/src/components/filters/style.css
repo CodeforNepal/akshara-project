@@ -18,6 +18,7 @@
 .FiltersList__Container {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .Filters__Container {
@@ -28,6 +29,7 @@
 
 .FiltersListInput__Container {
   display: flex;
+  height: 2rem;
 }
 
 .FiltersListInput__Editable {
@@ -55,9 +57,30 @@
 .FiltersListInput__Button {
   background: none;
   border: none;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   line-height: 0rem;
+}
+
+.FiltersList__Section {
+  margin-bottom: 2rem;
+}
+
+/* SearchableRefinementListFilter */
+
+.SearchableRefinementListFilter {
+
+}
+
+.StandardRefinementListFilter {
+
+}
+
+.StandardRefinementListFilter__Title {
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding-left: 15px;
 }
 
 /* To swith to a button view when in small screens */

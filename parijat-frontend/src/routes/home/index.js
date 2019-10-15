@@ -17,8 +17,8 @@ export default class Home extends Component {
 					<SearchBox
 						autofocus
 						queryFields={{
-							'title': 'शिर्षक',
-							'author': 'लेखक'
+							title: 'शिर्षक',
+							author: 'लेखक'
 						}}
 						onSubmit={queryValue => {
 							route(`search?q=${queryValue}`);

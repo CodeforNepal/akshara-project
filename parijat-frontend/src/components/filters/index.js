@@ -2,10 +2,8 @@ import { h, Component } from 'preact';
 import Icon from 'preact-material-components/Icon';
 import Dialog from 'preact-material-components/Dialog';
 import 'preact-material-components/Dialog/style.css';
-import Checkbox from 'preact-material-components/Checkbox';
 import 'preact-material-components/Checkbox/style.css';
 import TransliteratedInput from '../transliteratedinput';
-const map = require('lodash/map');
 const omitBy = require('lodash/omitBy');
 const isUndefined = require('lodash/isUndefined');
 import Button from '../button';
@@ -15,7 +13,8 @@ import {
 	FacetAccessor,
 	FilterBucket,
 	TermsBucket,
-	CardinalityMetric
+	CardinalityMetric,
+	RefinementListFilter
 } from 'searchkit';
 import style from './style';
 
@@ -68,7 +67,7 @@ class SearchableFacetAccessor extends FacetAccessor {
 	}
 }
 
-class SearchableRefinementListFilter extends FacetFilter {
+class SearchableFacetFilter extends FacetFilter {
 	getAccessorOptions() {
 		const {
 			field,
@@ -164,44 +163,100 @@ class FiltersListInput extends Component {
 	}
 }
 
-class FiltersList extends Component {
+class SearchableRefinementListFilter extends Component {
 	state = {
 		searchValue: ''
 	};
 
-	onSearchValueChange(event) {
+	onSearchValueChange = (event) => {
 		this.setSearchValue(event.target.value);
 	}
 
-	clearSearchValue() {
+	clearSearchValue = () => {
 		this.setSearchValue('');
 	}
 
-	setSearchValue(searchValue) {
+	setSearchValue = (searchValue) => {
 		this.setState({ searchValue });
 	}
 
 	render() {
 		return (
-			<ul className={style.FiltersList__Container}>
+			<div>
 				<FiltersListInput
 					searchValue={this.state.searchValue}
-					onInput={this.onSearchValueChange.bind(this)}
-					clearSearchValue={this.clearSearchValue.bind(this)}
-					title="लेखक"
+					onInput={this.onSearchValueChange}
+					clearSearchValue={this.clearSearchValue}
+					title={this.props.title}
 				/>
-				<SearchableRefinementListFilter
-					id="author"
-					size={7}
-					title="लेखक"
-					field="author.keyword"
-					operator="OR"
+				<SearchableFacetFilter
+					id={this.props.id}
+					size={this.props.size}
+					title={this.props.title}
+					field={this.props.field}
+					operator={this.props.operator}
 					searchValue={this.state.searchValue}
 					itemComponent={RefinementOption}
 				/>
-			</ul>
+			</div>
 		);
 	}
+}
+
+function StandardRefinementListFilter({ field, title, id, operator, itemComponent, size }) {
+	return (
+		<div>
+			<div
+				className={style.StandardRefinementListFilter__Title}
+			>
+				<strong>{title}</strong>
+			</div>
+			<RefinementListFilter
+				field={field}
+				title={title}
+				id={id}
+				operator={operator}
+				itemComponent={itemComponent}
+				size={size}
+			/>
+		</div>
+	);
+}
+
+function FiltersList() {
+	return (
+		<ul className={style.FiltersList__Container}>
+			<li className={style.FiltersList__Section}>
+				<StandardRefinementListFilter
+					field="lang"
+					title="भाषा"
+					id="lang"
+					operator="OR"
+					itemComponent={RefinementOption}
+					size={7}
+				/>
+			</li>
+			<li className={style.FiltersList__Section}>
+				<StandardRefinementListFilter
+					field="genre"
+					title="विधा"
+					id="genre"
+					operator="OR"
+					itemComponent={RefinementOption}
+					size={7}
+				/>
+			</li>
+			<li className={style.FiltersList__Section}>
+				<SearchableRefinementListFilter
+					field="author.keyword"
+					title="लेखक"
+					id="author"
+					operator="OR"
+					size={7}
+				/>
+			</li>
+		</ul>
+	);
 }
 
 const RefinementOption = props => (
