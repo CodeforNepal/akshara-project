@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "storybook": "start-storybook",
     "build": "NODE_ENV=production preact build",
-    "serve": "yarn serve:gen-config && superstatic --port 8080 --host 0.0.0.0",
-    "serve:gen-config": "preact serve --server config --dest superstatic.json",
+    "serve": "node server.js",
     "dev": "preact watch",
     "test": "mocha --require babel-polyfill --require babel-register",
     "lint": "eslint src",
@@ -30,6 +30,11 @@
     "babel-register": "^6.26.0",
     "cucumber": "^5.1.0",
     "cucumber-pretty": "^1.5.2",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
+    "@storybook/preact": "^5.0.4",
+    "core-js": "3",
     "eslint": "^4.5.0",
     "eslint-config-synacor": "^1.1.0",
     "expect": "^23.1.0",
@@ -39,11 +44,12 @@
     "nightwatch-api": "^2.3.0",
     "preact-cli": "^2.0.0",
     "superstatic": "^5.0.1"
+    "preact-cli": "^3.0.0-next.19",
+    "pushstate-server": "^3.1.0"
   },
   "dependencies": {
-    "babel-preset-env": "^1.7.0",
     "lodash": "^4.17.5",
-    "preact": "^8.2.1",
+    "preact": "^8.5.2",
     "preact-compat": "^3.17.0",
     "preact-material-components": "^1.4.0",
     "preact-router": "^2.5.5",

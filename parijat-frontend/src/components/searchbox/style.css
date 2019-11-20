@@ -9,6 +9,7 @@
 
 .SearchBox > div {
   width: 100%;
+  height: 100%;
 }
 
 .SearchBox__Menu {
@@ -40,6 +41,7 @@
   right: 0rem;
   top: 0rem;
   position: absolute;
+  line-height: 0;
 }
 
 .SuggestionItem {
@@ -81,6 +83,7 @@
 }
 
 .NoSuggestion > p {
+  display: flex;
   margin: 0.25rem;
   width: 100%;
   white-space: normal;
