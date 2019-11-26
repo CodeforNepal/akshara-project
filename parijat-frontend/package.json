@@ -10,7 +10,8 @@
     "serve": "node server.js",
     "dev": "preact watch",
     "test": "mocha --require babel-polyfill --require babel-register",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test:e2e": "node_modules/cucumber/bin/cucumber-js --require test/acceptance/index.js --require test/acceptance/stepDefinitions -f node_modules/cucumber-pretty "
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor",
@@ -25,6 +26,10 @@
     "build/*"
   ],
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "cucumber": "^5.1.0",
+    "cucumber-pretty": "^1.5.2",
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
@@ -35,6 +40,10 @@
     "expect": "^23.1.0",
     "if-env": "^1.0.0",
     "mocha": "^5.2.0",
+    "nightwatch": "^1.2.4",
+    "nightwatch-api": "^2.3.0",
+    "preact-cli": "^2.0.0",
+    "superstatic": "^5.0.1"
     "preact-cli": "^3.0.0-next.19",
     "pushstate-server": "^3.1.0"
   },
