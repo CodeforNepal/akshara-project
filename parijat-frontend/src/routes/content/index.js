@@ -1,3 +1,5 @@
+import { favItem } from '../../actions/user';
+import { connect } from 'preact-redux';
 import { h, Component } from 'preact';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -6,6 +8,13 @@ import ContentContainer from '../../components/contentContainer';
 import { getContent } from '../../api';
 import style from './style';
 import renderHTML from 'react-render-html';
+
+export const withUserFavourites = connect(
+	({ user }) => ({
+		favs: user.favs
+	}),
+	{ favItem }
+);
 
 const Item = ({ result }) => (
 	<div className={style.Item__Poem}>
@@ -19,7 +28,12 @@ const Item = ({ result }) => (
 			))}
 		</div>
 		<h4>
-			श्रोत: {result.source ? <a href={result.source_link}>{result.source}</a> : <span>अज्ञात</span> }
+			श्रोत:{' '}
+			{result.source ? (
+				<a href={result.source_link}>{result.source}</a>
+			) : (
+				<span>अज्ञात</span>
+			)}
 		</h4>
 	</div>
 );
@@ -43,10 +57,16 @@ class ContentPage extends Component {
 		});
 	}
 
+	favItem = () => {
+		this.props.favItem(this.state.result);
+	};
+
 	render() {
+		console.log(this.props.favs);
 		return (
 			<div>
 				<Header />
+				<button onClick={this.favItem}>Favourite</button>
 				<ContentContainer>
 					{this.state.result != null ? (
 						<Content result={this.state.result} />
@@ -60,4 +80,4 @@ class ContentPage extends Component {
 	}
 }
 
-export default ContentPage;
+export default withUserFavourites(ContentPage);

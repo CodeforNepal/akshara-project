@@ -28,7 +28,7 @@ export default class App extends Component {
 					<Search path="/search/:query" />
 					<Content path="/content/:id" />
 					<About path="/about" />
-          <FairUse path="/fair-use" />
+					<FairUse path="/fair-use" />
 				</Router>
 			</div>
 		);

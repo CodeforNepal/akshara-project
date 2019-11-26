@@ -31,6 +31,7 @@
     "cucumber": "^5.1.0",
     "cucumber-pretty": "^1.5.2",
     "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "^7.5.2",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
     "@storybook/preact": "^5.0.4",
@@ -52,9 +53,11 @@
     "preact": "^8.5.2",
     "preact-compat": "^3.17.0",
     "preact-material-components": "^1.4.0",
+    "preact-redux": "^2.1.0",
     "preact-router": "^2.5.5",
     "react-autocomplete": "^1.8.1",
     "react-render-html": "^0.6.0",
+    "redux": "^4.0.4",
     "searchkit": "^2.3.0"
   }
 }
