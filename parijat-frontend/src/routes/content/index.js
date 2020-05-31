@@ -51,6 +51,7 @@ class ContentPage extends Component {
 			result: null
 		};
 	}
+
 	componentDidMount() {
 		getContent(this.props.id).then(result => {
 			this.setState({ result });
@@ -66,7 +67,7 @@ class ContentPage extends Component {
 		return (
 			<div>
 				<Header />
-				<button onClick={this.favItem}>Favourite</button>
+				<button onClick={this.favItem}>♥️ Favourite</button>
 				<ContentContainer>
 					{this.state.result != null ? (
 						<Content result={this.state.result} />
