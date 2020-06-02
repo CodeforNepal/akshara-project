@@ -498,7 +498,7 @@ class Autocomplete extends React.Component {
     if (this._ignoreBlur) {
       this._ignoreFocus = true
       this._scrollOffset = getScrollOffset()
-      this.refs.input.focus()
+      this.refs.input && this.refs.input.focus()
       return
     }
     let setStateCallback
