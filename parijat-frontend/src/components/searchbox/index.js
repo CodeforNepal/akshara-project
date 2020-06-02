@@ -62,7 +62,6 @@ export default class SearchBox extends Component {
 						];
 					}
 				});
-				console.log(categorizedSuggestions);
 				this.setState({
 					suggestions: categorizedSuggestions
 				});
