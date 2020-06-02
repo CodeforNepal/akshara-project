@@ -63,7 +63,6 @@ class ContentPage extends Component {
 	};
 
 	render() {
-		console.log(this.props.favs);
 		return (
 			<div>
 				<Header />

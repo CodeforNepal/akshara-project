@@ -18,10 +18,11 @@ export default class Header extends Component {
 	render() {
 		const { query, children } = this.props;
 
+		const shouldShowSearchBox = children == null || children && children.length === 0;
 		return (
 			<div className={style.Header}>
 				<HeaderLogo />
-				{children.length === 0 ? (
+				{shouldShowSearchBox ? (
 					<SearchBox
 						queryFields={{
 							'title': 'शिर्षक',
