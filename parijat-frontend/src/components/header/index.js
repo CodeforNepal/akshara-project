@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import SearchBox from '../searchbox';
 import Logo from '../logo';
-import 'preact-material-components/TextField/style.css';
 import style from './style.css';
 
 const HeaderLogo = () => (

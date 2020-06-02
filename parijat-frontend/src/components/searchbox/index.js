@@ -1,6 +1,6 @@
-import { h, Component } from 'preact';
-import Icon from 'preact-material-components/Icon';
-import ReactAutocomplete from 'react-autocomplete';
+import { h, Component, createRef } from 'preact';
+import { HelpCircle, Search } from 'preact-feather';
+import ReactAutocomplete from '../react-autocomplete';
 import debounce from 'lodash/debounce';
 import TransliteratedInput from '../transliteratedinput';
 import { getSuggestions } from '../../api';
@@ -9,7 +9,7 @@ import style from './style.css';
 const NoSuggestion = ({ onSuggestionClick }) => (
 	<div className={style.NoSuggestion}>
 		<p>
-			<Icon className={style.NoSuggestion__Icon}>help</Icon>
+			<HelpCircle className={style.NoSuggestion__Icon} />
 			नेपाली साहित्य खोज्नु होस् । खोजका उदाहरणहरु -{' '}
 			<a onClick={() => onSuggestionClick('लक्ष्मीप्रसाद%20देवकोटा')}>
 				लक्ष्मीप्रसाद देवकोटा
@@ -35,6 +35,8 @@ const SuggestionItem = (item, highlighted) =>
 	);
 
 export default class SearchBox extends Component {
+	inputRef = createRef();
+
 	constructor() {
 		super();
 		this.state = {
@@ -60,6 +62,7 @@ export default class SearchBox extends Component {
 						];
 					}
 				});
+				console.log(categorizedSuggestions);
 				this.setState({
 					suggestions: categorizedSuggestions
 				});
@@ -79,6 +82,7 @@ export default class SearchBox extends Component {
 		}
 		else {
 			this.setState({
+				searchValue: '',
 				suggestions: []
 			});
 		}
@@ -107,6 +111,7 @@ export default class SearchBox extends Component {
 				onInput={onInput}
 				placeholder={placeholder}
 				autofocus={this.props.autofocus}
+				ref={this.inputRef}
 				{...props}
 			/>
 		);
@@ -138,7 +143,7 @@ export default class SearchBox extends Component {
 					onSelect={this.onAutocompleteSelect}
 				/>
 				<button type="submit" className={style.SearchBox__Button}>
-					<Icon>search</Icon>
+					<Search />
 				</button>
 			</form>
 		);

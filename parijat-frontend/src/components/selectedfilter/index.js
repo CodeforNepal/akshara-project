@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import Icon from 'preact-material-components/Icon';
+import { X } from 'preact-feather';
 import style from './style';
 
 const SelectedFilter = props => (
@@ -7,13 +7,11 @@ const SelectedFilter = props => (
 		<span className={style.SelectedFilter__Label}>
 			<strong>{props.labelKey}:</strong> {props.labelValue}
 		</span>
-		<Icon
+		<X
 			title="Remove Filter"
 			className={style.SelectedFilter__Icon}
 			onClick={props.removeFilter}
-		>
-			close
-		</Icon>
+		/>
 	</span>
 );
 

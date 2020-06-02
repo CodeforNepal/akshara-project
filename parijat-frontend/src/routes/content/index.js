@@ -1,5 +1,5 @@
 import { favItem } from '../../actions/user';
-import { connect } from 'preact-redux';
+import { connect } from 'react-redux';
 import { h, Component } from 'preact';
 import Header from '../../components/header';
 import Footer from '../../components/footer';

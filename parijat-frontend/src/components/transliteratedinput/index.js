@@ -1,8 +1,44 @@
-import { h, Component } from 'preact';
+import { h, Component, createRef } from 'preact';
+import { forwardRef } from 'preact/compat';
+import { connect } from 'react-redux';
+import { setTransliterationEnabled } from '../../actions/user';
 import { nepaliTransliterator } from '../../tools/transliterate';
 import style from './style.css';
 
+export const withUserTransliteration = connect(
+	({ user }) => ({
+		transliteration: user.transliteration
+	}),
+	{ setTransliterationEnabled },
+);
+
+export const withUserTransliteration2 = connect(
+	({ user }) => ({
+		isTransliterationEnable: user.transliteration
+	})
+)
+
+class TransliterationSettings extends Component {
+		toggleTransliterationEnabled = () => {
+			this.props.setTransliterationEnabled(!this.props.transliteration);
+		}
+
+		render() {
+			return (
+				<input
+					type="checkbox"
+					checked={this.props.transliteration}
+					onClick={this.toggleTransliterationEnabled}
+				/>
+			);
+		}
+}
+
+const ConnectedTransliterationSettings = withUserTransliteration(TransliterationSettings);
+
 class TransliteratedInput extends Component {
+	ref = createRef();
+
 	constructor() {
 		super();
 		this.state = {
@@ -14,9 +50,13 @@ class TransliteratedInput extends Component {
 	onInput = evnt => {
 		const { onInput } = this.props;
 		const { value } = evnt.target;
-		nepaliTransliterator.transliterate(value).then(tranSuggestion => {
-			this.setState({ tranSuggestion, value });
-		});
+		if (value && value.length > 0) {
+			nepaliTransliterator.transliterate(value).then(tranSuggestion => {
+				this.setState({ tranSuggestion, value });
+			});
+		} else {
+			this.setState({ value, tranSuggestion: '' });
+		}
 		onInput && onInput({ target: { value } });
 	};
 
@@ -25,40 +65,38 @@ class TransliteratedInput extends Component {
 		const { onInput } = this.props;
 		onInput && onInput({ target: { value } });
 		this.setState({ value });
-		setTimeout(this.focus, 100);
+		setTimeout(this.focusInput, 100);
 	};
 
-	// getBoundingClientRect = () => {
-	// 	this.input.getBoundingClientRect();
-	// }
-
-	focus = () => {
-		// Preact 8 doesn't support forward ref. Causing issues
-		// with custom input
-		this.input.focus();
-		this.input.setSelectionRange(999, 999);
-	};
+	focusInput = () => {
+		const inputElm = this.ref.current.firstElementChild;
+		inputElm.focus();
+		inputElm.setSelectionRange(999, 999);
+	}
 
 	render() {
-		const { value, ref, ...otherProps } = this.props;
+		const { value, innerRef, ...otherProps } = this.props;
 		const showSuggestion = this.state.value !== this.state.tranSuggestion;
 		return (
-			<span className={style.TransliteratedInput}>
+			<span ref={this.ref} className={style.TransliteratedInput}>
 				<input
-					ref={ref => { this.input = ref; }}
-					defaultValue={value}
+					ref={innerRef}
+					value={value}
 					className={style.TransliteratedInput__Input}
 					{...otherProps}
 					onInput={this.onInput}
 				/>
 				{showSuggestion ? (
-					<button
-						className={style.TransliteratedInput__Suggestion}
-						onClick={this.onSuggestionClick}
-						tooltip={this.state.tranSuggestion}
-					>
-						{this.state.tranSuggestion}
-					</button>
+					<div>
+						<button
+							className={style.TransliteratedInput__Suggestion}
+							onClick={this.onSuggestionClick}
+							tooltip={this.state.tranSuggestion}
+						>
+							{this.state.tranSuggestion}
+						</button>
+						<ConnectedTransliterationSettings />
+					</div>
 				) : null}
 			</span>
 		);
@@ -67,9 +105,11 @@ class TransliteratedInput extends Component {
 	componentDidMount() {
 		const { autofocus } = this.props;
 		if (autofocus) {
-			this.focus();
+			this.focusInput();
 		}
 	}
 }
 
-export default TransliteratedInput;
+export default forwardRef((props, ref) => <TransliteratedInput
+  innerRef={ref} {...props}
+/>);

@@ -1,8 +1,6 @@
 import { h, Component } from 'preact';
-import Icon from 'preact-material-components/Icon';
-import Dialog from 'preact-material-components/Dialog';
-import 'preact-material-components/Dialog/style.css';
-import 'preact-material-components/Checkbox/style.css';
+import { Search, X } from 'preact-feather';
+import Modal from 'react-modal';
 import TransliteratedInput from '../transliteratedinput';
 const omitBy = require('lodash/omitBy');
 const isUndefined = require('lodash/isUndefined');
@@ -144,7 +142,7 @@ class FiltersListInput extends Component {
 							className={style.FiltersListInput__Button}
 							onClick={this.clear}
 						>
-							<Icon>close</Icon>
+							<X />
 						</button>
 					</div>
 				) : (
@@ -154,7 +152,7 @@ class FiltersListInput extends Component {
 							className={style.FiltersListInput__Button}
 							onClick={this.showEdit}
 						>
-							<Icon>search</Icon>
+							<Search />
 						</button>
 					</div>
 				)}
@@ -272,30 +270,40 @@ const RefinementOption = props => (
 );
 
 class Filters extends Component {
+	constructor() {
+		super();
+		this.state = {
+			isOpen: false,
+		};
+		Modal.setAppElement('#app');
+	}
+
+	showModal = () => {
+		this.setState({ isOpen: true })
+	}
+
+	hideModal = () => {
+		this.setState({ isOpen: false })
+	}
+
 	render() {
 		return (
 			<div className={style.Filters__Container}>
 				<div className={style.Filters__Mobile}>
 					<Button
-						onClick={() => {
-							this.scrollingDlg.MDComponent.show();
-						}}
+						onClick={this.showModal}
 					>
 						खोज सुधार
 					</Button>
-					<Dialog
-						ref={scrollingDlg => {
-							this.scrollingDlg = scrollingDlg;
-						}}
-					>
-						<Dialog.Header>खोज सुधार</Dialog.Header>
-						<Dialog.Body scrollable>
+					<Modal isOpen={this.state.isOpen}>
+						<h1>खोज सुधार</h1>
+						<div>
 							<FiltersList />
-						</Dialog.Body>
-						<Dialog.Footer>
-							<Dialog.FooterButton cancel>बन्द गर्नुहोस्</Dialog.FooterButton>
-						</Dialog.Footer>
-					</Dialog>
+						</div>
+						<div>
+							<Button onClick={this.hideModal}>बन्द गर्नुहोस्</Button>
+						</div>
+					</Modal>
 				</div>
 				<div className={style.Filters__Desktop}>
 					<FiltersList />
