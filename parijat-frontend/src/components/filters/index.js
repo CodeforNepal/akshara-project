@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { Search, X } from 'preact-feather';
-import Modal from 'react-modal';
+import * as Modal from '../modal';
 import TransliteratedInput from '../transliteratedinput';
 const omitBy = require('lodash/omitBy');
 const isUndefined = require('lodash/isUndefined');
@@ -275,7 +275,6 @@ class Filters extends Component {
 		this.state = {
 			isOpen: false,
 		};
-		Modal.setAppElement('#app');
 	}
 
 	showModal = () => {
@@ -295,15 +294,18 @@ class Filters extends Component {
 					>
 						खोज सुधार
 					</Button>
-					<Modal isOpen={this.state.isOpen}>
-						<h1>खोज सुधार</h1>
-						<div>
+					<Modal.Modal
+						isOpen={this.state.isOpen}
+						onRequestClose={this.hideModal}
+					>
+						<Modal.Header>खोज सुधार</Modal.Header>
+						<Modal.Content>
 							<FiltersList />
-						</div>
-						<div>
+						</Modal.Content>
+						<Modal.Footer>
 							<Button onClick={this.hideModal}>बन्द गर्नुहोस्</Button>
-						</div>
-					</Modal>
+						</Modal.Footer>
+					</Modal.Modal>
 				</div>
 				<div className={style.Filters__Desktop}>
 					<FiltersList />

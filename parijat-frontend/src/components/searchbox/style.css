@@ -83,7 +83,7 @@
 }
 
 .NoSuggestion > p {
-  display: flex;
+  display: inline-block;
   margin: 0.25rem;
   width: 100%;
   white-space: normal;
