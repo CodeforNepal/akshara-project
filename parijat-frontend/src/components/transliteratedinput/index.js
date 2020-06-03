@@ -87,7 +87,7 @@ class TransliteratedInput extends Component {
 					onInput={this.onInput}
 				/>
 				{showSuggestion ? (
-					<div>
+					<div className={style.TransliteratedInput__Suggestion__Container}>
 						<button
 							className={style.TransliteratedInput__Suggestion}
 							onClick={this.onSuggestionClick}
