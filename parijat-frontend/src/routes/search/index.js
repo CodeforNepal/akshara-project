@@ -66,34 +66,30 @@ export default class Search extends Component {
 						/>
 					</Header>
 					<ContentContainer>
-						<div>
+						<div className={style.Search__Container}>
+							<div className={style.Search__Actions}>
+								<SearchActions />
+							</div>
 							<div>
-								<div cols="3">
-									<div className={style.Search__Actions}>
-										<SearchActions />
+								<div className={style.Search__Context}>
+									<div>
+										<CurrentQuery />
+										<SelectedFilters itemComponent={SelectedFilter} />
+										<ResetFilters component={ResetFiltersComponent} />
+									</div>
+									<div>
+										<HitsStats />
 									</div>
 								</div>
-								<div cols="9">
-									<div className={style.Search__Context}>
-										<div>
-											<CurrentQuery />
-											<SelectedFilters itemComponent={SelectedFilter} />
-											<ResetFilters component={ResetFiltersComponent} />
-										</div>
-										<div>
-											<HitsStats />
-										</div>
-									</div>
-									<div className={style.Search__Body}>
-										<Hits
-											hitsPerPage={10}
-											highlightFields={['title', 'author', 'text']}
-											itemComponent={SearchItem}
-										/>
-										<Pagination />
-										<NoHits />
-										<InitialLoader component={Loading} />
-									</div>
+								<div className={style.Search__Body}>
+									<Hits
+										hitsPerPage={10}
+										highlightFields={['title', 'author', 'text']}
+										itemComponent={SearchItem}
+									/>
+									<Pagination />
+									<NoHits />
+									<InitialLoader component={Loading} />
 								</div>
 							</div>
 						</div>

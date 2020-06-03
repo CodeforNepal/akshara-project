@@ -1,13 +1,11 @@
 import { h } from 'preact';
-import { X } from 'preact-feather';
+import { Trash2 } from 'preact-feather';
 import style from './style.css';
 
 export default ({ hasFilters, translate, resetFilters }) =>
 	hasFilters ? (
 		<span className={style.ResetFilters} onClick={resetFilters}>
-			<div>
-				<span>{translate('reset.clear_all')}</span>
-				<X className={style.ResetFilters__Icon} />
-			</div>
+			<Trash2 className={style.ResetFilters__Icon} />
+			<span>{translate('reset.clear_all')}</span>
 		</span>
 	) : null;

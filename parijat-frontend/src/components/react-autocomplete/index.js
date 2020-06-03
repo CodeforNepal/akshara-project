@@ -5,10 +5,10 @@
 // In long run, it is perhaps a good idea to deprecate its usage in favor of
 // actively maitained library.
 
-const React = require('preact/compat')
-const PropTypes = require('prop-types')
-const { findDOMNode } = require('preact/compat')
-const scrollIntoView = require('dom-scroll-into-view')
+import { h, Component } from 'preact';
+import { cloneElement, findDOMNode } from 'preact/compat';
+import scrollIntoView from 'dom-scroll-into-view';
+import PropTypes from 'prop-types';
 
 const IMPERATIVE_API = [
   'blur',
@@ -32,7 +32,7 @@ function getScrollOffset() {
   }
 }
 
-class Autocomplete extends React.Component {
+class Autocomplete extends Component {
 
   static propTypes = {
     /**
@@ -471,7 +471,7 @@ class Autocomplete extends React.Component {
         this.state.highlightedIndex === index,
         { cursor: 'default' }
       )
-      return React.cloneElement(element, {
+      return cloneElement(element, {
         onMouseEnter: this.props.isItemSelectable(item) ?
           () => this.highlightItemFromMouse(index) : null,
         onClick: this.props.isItemSelectable(item) ?
@@ -485,7 +485,7 @@ class Autocomplete extends React.Component {
       minWidth: this.state.menuWidth,
     }
     const menu = this.props.renderMenu(items, this.props.value, style)
-    return React.cloneElement(menu, {
+    return cloneElement(menu, {
       ref: e => this.refs.menu = e,
       // Ignore blur to prevent menu from de-rendering before we can process click
       onTouchStart: () => this.setIgnoreBlur(true),
@@ -608,4 +608,4 @@ class Autocomplete extends React.Component {
   }
 }
 
-module.exports = Autocomplete
+export default Autocomplete
