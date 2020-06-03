@@ -7,27 +7,22 @@ import style from './style.css';
 
 export const withUserTransliteration = connect(
 	({ user }) => ({
-		transliteration: user.transliteration
+		transliterationEnable: user.transliteration
 	}),
 	{ setTransliterationEnabled },
 );
 
-export const withUserTransliteration2 = connect(
-	({ user }) => ({
-		isTransliterationEnable: user.transliteration
-	})
-)
-
 class TransliterationSettings extends Component {
 		toggleTransliterationEnabled = () => {
-			this.props.setTransliterationEnabled(!this.props.transliteration);
+			this.props.setTransliterationEnabled(!this.props.transliterationEnable);
+			this.props.onTransliterationSettingsChange();
 		}
 
 		render() {
 			return (
 				<input
 					type="checkbox"
-					checked={this.props.transliteration}
+					checked={this.props.transliterationEnable}
 					onClick={this.toggleTransliterationEnabled}
 				/>
 			);
@@ -48,8 +43,17 @@ class TransliteratedInput extends Component {
 	}
 
 	onInput = evnt => {
-		const { onInput } = this.props;
+		const { onInput, transliterationEnable } = this.props;
 		const { value } = evnt.target;
+		this.updateTransliterationSuggestion(value, transliterationEnable);
+		onInput && onInput({ target: { value } });
+	};
+
+	updateTransliterationSuggestion = (value, transliterationEnable) => {
+		if (!transliterationEnable) {
+			this.setState({ value, tranSuggestion: '' });
+			return;
+		}
 		if (value && value.length > 0) {
 			nepaliTransliterator.transliterate(value).then(tranSuggestion => {
 				this.setState({ tranSuggestion, value });
@@ -57,8 +61,11 @@ class TransliteratedInput extends Component {
 		} else {
 			this.setState({ value, tranSuggestion: '' });
 		}
-		onInput && onInput({ target: { value } });
-	};
+	}
+
+	onTransliterationSettingsChange = evnt => {
+		this.focusInput();
+	}
 
 	onSuggestionClick = evnt => {
 		const { tranSuggestion: value } = this.state;
@@ -88,18 +95,28 @@ class TransliteratedInput extends Component {
 				/>
 				{showSuggestion ? (
 					<div className={style.TransliteratedInput__Suggestion__Container}>
-						<button
-							className={style.TransliteratedInput__Suggestion}
-							onClick={this.onSuggestionClick}
-							tooltip={this.state.tranSuggestion}
-						>
-							{this.state.tranSuggestion}
-						</button>
-						<ConnectedTransliterationSettings />
+						{ this.state.tranSuggestion ?
+							<button
+								className={style.TransliteratedInput__Suggestion}
+								onClick={this.onSuggestionClick}
+								tooltip={this.state.tranSuggestion}
+							>
+								{this.state.tranSuggestion}
+							</button>
+							: null
+						}
+						<ConnectedTransliterationSettings onTransliterationSettingsChange={this.onTransliterationSettingsChange} />
 					</div>
 				) : null}
 			</span>
 		);
+	}
+
+	// using deprecated lifecycle method, need to update using hooks
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.transliterationEnable !== this.props.transliterationEnable) {
+			this.updateTransliterationSuggestion(this.state.value, nextProps.transliterationEnable);
+		}
 	}
 
 	componentDidMount() {
@@ -110,6 +127,8 @@ class TransliteratedInput extends Component {
 	}
 }
 
-export default forwardRef((props, ref) => <TransliteratedInput
+const TransliteratedInputWithSettings = withUserTransliteration(TransliteratedInput);
+
+export default forwardRef((props, ref) => <TransliteratedInputWithSettings
   innerRef={ref} {...props}
 />);
