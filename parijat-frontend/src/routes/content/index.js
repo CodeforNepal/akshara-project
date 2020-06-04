@@ -66,7 +66,6 @@ class ContentPage extends Component {
 		return (
 			<div>
 				<Header />
-				<button onClick={this.favItem}>♥️ Favourite</button>
 				<ContentContainer>
 					{this.state.result != null ? (
 						<Content result={this.state.result} />
