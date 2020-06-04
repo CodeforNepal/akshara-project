@@ -26,10 +26,13 @@
     "build/*"
   ],
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/plugin-proposal-export-default-from": "^7.5.2",
-    "@babel/preset-env": "^7.4.2",
-    "@babel/register": "^7.4.0",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-export-default-from": "^7.10.1",
+    "@babel/plugin-proposal-export-namespace-from": "^7.10.1",
+    "@babel/plugin-syntax-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@babel/register": "^7.10.1",
     "@storybook/preact": "^5.3.19",
     "babel-loader": "^8.1.0",
     "babel-polyfill": "^6.26.0",

@@ -10,7 +10,7 @@ export function getContent(id, index = INDEX_NAME, _type = '_doc') {
 }
 
 function _parseSuggestValue(suggestValue) {
-	return [...new Set(suggestValue[0].options.map(x => x.text))];
+	return Array.from(new Set(suggestValue[0].options.map(x => x.text)));
 }
 
 export function getSuggestions(
