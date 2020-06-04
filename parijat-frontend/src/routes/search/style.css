@@ -1,6 +1,7 @@
 
 .Search__Container {
-
+  display: flex;
+  flex-direction: column;
 }
 
 .Search__Actions {
@@ -8,8 +9,15 @@
 }
 
 .Search__Context {
-  margin: 1rem 0rem;
+  margin: 1rem 0.5rem;
 }
 
 .Search__Body {
+}
+
+/* To swith to a button view when in larger screens */
+@media (min-width: 839px) {
+  .Search__Container {
+    flex-direction: row;
+  }
 }

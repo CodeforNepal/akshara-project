@@ -20,12 +20,7 @@ import {
 	InitialLoader,
 	NoHits
 } from 'searchkit';
-import Toolbar from 'preact-material-components/Toolbar';
 import { route } from 'preact-router';
-import LayoutGrid from 'preact-material-components/LayoutGrid';
-import 'preact-material-components/LayoutGrid/style.css';
-import Chips from 'preact-material-components/Chips';
-import 'preact-material-components/Chips/style.css';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import SearchItem from '../../components/searchitem';
@@ -71,37 +66,33 @@ export default class Search extends Component {
 						/>
 					</Header>
 					<ContentContainer>
-						<LayoutGrid>
-							<LayoutGrid.Inner>
-								<LayoutGrid.Cell cols="3">
-									<div className={style.Search__Actions}>
-										<SearchActions />
+						<div className={style.Search__Container}>
+							<div className={style.Search__Actions}>
+								<SearchActions />
+							</div>
+							<div>
+								<div className={style.Search__Context}>
+									<div>
+										<CurrentQuery />
+										<SelectedFilters itemComponent={SelectedFilter} />
+										<ResetFilters component={ResetFiltersComponent} />
 									</div>
-								</LayoutGrid.Cell>
-								<LayoutGrid.Cell cols="9">
-									<div className={style.Search__Context}>
-										<div>
-											<CurrentQuery />
-											<SelectedFilters itemComponent={SelectedFilter} />
-											<ResetFilters component={ResetFiltersComponent} />
-										</div>
-										<div>
-											<HitsStats />
-										</div>
+									<div>
+										<HitsStats />
 									</div>
-									<div className={style.Search__Body}>
-										<Hits
-											hitsPerPage={10}
-											highlightFields={['title', 'author', 'text']}
-											itemComponent={SearchItem}
-										/>
-										<Pagination />
-										<NoHits />
-										<InitialLoader component={Loading} />
-									</div>
-								</LayoutGrid.Cell>
-							</LayoutGrid.Inner>
-						</LayoutGrid>
+								</div>
+								<div className={style.Search__Body}>
+									<Hits
+										hitsPerPage={10}
+										highlightFields={['title', 'author', 'text']}
+										itemComponent={SearchItem}
+									/>
+									<Pagination />
+									<NoHits />
+									<InitialLoader component={Loading} />
+								</div>
+							</div>
+						</div>
 					</ContentContainer>
 					<Footer />
 				</div>

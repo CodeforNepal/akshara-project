@@ -1,5 +1,5 @@
 import { favItem } from '../../actions/user';
-import { connect } from 'preact-redux';
+import { connect } from 'react-redux';
 import { h, Component } from 'preact';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -51,6 +51,7 @@ class ContentPage extends Component {
 			result: null
 		};
 	}
+
 	componentDidMount() {
 		getContent(this.props.id).then(result => {
 			this.setState({ result });
@@ -62,11 +63,10 @@ class ContentPage extends Component {
 	};
 
 	render() {
-		console.log(this.props.favs);
 		return (
 			<div>
 				<Header />
-				<button onClick={this.favItem}>Favourite</button>
+				<button onClick={this.favItem}>♥️ Favourite</button>
 				<ContentContainer>
 					{this.state.result != null ? (
 						<Content result={this.state.result} />

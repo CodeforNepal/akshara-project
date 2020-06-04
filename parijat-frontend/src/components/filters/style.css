@@ -60,6 +60,7 @@
   width: 2rem;
   height: 2rem;
   line-height: 0rem;
+  cursor: pointer;
 }
 
 .FiltersList__Section {
@@ -83,14 +84,19 @@
   padding-left: 15px;
 }
 
-/* To swith to a button view when in small screens */
+/* To swith to a button view when in large screens */
 @media (min-width: 839px) {
   .Filters__Mobile {
     display: none;
     width: 100%;
   }
+
+  .Filters__Container {
+    width: 15rem;
+  }
 }
 
+/* To swith to a button view when in small screens */
 @media (max-width: 839px) {
   .Filters__Desktop {
     display: none;

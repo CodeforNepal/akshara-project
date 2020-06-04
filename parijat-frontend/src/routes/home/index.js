@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import 'preact-material-components/Button/style.css';
 import { route } from 'preact-router';
 import SearchBox from '../../components/searchbox';
 import Footer from '../../components/footer';

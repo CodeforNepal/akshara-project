@@ -7,8 +7,10 @@ const Logo = ({ animated }) => {
 		<svg
 			id="svg2"
 			xmlns="http://www.w3.org/2000/svg"
+			width="100%"
 			height="100%"
 			version="1.1"
+			style={{ "max-height": "5rem" }}
 			viewBox="0 0 200.00002 69.999998"
 		>
 			<g id="layer1" transform="translate(0 -982.36)">

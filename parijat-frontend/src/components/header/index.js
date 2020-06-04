@@ -2,7 +2,6 @@ import { h, Component } from 'preact';
 import { route } from 'preact-router';
 import SearchBox from '../searchbox';
 import Logo from '../logo';
-import 'preact-material-components/TextField/style.css';
 import style from './style.css';
 
 const HeaderLogo = () => (
@@ -19,10 +18,11 @@ export default class Header extends Component {
 	render() {
 		const { query, children } = this.props;
 
+		const shouldShowSearchBox = children == null || children && children.length === 0;
 		return (
 			<div className={style.Header}>
 				<HeaderLogo />
-				{children.length === 0 ? (
+				{shouldShowSearchBox ? (
 					<SearchBox
 						queryFields={{
 							'title': 'शिर्षक',

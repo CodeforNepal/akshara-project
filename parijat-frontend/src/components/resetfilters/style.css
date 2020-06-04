@@ -4,10 +4,7 @@
   margin-bottom: 0.5rem;
   padding: 0.25rem;
   border: 1px solid grey;
-}
-
-.ResetFilters > div {
-  display: flex;
+  cursor: pointer;
 }
 
 .ResetFilters__Icon {

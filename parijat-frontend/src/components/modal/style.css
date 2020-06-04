@@ -1,0 +1,29 @@
+.Modal {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  margin: 2rem;
+  box-shadow: 3px 3px 20px 0px rgba(90,191,161,1);
+}
+
+
+.Header {
+  font-size: x-large;
+  height: 2rem;
+  padding: 0.75rem 0.5rem;
+  background: #5ABFA1;
+}
+
+.Content {
+  max-height: 70vh;
+  padding: 0.5rem;
+  overflow: scroll;
+}
+
+.Footer {
+  margin: 0.5rem 0rem;
+  height: 2rem;
+  padding: 0.5rem;
+  background: #FAFAFA;
+  border-top: 1px solid #5ABFA1;
+}
