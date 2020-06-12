@@ -1,4 +1,4 @@
-FROM node:carbon-alpine
+FROM node:erbium-alpine
 
 ADD . /frontend
 
