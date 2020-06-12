@@ -48,8 +48,8 @@
     "nightwatch": "^1.2.4",
     "nightwatch-api": "^2.3.0",
     "preact-cli": "^3.0.0-rc.7",
-    "pushstate-server": "^3.1.0",
-    "superstatic": "^5.0.1"
+    "preact-render-to-string": "^5.1.9",
+    "pushstate-server": "^3.1.0"
   },
   "dependencies": {
     "dom-scroll-into-view": "^2.0.1",

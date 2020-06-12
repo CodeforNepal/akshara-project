@@ -1,14 +1,9 @@
-let superstatic = require('superstatic');
-let connect = require('connect');
+var server = require('pushstate-server');
 
-let PORT = 8080;
+console.log("Starting production server at port 8080");
 
-let config = {
-	public: '/build'
-};
-
-let app = connect().use(superstatic(config));
-
-app.listen(PORT, () => {
-	console.log('Production server started at ' + PORT);
-});
+server.start({
+  port: 8080,
+  host: '0.0.0.0',
+  directory: './build',
+})
