@@ -79,15 +79,15 @@
 }
 
 .NoSuggestion {
-  padding: 0.5rem;
 }
 
 .NoSuggestion > p {
-  display: flex;
-  margin: 0.25rem;
+  display: inline-block;
   width: 100%;
   white-space: normal;
   word-wrap: break-word;
+  padding: 0;
+  margin: 0;
 }
 
 .NoSuggestion a {

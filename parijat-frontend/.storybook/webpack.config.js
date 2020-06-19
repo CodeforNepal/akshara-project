@@ -11,8 +11,9 @@ module.exports = {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
-              modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]',
+              }
             },
           }
         ],
@@ -21,9 +22,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat',
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
     }
   },
 }
-
