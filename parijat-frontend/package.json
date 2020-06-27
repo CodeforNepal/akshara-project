@@ -9,9 +9,9 @@
     "build": "NODE_ENV=production preact build",
     "serve": "node server.js",
     "dev": "preact watch",
-    "test": "mocha --require babel-polyfill --require babel-register",
     "lint": "eslint src",
-    "test:e2e": "node_modules/cucumber/bin/cucumber-js --require test/acceptance/index.js --require test/acceptance/stepDefinitions -f node_modules/cucumber-pretty "
+    "test": "mocha --require core-js --require regenerator-runtime/runtime --require @babel/register",
+    "test:e2e": "node_modules/cucumber/bin/cucumber-js test/acceptance/features -r test/acceptance/index.js --require test/acceptance/stepDefinitions -f node_modules/cucumber-pretty"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor",
@@ -32,13 +32,11 @@
     "@babel/plugin-syntax-class-properties": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
-    "@babel/register": "^7.10.1",
+    "@babel/register": "^7.10.3",
     "@storybook/preact": "^5.3.19",
     "babel-loader": "^8.1.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-register": "^6.26.0",
     "chromedriver": "^83.0.0",
-    "core-js": "3",
+    "core-js": "2",
     "cucumber": "^6.0.5",
     "cucumber-pretty": "^6.0.0",
     "eslint": "^4.5.0",
@@ -50,7 +48,8 @@
     "nightwatch-api": "^3.0.1",
     "preact-cli": "^3.0.0-rc.7",
     "preact-render-to-string": "^5.1.9",
-    "pushstate-server": "^3.1.0"
+    "pushstate-server": "^3.1.0",
+    "regenerator-runtime": "^0.13.5"
   },
   "dependencies": {
     "dom-scroll-into-view": "^2.0.1",
