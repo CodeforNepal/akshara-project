@@ -1,10 +1,14 @@
 module.exports = {
-	src_folders: ['test'],
+	src_folders: ['test/acceptance'],
 	page_objects_path: './test/acceptance/pageObjects',
+	webdriver : {
+		start_process: true,
+		server_path: "node_modules/.bin/chromedriver",
+		port: 9515
+	},
 	test_settings: {
 		default: {
-			selenium_host: '127.0.0.1',
-			launch_url: 'http://172.17.0.1:8080',
+			launch_url: 'http://0.0.0.0:8080',
 			globals: {},
 			desiredCapabilities: {
 				browserName: 'chrome',

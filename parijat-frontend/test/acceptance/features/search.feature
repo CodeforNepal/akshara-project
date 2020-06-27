@@ -7,7 +7,7 @@ Feature: search
     Given the user has browsed to the homepage
 
   Scenario: user should be able to search in english characters using transliterated text
-    When the user enters the string "munaa madan" into the main search field
+    When the user enters the string "nepaala" into the main search field
     And the user selects the transliterated text
     And the user searches for the literature
     Then the search result should be displayed
@@ -19,7 +19,7 @@ Feature: search
     Then the search result should not be displayed
 
   Scenario: user should be able to search in nepali characters
-    When the user enters the string "मुना मदन्" into the main search field
+    When the user enters the string "नेपाल" into the main search field
     And the user searches for the literature
     Then the search result should be displayed
 

@@ -18,4 +18,3 @@ Then('the transliteration should not be displayed', () => client.useXpath()
 Given('the user has selected the transliterated text', () => client.page.homePage().selectTheTransliteratedText());
 
 When('the user selects the transliterated text', () => client.page.homePage().selectTheTransliteratedText());
-
