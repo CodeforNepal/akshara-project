@@ -7,7 +7,8 @@
   display: flex;
   margin: 3rem 0;
   align-items: center;
-  justify-content: center;  
+  justify-content: center;
+  flex-direction: column;
 }
 
 .Footer__List {
@@ -28,6 +29,14 @@
 
 .Footer__ListItem > a:hover {
   color: #5ABFA1;
+}
+
+.Footer__c4n_logo {
+    width: 10rem;
+}
+
+.Footer__HostMessage {
+  font-size: smaller;
 }
 
 @media only screen and (max-width: 839px) {
