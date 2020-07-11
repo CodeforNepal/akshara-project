@@ -31,7 +31,7 @@ module.exports = {
 			locateStrategy: 'xpath'
 		},
 		transliterationTextField: {
-			selector: "//span[contains(@class,'TransliteratedList__Item')]",
+			selector: "//button[contains(@class,'TransliteratedInput__Suggestion')]",
 			locateStrategy: 'xpath'
 		},
 		searchButton: {

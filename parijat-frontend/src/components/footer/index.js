@@ -39,6 +39,8 @@ const Footer = () => (
 					<a href="/fair-use">उचित उपयोग</a>
 				</li>
 			</ul>
+			<a href="https://codefornepal.org/" target="_blank"><img className={style.Footer__c4n_logo} src="/assets/c4n_logo.png" /></a>
+			<div className={style.Footer__HostMessage}>Hosted on <a href="https://digitalocean.com" target="_blank">DigitalOcean</a></div>
 		</div>
 	</footer>
 );

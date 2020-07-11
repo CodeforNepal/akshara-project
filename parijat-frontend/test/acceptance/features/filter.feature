@@ -6,7 +6,7 @@ Feature: Filter Search Results
 
   Background:
     Given the user has browsed to the homepage
-    And the user has entered the string "munaa madan" into the main search field
+    And the user has entered the string "nepaala" into the main search field
     And the user has selected the transliterated text
     And the user has searched for the literature
 
@@ -16,5 +16,5 @@ Feature: Filter Search Results
     Examples:
       | author_name |
       | दिलिप योन्जन   |
-      | पुरुषोत्तम सुवेदी  |
-      | विप्लव ढकाल    |
+      | गोपाल योञ्जन   |
+      | निमेष निखिल   |

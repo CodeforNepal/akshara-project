@@ -101,6 +101,7 @@ class ContentPage extends Component {
 							</a>
 							को बारेमा
 						</h3>
+						<img src="/assets/c4n_logo.png" />
 						<p>
 							<a
 								className={style.About__Link}
