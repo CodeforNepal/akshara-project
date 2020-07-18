@@ -1,0 +1,9 @@
+{
+  "name": "sonic-test",
+  "version": "0.0.1",
+  "description": "Test for sonic",
+  "private": true,
+  "dependencies": {
+    "sonic-channel": "^1.2.6"
+  }
+}

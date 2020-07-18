@@ -1,5 +1,20 @@
 version: '3.6'
 services:
+  sonic:
+    # the vars here are picked up from the .env file
+    image: valeriansaliou/sonic:v${SONIC_VERSION}
+    container_name: akshara_sonic
+    volumes:
+      # share the config in the repo with the container
+      - ./sonic/config/sonic.cfg:/etc/sonic.cfg
+      # using local docker volume for sonic data
+      # gets stored in /var/lib/docker/volumes by default, and can specify a
+      # custom path here, but need to configure the dir perms for container use
+      - sonicdata:/var/lib/sonic/store
+    ports:
+      - 1491:1491
+    networks:
+      - sonicnet
   elasticsearch:
     build:
       context: ./elasticsearch
@@ -76,5 +91,8 @@ services:
 volumes:
   esdata:
     driver: local
+  sonicdata:
+    driver: local
 networks:
   esnet:
+  sonicnet:
