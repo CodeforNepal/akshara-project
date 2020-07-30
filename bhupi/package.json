@@ -1,0 +1,40 @@
+{
+  "name": "bhupi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=production node ./bin/www",
+    "start:dev": "NODE_ENV=development nodemon ./bin/www",
+    "start:worker": "node worker/worker.js",
+    "start:worker:dev": "nodemon worker/worker.js",
+    "test:integration": "NODE_ENV=test mocha test/integration --watch",
+    "create:db:dev": "NODE_ENV=development knex migrate:latest && NODE_ENV=development knex seed:run"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bull": "^3.16.0",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-session": "^1.17.1",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.2",
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.3.0",
+    "redis": "^3.0.2",
+    "simple-git": "^2.14.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4",
+    "passport-stub": "^1.1.1"
+  }
+}
