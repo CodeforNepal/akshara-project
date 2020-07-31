@@ -1,7 +1,10 @@
 export const INDEX_NAME = `akshara_nepali`;
 
 export const API_ENDPOINT =
-	process.env.NODE_ENV === 'production' ? `/es/` : `https://sangraha.org/es/`;
+	process.env.NODE_ENV === 'production' ? `/es/` : `http://localhost:9200/`;
+
+export const BHUPI_ENDPOINT =
+	process.env.NODE_ENV === 'production' ? `/bhupi/` : `http://127.0.0.1:3000/`;
 
 export function getContent(id, index = INDEX_NAME, _type = '_doc') {
 	return fetch(`${API_ENDPOINT}${index}/${_type}/${id}`).then(response =>
@@ -52,4 +55,26 @@ export function getSuggestions(
 			}),
 			{}
 		));
+}
+
+export function login({ username, password }) {
+	return fetch(`${BHUPI_ENDPOINT}auth/login`, {
+		method: 'POST',
+		body: JSON.stringify({ username, password }),
+		headers: {
+			'content-type': 'application/json'
+		}
+	})
+		.then(response => response.json());
+}
+
+
+export function admin() {
+	return fetch(`${BHUPI_ENDPOINT}admin`, {
+		method: 'GET',
+		headers: {
+			Authorization: 'Bearer ' + localStorage.getItem('token')
+		}
+	})
+		.then(response => response.json());
 }

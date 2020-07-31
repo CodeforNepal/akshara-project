@@ -1,14 +1,14 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
 
-// import Header from './header';
-// import Home from '../routes/home';
-// import Profile from '../routes/profile';
+import PrivateRoute from 'async!./router/PrivateRoute';
 import Home from 'async!../routes/home';
 import Search from 'async!../routes/search';
 import Content from 'async!../routes/content';
 import About from 'async!../routes/about';
 import FairUse from 'async!../routes/fair-use';
+import Login from 'async!../routes/login';
+import Admin from 'async!../routes/admin';
 
 export default class App extends Component {
 	/** Gets fired when the route changes.
@@ -24,11 +24,13 @@ export default class App extends Component {
 			<div id="app">
 				<Router onChange={this.handleRoute}>
 					<Home path="/" />
+					<Login path="/login" />
 					<Search path="/search/" query="" />
 					<Search path="/search/:query" />
 					<Content path="/content/:id" />
 					<About path="/about" />
 					<FairUse path="/fair-use" />
+					<PrivateRoute component={Admin} path="/admin" />
 				</Router>
 			</div>
 		);

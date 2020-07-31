@@ -1,0 +1,22 @@
+.LoginPage {
+	margin-top: 5rem;
+}
+
+.Login__Container {
+	display: flex;
+	justify-content: center;
+}
+
+.Login__Content {
+	padding: 16px;
+	padding: var(--mdc-layout-grid-margin-tablet, 16px);
+	text-align: center;
+	font-family: Arial;
+	font-weight: normal;
+}
+
+.Login__Content__Error {
+	color: #ec9696;
+	text-align: left;
+	padding: 0.5rem;
+}
