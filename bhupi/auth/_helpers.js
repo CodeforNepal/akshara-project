@@ -40,6 +40,7 @@ function adminRequired(req, res, next) {
 }
 
 function loginRedirect(req, res, next) {
+  console.log("loginRedirect: ", req.user);
   if (req.user) return res.status(401).json(
     {status: 'You are already logged in'});
   return next();

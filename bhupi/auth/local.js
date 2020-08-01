@@ -7,7 +7,7 @@ const init = require('./passport');
 const knex = require('../db/connection');
 
 
-const JWT_SECRET = "jwt_sercret_to_set";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 const options = {};
 
@@ -15,10 +15,8 @@ init();
 
 passport.use(new LocalStrategy(options, (username, password, done) => {
   // check to see if the username exists
-  console.log("LocalStrategy: ", username, password);
   knex('users').where({ username }).first()
   .then((user) => {
-    console.log("Matching User: ", user);
     if (!user) return done(null, false);
     if (!authHelpers.comparePass(password, user.password)) {
       return done(null, false);

@@ -36,30 +36,35 @@ describe('routes : auth', () => {
         res.redirects.length.should.eql(0);
         res.status.should.eql(200);
         res.type.should.eql('application/json');
-        res.body.status.should.eql('success');
+        res.body.token.should.exist;
         done();
       });
     });
 
-    xit('should throw an error if a user is logged in', (done) => {
-      passportStub.login({
-        username: 'jeremy',
-        password: 'johnson123'
-      });
-      chai.request(server)
-      .post('/auth/register')
-      .send({
-        username: 'michael',
-        password: 'herman'
-      })
-      .end((err, res) => {
-        should.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('You are already logged in');
-        done();
-      });
+    xit('should throw an error if a user is logged in', async (done) => {
+      const loginRes = await chai.request(server)
+        .post('/auth/login')
+        .send({
+          username: 'jeremy',
+          password: 'johnson123'
+        });
+
+      const { token } = loginRes.body;
+
+      const registerRes = await chai.request(server)
+        .post('/auth/register')
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          username: 'michael',
+          password: 'herman'
+        })
+
+      registerRes.redirects.length.should.eql(0);
+      registerRes.status.should.eql(401);
+      registerRes.type.should.eql('application/json');
+      registerRes.body.status.should.eql('You are already logged in');
+
+      done();
     });
 
     it('should throw an error if the username is < 6 characters', (done) => {
@@ -77,6 +82,7 @@ describe('routes : auth', () => {
         done();
       });
     });
+
     it('should throw an error if the password is < 6 characters', (done) => {
       chai.request(server)
       .post('/auth/register')
@@ -107,7 +113,7 @@ describe('routes : auth', () => {
         res.redirects.length.should.eql(0);
         res.status.should.eql(200);
         res.type.should.eql('application/json');
-        res.body.status.should.eql('success');
+        res.body.token.should.exist;
         done();
       });
     });

@@ -4,7 +4,7 @@ const router = express.Router();
 
 const authHelpers = require('../auth/_helpers');
 
-router.get('/admin', passport.authenticate('jwt', {session: false}), authHelpers.adminRequired, (req, res, next)  => {
+router.get('/admin', authHelpers.adminRequired, (req, res, next)  => {
   handleResponse(res, 200, 'success');
 });
 
