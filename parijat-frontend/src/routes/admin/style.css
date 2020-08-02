@@ -5,6 +5,11 @@
   justify-content: space-between;
 }
 
+.Admin__Container {
+  display: flex;
+  flex-direction: row;
+}
+
 .Admin__Content {
-  padding: 3rem;
+  margin: 2rem;
 }

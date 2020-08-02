@@ -1,0 +1,9 @@
+.Admin__Menu {
+  padding: 1rem;
+  list-style: none;
+}
+
+.Admin__Menu__Item {
+  display: block;
+  padding: 0.5rem 0;
+}

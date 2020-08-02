@@ -1,5 +1,4 @@
 import { h, Component } from 'preact';
-import { route } from 'preact-router';
 import { AlertTriangle, LogIn } from 'preact-feather';
 import Loading from '../../components/loading';
 import Button from '../../components/button';
@@ -43,7 +42,7 @@ class LoginPage extends Component {
 				return
 			}
 			localStorage.setItem('token', token);
-			route('/admin');
+			this.props.history.push('/admin');
     });
   }
 

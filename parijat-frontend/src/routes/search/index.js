@@ -20,7 +20,6 @@ import {
 	InitialLoader,
 	NoHits
 } from 'searchkit';
-import { route } from 'preact-router';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import SearchItem from '../../components/searchitem';

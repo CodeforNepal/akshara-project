@@ -68,3 +68,12 @@ a:hover {
 .mdc-toolbar__section {
   height: 100%;
 }
+
+/* Sangraha Admin Style */
+a.active {
+  font-weight: bolder;
+}
+
+a.active::after {
+	content: " ▶";
+}

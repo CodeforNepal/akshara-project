@@ -1,19 +1,28 @@
 import { h, Component } from 'preact';
-import { Route } from 'preact-router';
-import Redirect from './Redirect';
+import { Route, Redirect } from 'react-router';
 
 export function isAuthenticated() {
   return ( localStorage.getItem('token') )
 }
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return isAuthenticated() ? (
-    <Component {...rest} />
-  ) : (
-    <Redirect
-      to="/login"
+function PrivateRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isAuthenticated() ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
     />
-  )
+  );
 }
 
 export default PrivateRoute;
