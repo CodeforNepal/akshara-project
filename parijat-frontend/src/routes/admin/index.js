@@ -5,6 +5,7 @@ import PrivateRoute from '../../components/router/PrivateRoute';
 import AdminIndexSync from '../../components/admin/AdminIndexSync';
 import AdminUsers from '../../components/admin/AdminUsers';
 import AdminMenu from '../../components/admin/AdminMenu';
+import AdminTaskQueue from '../../components/admin/AdminTaskQueue';
 import AdminWelcome from '../../components/admin';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -44,6 +45,9 @@ function Admin() {
 						</PrivateRoute>
 						<PrivateRoute path="/admin/users">
 							<AdminUsers />
+						</PrivateRoute>
+						<PrivateRoute path="/admin/tasks">
+							<AdminTaskQueue />
 						</PrivateRoute>
 					</Switch>
 				</div>

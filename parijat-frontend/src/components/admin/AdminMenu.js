@@ -15,6 +15,9 @@ export default class AdminMenu extends Component {
         <NavLink to="/admin/users" className={style.Admin__Menu__Item}>
           User Management
         </NavLink>
+        <NavLink to="/admin/tasks" className={style.Admin__Menu__Item}>
+          Long Running Tasks
+        </NavLink>
       </nav>
     );
   }

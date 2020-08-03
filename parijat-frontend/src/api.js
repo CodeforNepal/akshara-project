@@ -69,9 +69,9 @@ export function login({ username, password }) {
 }
 
 
-export function admin() {
-	return fetch(`${BHUPI_ENDPOINT}admin`, {
-		method: 'GET',
+export function remotePull() {
+	return fetch(`${BHUPI_ENDPOINT}sync/pull`, {
+		method: 'POST',
 		headers: {
 			Authorization: 'Bearer ' + localStorage.getItem('token')
 		}
