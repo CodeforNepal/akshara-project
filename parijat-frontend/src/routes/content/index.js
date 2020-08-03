@@ -1,5 +1,6 @@
 import { favItem } from '../../actions/user';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { h, Component } from 'preact';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
@@ -53,7 +54,8 @@ class ContentPage extends Component {
 	}
 
 	componentDidMount() {
-		getContent(this.props.id).then(result => {
+		const { id } = this.props.match.params;
+		getContent(id).then(result => {
 			this.setState({ result });
 		});
 	}
@@ -79,4 +81,4 @@ class ContentPage extends Component {
 	}
 }
 
-export default withUserFavourites(ContentPage);
+export default withRouter(withUserFavourites(ContentPage));
