@@ -40,41 +40,104 @@ services:
       - 9200:9200
     networks:
       - esnet
-  kibana:
-    image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
-    container_name: akshara_kibana
+  #   kibana:
+  #     image: docker.elastic.co/kibana/${KIBANA_IMAGE}:${KIBANA_VERSION}
+  #     container_name: akshara_kibana
+  #     environment:
+  #       # limit kibana memory usage (default is 1G)
+  #       - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
+  #       # for valid options here, see:
+  #       # https://github.com/elastic/kibana-docker/blob/master/build/kibana/bin/kibana-docker
+  #       # if true, only error messages are shown
+  #       - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
+  #       # which page to launch by default
+  #       - KIBANA_DEFAULTAPPID=discover
+  #       # kibana-specific xpack features (to be used when xpack is installed)
+  #       - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
+  #       # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
+  #       # which takes forever. Disabling these and going with the defaults here.
+  #       #- XPACK_MONITORING_ENABLED=true
+  #       #- XPACK_REPORTING_ENABLED=true
+  #       # paid features
+  #       #- XPACK_GRAPH_ENABLED=false
+  #       #- XPACK_ML_ENABLED=false
+  #       #- XPACK_SECURITY_ENABLED=false
+  #     ports:
+  #       - 5601:5601
+  #     networks:
+  #       - esnet
+#   frontend:
+#     build: ./parijat-frontend
+#     container_name: parijat_frontend
+#     ports:
+#       - 8080:8080
+#     networks:
+#       - esnet
+  bhupi_worker:
+    build: ./bhupi
+    volumes:
+      - ./bhupi:/usr/src/bhupi
+      - ./elasticsearch/data/user-contributed:/usr/src/bhupi/user-contributed
+    container_name: bhupi_worker
+    command: ["yarn", "start:worker:dev"]
+    networks:
+      - bhupinet
+      - esnet
+
+  bhupi:
+    build: ./bhupi
+    volumes:
+      - ./bhupi:/usr/src/bhupi
+    container_name: bhupi
+    command: ["yarn", "start:dev"]
+    ports:
+      - 3000:3000 
+    networks:
+      - bhupinet
+
+  db:
+    image: postgres:12.3-alpine
     environment:
-      # limit kibana memory usage (default is 1G)
-      - "NODE_OPTIONS=--max-old-space-size=${KIBANA_NODE_MEM_LIMIT_MB}"
-      # for valid options here, see:
-      # https://github.com/elastic/kibana-docker/blob/master/build/kibana/bin/kibana-docker
-      # if true, only error messages are shown
-      - LOGGING_QUIET=${KIBANA_LOGGING_QUIET}
-      # which page to launch by default
-      - KIBANA_DEFAULTAPPID=discover
-      # kibana-specific xpack features (to be used when xpack is installed)
-      - XPACK_LICENSE_SELF_GENERATED_TYPE=basic
-      # overriding the xpack defaults currently triggers optimizing and caching of kibana bundles,
-      # which takes forever. Disabling these and going with the defaults here.
-      #- XPACK_MONITORING_ENABLED=true
-      #- XPACK_REPORTING_ENABLED=true
-      # paid features
-      #- XPACK_GRAPH_ENABLED=false
-      #- XPACK_ML_ENABLED=false
-      #- XPACK_SECURITY_ENABLED=false
+      POSTGRES_DB: sangraha_wiki
+      POSTGRES_PASSWORD: sangrahapass
+      POSTGRES_USER: sangraha
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    container_name: akshara_db
     ports:
-      - 5601:5601
+      -  5432:5432
     networks:
-      - esnet
-  frontend:
-    build: ./parijat-frontend
-    container_name: parijat_frontend
+      - bhupinet
+
+  redis:
+          # build:
+          #   context: ./redis
+    image: redis:6.0.5-alpine
+    container_name: akshara_redis
     ports:
-      - 8080:8080
+      - "6379:6379"
+    volumes:
+     - redisdata:/var/lib/redis
+    command: ["redis-server", "--bind", "redis", "--port", "6379"]
+       # - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+
+       # environment:
+       #  - REDIS_REPLICATION_MODE=master
+
+       # networks:
+       #   node_net:
+       #     ipv4_address: 172.28.1.4
     networks:
-      - esnet
+      - bhupinet
+
+
 volumes:
+  db-data:
+  redisdata:
+    driver: local
   esdata:
     driver: local
+
 networks:
+  bhupinet:
   esnet:

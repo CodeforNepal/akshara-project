@@ -9,11 +9,16 @@ router.get('/', function(req, res, next) {
   res.send('sync resource');
 });
 
-router.post('/pull', passport.authenticate('jwt', {session: false}), authHelpers.adminRequired, function(req, res, next) {
-  taskQueue.add({
-    task: 'pull'
-  });
-  res.send('sync pull')
+router.post('/pull', passport.authenticate('jwt', {session: false}), authHelpers.adminRequired, async function(req, res, next) {
+  try {
+    const { id, timestamp } = await taskQueue.add({
+      task: 'pull'
+    });
+    res.status(201).json({ id, timestamp });
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+  }
 });
 
 module.exports = router;
