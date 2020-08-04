@@ -1,3 +1,8 @@
 const Bull = require("bull");
+const { setQueues } = require('bull-board')
 
-module.exports = new Bull('bhupi_task_queue_0', `${process.env.REDIS_URL}/0`);
+const bhupiTaskQueue = new Bull('bhupi_task_queue_0', `${process.env.REDIS_URL}/0`);
+
+setQueues([bhupiTaskQueue]);
+
+module.exports = bhupiTaskQueue;

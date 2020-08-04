@@ -7,6 +7,7 @@ var passport = require('passport');
 var session = require('express-session');
 var logger = require('morgan');
 var cors = require('cors');
+const { UI } = require('bull-board')
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
@@ -45,6 +46,9 @@ app.use('/', userRouter);
 app.use('/', adminRouter);
 app.use('/sync', syncRouter);
 app.use('/auth', authRouter);
+
+// Bull Queue Admin
+app.use('/admin/queues', UI)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
