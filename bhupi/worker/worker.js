@@ -1,54 +1,67 @@
 const simpleGit = require('simple-git');
-const axios = require('axios');
+const { Client: ElasticClient } = require('@elastic/elasticsearch')
 const fs = require('fs').promises;
 const difference = require('lodash/difference');
 const forEach = require('lodash/forEach');
 const map = require('lodash/map');
+const replaceall = require('replaceall');
 const taskQueue = require('../queue');
 
 const git = simpleGit('user-contributed', { binary: 'git' });
+const elasticClient = new ElasticClient({ node: process.env.ES_URL });
 
 taskQueue.process(async (job) => {
   const { task } = job.data;
   console.log(`Started: ${task}`);
   if (task === 'pull') {
-    await taskPull();
+    try {
+      await taskPull();
+    } catch (e) {
+      console.error(e);
+    }
   }
   return console.log(`Ended: ${task}`);
 });
 
 async function taskPull() {
   const pullChanges = await pullRemoteRepo();
-  reindexGitChanges(pullChanges);
+  await elasticClient.deleteByQuery({
+    index: process.env.ES_INDEX,
+    body: {
+      "author": "विद्यापति",
+    }
+  })
+  await reindexGitChanges(pullChanges);
 }
 
 async function pullRemoteRepo() {
   return await git.pull('origin', 'development');
 }
 
-function reindexGitChanges(pullChanges) {
+async function reindexGitChanges(pullChanges) {
   const { created, deleted, files } = pullChanges;
   const updated = difference(files, created, deleted);
   const createdFiles = appendGitDirectory(created).filter(onlyJSONFile);
   const updatedFiles = appendGitDirectory(updated).filter(onlyJSONFile);
   const deletedFiles = appendGitDirectory(deleted).filter(onlyJSONFile);
-  indexAddFiles(createdFiles);
-  indexAddFiles(deletedFiles);
+  await indexAddFiles(createdFiles);
+  await indexAddFiles(deletedFiles);
   indexDeleteFiles(deletedFiles);
 }
 
-function indexAddFiles(files) {
+async function indexAddFiles(files) {
   console.log("Add/Update files: ", files);
-  forEach(files, async (file) => {
+  return Promise.all(files.map(async (file) => {
     try {
       const jsonContent = await readJSONFile(file);
       console.log(jsonContent);
-      const { status, statusText, headers, config } = await postESContent(jsonContent);
-      console.log({ status, statusText, headers, config });
+      const { status, statusText } = await postESContent(jsonContent);
+      Promise.resolve({ status, statusText });
     } catch (error) {
-      console.error(error);
+      console.error(error.response);
+      Promise.reject(error);
     }
-  });
+  }));
 }
 
 function indexDeleteFiles(files) {
@@ -61,8 +74,11 @@ function appendGitDirectory(files) {
 }
 
 function onlyJSONFile(filename) {
-  console.log(filename);
-  return filename.endsWith('.json');
+  return filename.endsWith('.json') || filename.endsWith('.json"');
+}
+
+function genContentId({ lang, author, title }) {
+  return `${lang}-${author}-${title}`;
 }
 
 async function readJSONFile(file) {
@@ -72,6 +88,10 @@ async function readJSONFile(file) {
 
 async function postESContent(jsonContent) {
   const { ES_URL, ES_INDEX, ES_PIPELINE } = process.env;
-  const requestPath = `${ES_URL}/${ES_INDEX}/_doc?pipeline=${ES_PIPELINE}`;
-  return await axios.post(requestPath, jsonContent);
+  return await elasticClient.index({
+      id: genContentId(jsonContent),
+      index: ES_INDEX,
+      pipeline: ES_PIPELINE,
+      body: jsonContent
+  })
 }

@@ -11,7 +11,7 @@
     "create:db:dev": "NODE_ENV=development knex migrate:latest && NODE_ENV=development knex seed:run"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "@elastic/elasticsearch": "^7.8.0",
     "bcryptjs": "^2.4.3",
     "bull": "^3.16.0",
     "cookie-parser": "~1.4.4",
@@ -31,6 +31,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.3.0",
     "redis": "^3.0.2",
+    "replaceall": "^0.1.6",
     "simple-git": "^2.14.0"
   },
   "devDependencies": {
