@@ -16,8 +16,8 @@ taskQueue.process(async (job) => {
   if (task === 'pull') {
     try {
       await taskPull();
-    } catch (e) {
-      console.error(e);
+    } catch (err) {
+      console.log(err.meta.body);
     }
   }
   return console.log(`Ended: ${task}`);
@@ -25,12 +25,6 @@ taskQueue.process(async (job) => {
 
 async function taskPull() {
   const pullChanges = await pullRemoteRepo();
-  await elasticClient.deleteByQuery({
-    index: process.env.ES_INDEX,
-    body: {
-      "author": "विद्यापति",
-    }
-  })
   await reindexGitChanges(pullChanges);
 }
 
@@ -55,10 +49,10 @@ async function indexAddFiles(files) {
     try {
       const jsonContent = await readJSONFile(file);
       console.log(jsonContent);
-      const { status, statusText } = await postESContent(jsonContent);
+      const { status, statusText } = await postESContent(genContentId(file), jsonContent);
       Promise.resolve({ status, statusText });
     } catch (error) {
-      console.error(error.response);
+      console.error(error.response.body);
       Promise.reject(error);
     }
   }));
@@ -77,8 +71,8 @@ function onlyJSONFile(filename) {
   return filename.endsWith('.json') || filename.endsWith('.json"');
 }
 
-function genContentId({ lang, author, title }) {
-  return `${lang}-${author}-${title}`;
+function genContentId(fileFullPath) {
+  return replaceall('/', '-', fileFullPath.replace('user-contributed/', '').replace('.json', ''));
 }
 
 async function readJSONFile(file) {
@@ -86,10 +80,10 @@ async function readJSONFile(file) {
   return Promise.resolve(JSON.parse(res));
 }
 
-async function postESContent(jsonContent) {
+async function postESContent(id, jsonContent) {
   const { ES_URL, ES_INDEX, ES_PIPELINE } = process.env;
   return await elasticClient.index({
-      id: genContentId(jsonContent),
+      id,
       index: ES_INDEX,
       pipeline: ES_PIPELINE,
       body: jsonContent
