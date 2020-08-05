@@ -75,6 +75,16 @@ export function remotePull() {
 		headers: {
 			Authorization: 'Bearer ' + localStorage.getItem('token')
 		}
-	})
-		.then(response => response.json());
+	}).then(response => response.json());
+}
+
+export function createContent(newContent) {
+	return fetch(`${BHUPI_ENDPOINT}content`, {
+		method: 'POST',
+		body: JSON.stringify(newContent),
+		headers: {
+			'content-type': 'application/json',
+			Authorization: 'Bearer ' + localStorage.getItem('token')
+		}
+	}).then(response => response.json());
 }

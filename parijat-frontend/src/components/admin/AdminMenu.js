@@ -9,6 +9,9 @@ export default class AdminMenu extends Component {
         <NavLink exact to="/admin" className={style.Admin__Menu__Item}>
           Overview
         </NavLink>
+        <NavLink exact to="/admin/content" className={style.Admin__Menu__Item}>
+          Content
+        </NavLink>
         <NavLink to="/admin/index-sync" className={style.Admin__Menu__Item}>
           Index Syncing
         </NavLink>

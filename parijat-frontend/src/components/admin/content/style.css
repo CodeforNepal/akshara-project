@@ -1,0 +1,30 @@
+.ContentNewPage {
+  width: 100%;
+}
+
+.ContentNewForm {
+
+}
+
+.ContentNewForm__Field {
+  color: grey;
+  margin-bottom: 1rem;
+}
+
+.ContentNewForm__Field label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ContentNewForm__Field input {
+  border: 1px solid grey;
+  padding: 0.5rem;
+  min-width: 40rem;
+}
+
+.ContentNewForm__Field textarea {
+  border: 1px solid grey;
+  padding: 0.5rem;
+  min-width: 40rem;
+  min-height: 20rem;
+}

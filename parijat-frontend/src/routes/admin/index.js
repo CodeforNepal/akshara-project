@@ -5,6 +5,7 @@ import PrivateRoute from '../../components/router/PrivateRoute';
 import AdminIndexSync from '../../components/admin/AdminIndexSync';
 import AdminUsers from '../../components/admin/AdminUsers';
 import AdminMenu from '../../components/admin/AdminMenu';
+import ContentNewPage from '../../components/admin/content/ContentNewPage';
 import AdminTaskQueue from '../../components/admin/AdminTaskQueue';
 import AdminWelcome from '../../components/admin';
 import Header from '../../components/header';
@@ -39,6 +40,9 @@ function Admin() {
 					<Switch>
 						<PrivateRoute exact path="/admin">
 							<AdminWelcome />
+						</PrivateRoute>
+						<PrivateRoute path="/admin/content">
+							<ContentNewPage />
 						</PrivateRoute>
 						<PrivateRoute path="/admin/index-sync">
 							<AdminIndexSync />
