@@ -13,7 +13,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var syncRouter = require('./routes/sync');
 var authRouter = require('./routes/auth');
-var adminRouter = require('./routes/admin');
+var contentRouter = require('./routes/content');
 
 var app = express();
 
@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/', userRouter);
-app.use('/', adminRouter);
+app.use('/', contentRouter);
 app.use('/sync', syncRouter);
 app.use('/auth', authRouter);
 

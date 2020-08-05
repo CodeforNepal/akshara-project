@@ -2,9 +2,8 @@ const fs = require('fs').promises;
 const difference = require('lodash/difference');
 const forEach = require('lodash/forEach');
 const map = require('lodash/map');
-const replaceall = require('replaceall');
 const git = require('../utils/git');
-const elasticClient = require('../utils/es');
+const { elasticClient, genContentId } = require('../utils/es');
 
 async function taskPull() {
   const pullChanges = await pullRemoteRepo();
@@ -54,23 +53,19 @@ function onlyJSONFile(filename) {
   return filename.endsWith('.json') || filename.endsWith('.json"');
 }
 
-function genContentId(fileFullPath) {
-  return replaceall('/', '-', fileFullPath.replace('user-contributed/', '').replace('.json', ''));
-}
-
 async function readJSONFile(file) {
   const res = await fs.readFile(file);
   return Promise.resolve(JSON.parse(res));
 }
 
 async function postESContent(id, jsonContent) {
-  const { ES_URL, ES_INDEX, ES_PIPELINE } = process.env;
+  const { ES_INDEX, ES_PIPELINE } = process.env;
   return await elasticClient.index({
       id,
       index: ES_INDEX,
       pipeline: ES_PIPELINE,
       body: jsonContent
-  })
+  });
 }
 
 module.exports = taskPull;

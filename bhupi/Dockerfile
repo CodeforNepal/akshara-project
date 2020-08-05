@@ -5,6 +5,8 @@ RUN apk --update add git less openssh && \
     rm /var/cache/apk/*
 # Without this unicode filename won't work correctly
 RUN git config --global core.quotePath false
+RUN git config --global user.email "contact@sangraha.org"
+RUN git config --global user.name "Sangraha Kaamdaar (API)"
 # Setup bhupi
 WORKDIR /usr/src/bhupi
 COPY package*.json ./
