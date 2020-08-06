@@ -5,15 +5,11 @@ const taskCreateContent = require('./taskCreateContent');
 taskQueue.process(async (job) => {
   const { task } = job.data;
   console.log(`Started: ${task}`);
-  try {
-    if (task === 'pull') {
-      await taskPull();
-    }
-    if (task == 'create_content') {
-      await taskCreateContent(job.data.body);
-    }
-  } catch (err) {
-   console.log(err);
+  if (task === 'pull') {
+    await taskPull();
+  }
+  if (task == 'create_content') {
+    await taskCreateContent(job.data.body);
   }
   return console.log(`Ended: ${task}`);
 });

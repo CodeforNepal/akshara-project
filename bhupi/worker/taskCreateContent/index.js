@@ -1,14 +1,17 @@
 const mkdirp = require('mkdirp');
 const fs = require('fs').promises;
+const { existsSync } = require('fs');
 const git = require('../utils/git');
 const { elasticClient, genContentId } = require('../utils/es');
 
 async function taskCreateContent(newContent) {
   const { dir, file } = genPathInfo(newContent);
   const fullPath = `${dir}${file}`
+  const doesFileExist = existsSync(fullPath);
+  console.log('File exists: ', doesFileExist);
   await createDir(dir);
   await createJSON(fullPath, newContent);
-  await commitGit(fullPath.replace('user-contributed/', ''));
+  await commitGit(fullPath.replace('user-contributed/', ''), doesFileExist ? 'Update' : 'Create');
   await indexES(genContentId(fullPath), newContent);
 }
 
@@ -30,11 +33,12 @@ async function createJSON(pathName, jsonContent) {
   return await fs.writeFile(pathName, JSON.stringify(jsonContent));
 }
 
-async function commitGit(pathName) {
+async function commitGit(pathName, actionText) {
   console.log(`git add ${pathName}`)
-  console.log('git commit -m')
+  const commitMessage = `${actionText} file '${pathName}'`;
+  console.log(`git commit -m ${commitMessage}`);
   await git.add([pathName]);
-  return await git.commit(`Add file '${pathName}'`);
+  return await git.commit(commitMessage);
 }
 
 async function indexES(id, newContent) {
