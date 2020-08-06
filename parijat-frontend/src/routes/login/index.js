@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { AlertTriangle, LogIn } from 'preact-feather';
+import { withRouter } from 'react-router';
 import Loading from '../../components/loading';
 import Button from '../../components/button';
 import Logo from '../../components/logo';
@@ -32,8 +33,22 @@ class LoginPage extends Component {
 		this.login();
 	}
 
+  redirectPath = () => {
+		const { location } = this.props;
+		const defaultPath = '/admin';
+		if (location.state == null) {
+			return defaultPath;
+		}
+		if (location.state.from == null) {
+			return defaultPath;
+		}
+		return location.state.from;
+	}
+
   login = () => {
     const { username, password } = this.state;
+		console.log(this.props.location);
+		const redirectPath = this.redirectPath();
 		this.setState({ loading: true });
     login({ username, password }).then(({ token }) => {
 			this.setState({ loading: false });
@@ -42,7 +57,7 @@ class LoginPage extends Component {
 				return
 			}
 			localStorage.setItem('token', token);
-			this.props.history.push('/admin');
+			this.props.history.push(redirectPath);
     });
   }
 
@@ -75,4 +90,4 @@ class LoginPage extends Component {
 	}
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
