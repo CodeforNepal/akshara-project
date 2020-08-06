@@ -4,6 +4,8 @@ const taskPush = require('./taskPush');
 const taskCreateContent = require('./taskCreateContent');
 
 taskQueue.process(async (job) => {
+  const res = await taskQueue.getRepeatableJobs();
+  console.log(res);
   const { task } = job.data;
   console.log(`Started: ${task}`);
   if (task === 'pull') {
