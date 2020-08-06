@@ -24,7 +24,7 @@ function Header({ query, children }) {
 						'author': 'लेखक'
 					}}
 					onSubmit={queryValue => {
-						history.push(`search?q=${queryValue}`);
+						history.push(`/search?q=${queryValue}`);
 					}}
 				/>
 			) : (
