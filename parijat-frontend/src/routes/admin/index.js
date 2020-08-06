@@ -6,16 +6,15 @@ import AdminIndexSync from '../../components/admin/AdminIndexSync';
 import AdminUsers from '../../components/admin/AdminUsers';
 import AdminMenu from '../../components/admin/AdminMenu';
 import ContentNewPage from '../../components/admin/content/ContentNewPage';
+import ContentEditPage from '../../components/admin/content/ContentEditPage';
 import AdminTaskQueue from '../../components/admin/AdminTaskQueue';
 import AdminWelcome from '../../components/admin';
 import Header from '../../components/header';
 import Footer from '../../components/footer';
 import Button from '../../components/button';
 import AdminComponent from '../../components/admin';
-
 import { login, admin } from '../../api';
 import style from './style';
-
 
 function UserMenu() {
 	const history = useHistory();
@@ -41,7 +40,10 @@ function Admin() {
 						<PrivateRoute exact path="/admin">
 							<AdminWelcome />
 						</PrivateRoute>
-						<PrivateRoute path="/admin/content">
+						<PrivateRoute path="/admin/content/edit/:id">
+							<ContentEditPage />
+						</PrivateRoute>
+						<PrivateRoute exact path="/admin/content/new">
 							<ContentNewPage />
 						</PrivateRoute>
 						<PrivateRoute path="/admin/index-sync">

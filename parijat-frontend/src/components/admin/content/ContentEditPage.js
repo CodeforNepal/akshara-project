@@ -1,15 +1,23 @@
 import { Component, h } from 'preact';
+import { withRouter } from 'react-router';
 import Loading from '../../loading';
 import ContentForm, { FORM_NAME } from './ContentForm';
-import { createContent } from '../../../api';
+import { createContent, getContent } from '../../../api';
 import style from './style.css';
 
-class ContentNewPage extends Component {
+class ContentEditPage extends Component {
   constructor() {
     super();
     this.state = {
-      loading: false,
+      loading: true,
+      initialValues: {},
     };
+  }
+
+  async componentDidMount() {
+		const { id } = this.props.match.params;
+		const result = await getContent(id);
+		this.setState({ initialValues: result._source, loading: false });
   }
 
   submitForm = async (newContent) => {
@@ -24,15 +32,18 @@ class ContentNewPage extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, initialValues } = this.state;
     return (
       <div className={style.ContentNewPage}>
         { loading ? <Loading /> : null }
-        <h3>Add New Content</h3>
-        <ContentForm submitForm={this.submitForm} />
+        <h3>Edit Content</h3>
+        <ContentForm
+          initialValues={initialValues}
+          submitForm={this.submitForm}
+        />
       </div>
     );
   }
 }
 
-export default ContentNewPage;
+export default withRouter(ContentEditPage);

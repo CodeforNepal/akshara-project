@@ -17,7 +17,7 @@ export const withUserFavourites = connect(
 	{ favItem }
 );
 
-const Item = ({ result }) => (
+const Item = ({ id, result }) => (
 	<div className={style.Item__Poem}>
 		<h3>{result.title}</h3>
 		<h4>
@@ -36,12 +36,13 @@ const Item = ({ result }) => (
 				<span>अज्ञात</span>
 			)}
 		</h4>
+		<a target="_blank" href={`/admin/content/edit/${id}`}>Edit</a>
 	</div>
 );
 
-const Content = ({ result }) => (
+const Content = ({ id, result }) => (
 	<div className={style.Content__Container}>
-		{result.found ? <Item result={result._source} /> : <div>Not Found</div>}
+		{result.found ? <Item id={id} result={result._source} /> : <div>Not Found</div>}
 	</div>
 );
 
@@ -65,12 +66,13 @@ class ContentPage extends Component {
 	};
 
 	render() {
+		const { id } = this.props.match.params;
 		return (
 			<div>
 				<Header />
 				<ContentContainer>
 					{this.state.result != null ? (
-						<Content result={this.state.result} />
+						<Content id={id} result={this.state.result} />
 					) : (
 						<Loading />
 					)}
