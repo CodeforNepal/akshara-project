@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('bhupi:server');
+var debug = require('debug')('vidyapati:server');
 var http = require('http');
 
 /**

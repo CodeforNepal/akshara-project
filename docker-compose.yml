@@ -73,27 +73,27 @@ services:
 #       - 8080:8080
 #     networks:
 #       - esnet
-  bhupi_worker:
-    build: ./bhupi
+  vidyapati_worker:
+    build: ./vidyapati
     volumes:
-      - ./bhupi:/usr/src/bhupi
-      - ./elasticsearch/data/user-contributed:/usr/src/bhupi/user-contributed
-    container_name: bhupi_worker
+      - ./vidyapati:/usr/src/vidyapati
+      - ./elasticsearch/data/user-contributed:/usr/src/vidyapati/user-contributed
+    container_name: vidyapati_worker
     command: ["yarn", "start:worker:dev"]
     networks:
-      - bhupinet
+      - vidyapatinet
       - esnet
 
-  bhupi:
-    build: ./bhupi
+  vidyapati:
+    build: ./vidyapati
     volumes:
-      - ./bhupi:/usr/src/bhupi
-    container_name: bhupi
+      - ./vidyapati:/usr/src/vidyapati
+    container_name: vidyapati
     command: ["yarn", "start:dev"]
     ports:
-      - 3000:3000 
+      - 3000:3000
     networks:
-      - bhupinet
+      - vidyapatinet
 
   db:
     image: postgres:12.3-alpine
@@ -107,7 +107,7 @@ services:
     ports:
       -  5432:5432
     networks:
-      - bhupinet
+      - vidyapatinet
 
   redis:
           # build:
@@ -128,7 +128,7 @@ services:
        #   node_net:
        #     ipv4_address: 172.28.1.4
     networks:
-      - bhupinet
+      - vidyapatinet
 
 
 volumes:
@@ -139,5 +139,5 @@ volumes:
     driver: local
 
 networks:
-  bhupinet:
+  vidyapatinet:
   esnet:

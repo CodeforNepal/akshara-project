@@ -7,8 +7,8 @@ RUN apk --update add git less openssh && \
 RUN git config --global core.quotePath false
 RUN git config --global user.email "contact@sangraha.org"
 RUN git config --global user.name "Sangraha Kaamdaar (API)"
-# Setup bhupi
-WORKDIR /usr/src/bhupi
+# Setup vidyapati
+WORKDIR /usr/src/vidyapati
 COPY package*.json ./
 COPY yarn.lock ./
 RUN yarn

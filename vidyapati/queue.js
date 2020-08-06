@@ -1,7 +1,7 @@
 const Bull = require("bull");
 const { setQueues } = require('bull-board')
 
-const bhupiTaskQueue = new Bull('bhupi_task_queue_0', `${process.env.REDIS_URL}/0`);
+const vidyapatiTaskQueue = new Bull('vidyapati_task_queue_0', `${process.env.REDIS_URL}/0`);
 
 if (process.env.NODE_ENV === 'production') {
   const repeatOpts = {
@@ -11,12 +11,12 @@ if (process.env.NODE_ENV === 'production') {
   };
   // Remove old task repeatable task
   console.log('Remove Old Repeatables');
-  bhupiTaskQueue.removeRepeatable(
+  vidyapatiTaskQueue.removeRepeatable(
     'git_push',
     repeatOpts
   );
   // Push to remote every 1 hrs.
-  bhupiTaskQueue.add(
+  vidyapatiTaskQueue.add(
     'git_push',
     {
       task: 'push',
@@ -25,6 +25,6 @@ if (process.env.NODE_ENV === 'production') {
   );
 }
 
-setQueues([bhupiTaskQueue]);
+setQueues([vidyapatiTaskQueue]);
 
-module.exports = bhupiTaskQueue;
+module.exports = vidyapatiTaskQueue;
