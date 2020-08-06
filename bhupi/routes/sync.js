@@ -21,4 +21,16 @@ router.post('/pull', passport.authenticate('jwt', {session: false}), authHelpers
   }
 });
 
+router.post('/push', passport.authenticate('jwt', {session: false}), authHelpers.adminRequired, async function(req, res, next) {
+  try {
+    const { id, timestamp } = await taskQueue.add({
+      task: 'push'
+    });
+    res.status(201).json({ id, timestamp });
+  } catch (error) {
+    console.log(error);
+    res.status(500);
+  }
+});
+
 module.exports = router;

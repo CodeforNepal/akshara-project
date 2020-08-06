@@ -78,6 +78,15 @@ export function remotePull() {
 	}).then(response => response.json());
 }
 
+export function remotePush() {
+	return fetch(`${BHUPI_ENDPOINT}sync/push`, {
+		method: 'POST',
+		headers: {
+			Authorization: 'Bearer ' + localStorage.getItem('token')
+		}
+	}).then(response => response.json());
+}
+
 export function createContent(newContent) {
 	return fetch(`${BHUPI_ENDPOINT}content`, {
 		method: 'POST',
