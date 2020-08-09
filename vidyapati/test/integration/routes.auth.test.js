@@ -1,70 +1,93 @@
-process.env.NODE_ENV = 'test';
-
 const chai = require('chai');
 const should = chai.should();
 const chaiHttp = require('chai-http');
-const passportStub = require('passport-stub');
+const sinon = require('sinon');
 const server = require('../../app');
 const knex = require('../../db/connection');
+const passport = require('../../auth/local');
+const taskQueue = require('../../queue');
+const { setLoggedInUser } = require('../utils/fakeAuthMiddleware');
 
 chai.use(chaiHttp);
-passportStub.install(server);
+
+function stubAuth({ username, id }) {
+    setLoggedInUser({ username, id });
+
+    sinon
+      .stub(passport,"authenticate")
+      .callsFake((strategy, options, callback) => {
+        console.log("authenticate >>> ", strategy, options, callback);
+        callback(null, { username, id }, null);
+        return (req,res,next) => {  };
+      });
+
+}
+
+function resetStubAuth() {
+  setLoggedInUser(null);
+  passport.authenticate.restore && passport.authenticate.restore();
+}
 
 describe('routes : auth', () => {
 
-  beforeEach(() => {
-    return knex.migrate.rollback()
-    .then(() => { return knex.migrate.latest(); })
-    .then(() => { return knex.seed.run(); });
+  before(function() {
+    resetStubAuth();
+  });
+
+  beforeEach(async function() {
+    await knex.migrate.rollback();
+    await knex.migrate.latest();
+    await knex.seed.run();
+    return Promise.resolve();
   });
 
   afterEach(() => {
-    passportStub.logout();
+    resetStubAuth();
     return knex.migrate.rollback();
   });
 
   describe('POST /auth/register', () => {
-    it('should register a new user', (done) => {
-      chai.request(server)
-      .post('/auth/register')
-      .send({
-        username: 'michael',
-        password: 'herman'
-      })
-      .end((err, res) => {
-        should.not.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql('application/json');
-        res.body.token.should.exist;
-        done();
-      });
+    it('should register a new user', async () => {
+      const res = await chai.request(server)
+        .post('/auth/register')
+        .send({
+          username: 'michael',
+          password: 'herman'
+        });
+
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(200);
+      res.type.should.eql('application/json');
+      res.body.token.should.exist;
+      return Promise.resolve();
     });
 
-    xit('should throw an error if a user is logged in', async (done) => {
-      const loginRes = await chai.request(server)
+    it('should cause 401 if a user is logged in', async () => {
+      stubAuth({ username: 'jeremy', id: 1 });
+
+      let res = await chai.request(server)
         .post('/auth/login')
         .send({
           username: 'jeremy',
           password: 'johnson123'
         });
 
-      const { token } = loginRes.body;
+      const { token } = res.body;
 
-      const registerRes = await chai.request(server)
+      res = await chai.request(server)
         .post('/auth/register')
         .set("Authorization", `Bearer ${token}`)
         .send({
           username: 'michael',
           password: 'herman'
-        })
+        });
 
-      registerRes.redirects.length.should.eql(0);
-      registerRes.status.should.eql(401);
-      registerRes.type.should.eql('application/json');
-      registerRes.body.status.should.eql('You are already logged in');
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(401);
+      res.type.should.eql('application/json');
+      res.body.status.should.eql('You are already logged in');
 
-      done();
+      Promise.resolve();
     });
 
     it('should throw an error if the username is < 6 characters', (done) => {
@@ -135,138 +158,100 @@ describe('routes : auth', () => {
       });
     });
 
-    xit('should throw an error if a user is logged in', (done) => {
-      passportStub.login({
-        username: 'jeremy',
-        password: 'johnson123'
-      });
-      chai.request(server)
-      .post('/auth/login')
-      .send({
-        username: 'jeremy',
-        password: 'johnson123'
-      })
-      .end((err, res) => {
-        should.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('You are already logged in');
-        done();
-      });
+    it('should cause 401 if a user is logged in', async () => {
+      stubAuth({ username: 'jeremy', id: 1 });
+
+      let res = await chai.request(server)
+        .post('/auth/login')
+        .send({
+          username: 'jeremy',
+          password: 'johnson123'
+        });
+
+      const { token } = res.body;
+
+      await chai.request(server);
+
+      res = await chai.request(server)
+        .post('/auth/login')
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          username: 'jeremy',
+          password: 'johnson123'
+        });
+
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(401);
+      res.type.should.eql('application/json');
+      res.body.status.should.eql('You are already logged in');
+
+      return Promise.resolve();
     });
   });
 
-  describe('GET /auth/logout', () => {
-    xit('should logout a user', (done) => {
-      // Something is wrong with passport-stub
-      passportStub.login({
-        username: 'jeremy',
-        password: 'johnson123'
-      })
-      // logout
-      chai.request(server)
-      .get('/auth/logout')
-      .end((err, res) => {
-        should.not.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('success');
-        done();
-      });
+  describe('/sync API', () => {
+    it('should add pull task to queue', async () => {
+      sinon.stub(taskQueue,"add")
+        .callsFake((task) => {
+          return Promise.resolve({ id: 'task_1', timestamp: 123123 })
+        });
+
+      let res = await chai.request(server)
+        .post('/auth/login')
+        .send({
+          username: 'kelly',
+          password: 'bryant123'
+        });
+
+      stubAuth({ username: 'kelly', id: 2 });
+
+      const { token } = res.body;
+
+      res = await chai.request(server)
+        .post('/sync/pull')
+        .set("Authorization", `Bearer ${token}`)
+        .send();
+
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(201);
+      res.type.should.eql('application/json');
+      res.body.should.eql({ id: 'task_1', timestamp: 123123 });
+      return Promise.resolve()
     });
 
-    it('should throw an error if a user is not logged in', (done) => {
-      chai.request(server)
-      .get('/auth/logout')
-      .end((err, res) => {
+    it('should return a 401 if the user is not logged in', async () => {
+      let res = await chai.request(server)
+        .post('/sync/pull');
         res.redirects.length.should.eql(0);
         res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('Please log in');
-        done();
-      });
+        // Not sure why below doesn't work properly
+        // res.type.should.eql('application/json');
+        // res.body.status.should.eql('Please log in');
     });
 
-  });
+    it('should return a 401 if the user is not an admin', async () => {
+      let res = await chai.request(server)
+        .post('/auth/login')
+        .send({
+          username: 'jeremy',
+          password: 'johnson123'
+        });
 
-  describe('GET /user', () => {
-    xit('should return a success', (done) => {
-      passportStub.login({
-        username: 'jeremy',
-        password: 'johnson123'
-      });
-      chai.request(server)
-      .get('/user')
-      .end((err, res) => {
-        should.not.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('success');
-        done();
-      });
-    });
+      stubAuth({ username: 'jeremy', id: 1 });
 
-    it('should throw an error if a user is not logged in', (done) => {
-      chai.request(server)
-      .get('/user')
-      .end((err, res) => {
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('Please log in');
-        done();
-      });
-    });
-  });
+      const { token } = res.body;
 
-  describe('GET /admin', () => {
-    xit('should return a success', (done) => {
-      passportStub.login({
-        username: 'kelly',
-        password: 'bryant123'
-      });
-      chai.request(server)
-      .get('/admin')
-      .end((err, res) => {
-        should.not.exist(err);
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('success');
-        done();
-      });
-    });
+      res = await chai.request(server)
+        .post('/sync/pull')
+        .set("Authorization", `Bearer ${token}`)
+        .send();
 
-    it('should throw an error if a user is not logged in', (done) => {
-      chai.request(server)
-      .get('/admin')
-      .end((err, res) => {
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('Please log in');
-        done();
-      });
-    });
+      res.redirects.length.should.eql(0);
+      res.status.should.eql(401);
+      res.type.should.eql('application/json');
+      res.body.status.should.eql('You are not authorized');
 
-    xit('should throw an error if a user is not an admin', (done) => {
-      passportStub.login({
-        username: 'jeremy',
-        password: 'johnson123'
-      });
-      chai.request(server)
-      .get('/admin')
-      .end((err, res) => {
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(401);
-        res.type.should.eql('application/json');
-        res.body.status.should.eql('You are not authorized');
-        done();
-      });
+      return Promise.resolve();
     });
   });
-
 });

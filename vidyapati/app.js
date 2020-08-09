@@ -10,10 +10,11 @@ var cors = require('cors');
 const { UI } = require('bull-board')
 
 var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
 var syncRouter = require('./routes/sync');
 var authRouter = require('./routes/auth');
 var contentRouter = require('./routes/content');
+
+const { fakeAuthMiddleWare } = require('./test/utils/fakeAuthMiddleware');
 
 var app = express();
 
@@ -39,10 +40,12 @@ app.use(passport.session());
 // CORS enabled - be careful. Need to remove this.
 app.use(cors());
 
+// Used only in testing
+app.use(fakeAuthMiddleWare);
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/', userRouter);
 app.use('/', contentRouter);
 app.use('/sync', syncRouter);
 app.use('/auth', authRouter);
