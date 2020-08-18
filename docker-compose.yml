@@ -96,7 +96,8 @@ services:
       - vidyapatinet
 
   db:
-    image: postgres:12.3-alpine
+    build:
+      context: ./postgres
     environment:
       POSTGRES_DB: sangraha_wiki
       POSTGRES_PASSWORD: sangrahapass
