@@ -110,6 +110,21 @@ services:
     networks:
       - vidyapatinet
 
+  test-db:
+    build:
+      context: ./postgres
+    environment:
+      POSTGRES_DB: sangraha_wiki_test
+      POSTGRES_PASSWORD: sangrahapass
+      POSTGRES_USER: sangraha
+    volumes:
+      - test-db-data:/var/lib/postgresql/data
+    container_name: akshara_db_test
+    ports:
+      -  5433:5432
+    networks:
+      - vidyapatinet
+
   redis:
           # build:
           #   context: ./redis
@@ -133,6 +148,7 @@ services:
 
 
 volumes:
+  test-db-data:
   db-data:
   redisdata:
     driver: local
