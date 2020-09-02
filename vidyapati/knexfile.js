@@ -21,12 +21,7 @@ module.exports = {
 
   test: {
     client: 'postgresql',
-    connection: {
-      host: '127.0.0.1',
-      database: 'sangraha_wiki_test',
-      user:     'sangraha',
-      password: 'sangrahapass'
-    },
+    connection: `postgresql://sangraha:sangrahapass@127.0.0.1:5433/sangraha_wiki_test`,
     pool: {
       min: 2,
       max: 10

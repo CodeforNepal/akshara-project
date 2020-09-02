@@ -8,6 +8,7 @@
     "start:worker": "node -r dotenv/config worker/worker.js",
     "start:worker:dev": "nodemon --watch worker -r dotenv/config worker/worker.js",
     "test:integration": "NODE_ENV=test mocha test/integration --watch",
+    "create:db:test": "NODE_ENV=test knex migrate:latest && NODE_ENV=test knex seed:run",
     "create:db:dev": "NODE_ENV=development knex migrate:latest && NODE_ENV=development knex seed:run"
   },
   "dependencies": {
