@@ -1,15 +1,18 @@
 ![alt text](https://raw.githubusercontent.com/Code4Nepal/akshara-project/master/parijat-frontend/src/assets/logo.png "सङ्ग्रह")
 
-### सङ्ग्रह | [sangraha.org](http://sangraha.org)
+### सङ्ग्रह | [sangraha.org](https://sangraha.org)
 
 
 <!-- toc -->
 
 - [Introduction](#introduction)
-- [Feedbacks and Bug Report](#feedbacks-and-bug-report)
-- [Development Notes](#development-notes)
-    + [Notes](#notes)
+- [Getting Started](#getting-started)
+    + [Contribution Guidelines](#contribution-guidelines)
+    + [Frontend](parijat-frontend/README.md)
+    + [Backend](/BACKEND.md)
+    + [Production](/PRODUCTION.md)
 - [Plan](#plan)
+- [Feedbacks and Bug Report](#feedbacks-and-bug-report)
 - [Mailing List](#mailing-list)
 - [About Code for Nepal - Bay Area](#about-code-for-nepal---bay-area)
 - [License](#license)
@@ -36,40 +39,21 @@ The सङ्ग्रह website will be equipped with the following features:
 - Side-by-side translations of texts in different languages
 - A dictionary, especially for materials in non Nepali languages so that they are accessible to all Nepali speakers
 
-## Feedbacks and Bug Report
-Please provide feedbacks here - https://goo.gl/forms/XfIMqXmRMp3MMMMh2 . For bug reports create a Github issue here - https://github.com/Code4Nepal/akshara-project/issues
+## Getting Started
 
+#### Contribution Guidelines
 
-## Development Notes
-
-We use docker during development as well as for production use. If you're only working on front-end components, you do not need to set up docker environment. See the frontend specific docs [parijat-frontend-docs](parijat-frontend/README.md)
-
-Please follow the official docs to install [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) on your system.
-
-Then a simple `docker-compose up` (from the project root directory) will start all of the akshara services. Full list of those services:
-
-* Frontend, for the main site (http://localhost:8080)
-* Elasticsearch, for the search backend and datastore (http://localhost:9200)
-* Kibana, for exploring the elasticsearch data (http://localhost:5601)
-
-There's also a nginx service that acts as a reverse proxy to the core services, and provides access to them over the web:
-
-* Frontend, at http://localhost/
-* Elasticsearch, at http://localhost/es/
-
-#### Notes
-
-* You will need to prefix the docker commands with *sudo*, if you haven't added your user to the *docker* group (https://docs.docker.com/install/linux/linux-postinstall/). 
-
-* If you are a developer running the elasticsearch instance here for testing, please read through the elasticsearch-specific [akshara docs](elasticsearch/README.md), especailly the [usage](elasticsearch/README.md#usage) section. Our elasticsearch setup makes certain assumptions that you need to follow while indexing documents, to ensure that all search features are available.
-
+- Fork this repository.
+- Create a branch to work on open issues in [Issues](https://github.com/Code4Nepal/akshara-project/issues).
+- Commit your changes and push your new branch to GitHub.
+- Create a pull request. Please include your issue # along with a brief desription of your changes. 
 
 ## Plan
 - ☑ Phase 1:  Minimal Viable Product (MVP) Implementation
     - ☑ Basic MVP codebase
     - ☑ Major platform decisions
     - ☑ Add first contents - poems in Nepali language
-    - ☑ Launch first version at [सङ्ग्रह](http://sangraha.org)
+    - ☑ Launch first version at [सङ्ग्रह](https://sangraha.org)
 
 - ☐ Phase 1.5: Bug Fixes and Progressive Enhancement
     - ☐ Bug fixes
@@ -87,6 +71,9 @@ There's also a nginx service that acts as a reverse proxy to the core services, 
      - ☐ Build community of content contributors and curators 
      - ☐ Market the product for wider adoption
 
+## Feedbacks and Bug Report
+Please provide feedbacks here - https://goo.gl/forms/XfIMqXmRMp3MMMMh2. For bug reports create a Github issue here - https://github.com/Code4Nepal/akshara-project/issues
+
 ## Mailing List
 We use Google Groups to co-ordinate day-to-day operations, planning and development work. If you are interested in being part of the community please consider joining the group - https://groups.google.com/forum/#!forum/akshara-development-list . Click 'Apply for Membership' to join the list.
          
@@ -97,4 +84,3 @@ Code for Nepal's Bay Area Chapter has been active since January 2017 and focuses
 ## License
 
 The code is provided under the Free and Open Source software license [GNU GPL 3.0](LICENSE) . Except where otherwise noted all content is licensed under [CC BY-SA 2.5](https://creativecommons.org/licenses/by-sa/2.5/).
-
